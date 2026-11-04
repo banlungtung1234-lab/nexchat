@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#17153f">
+  <meta name="description" content="NexChat — nền tảng trò chuyện realtime hiện đại, riêng tư và tối ưu cho mọi thiết bị.">
+  <link rel="icon" href="/nexchat-logo.svg?v=1.0.0" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest?v=1.0.0">
+  <title>NexChat · Kết nối theo cách của bạn</title>
+  <script src="/theme-init.js?v=1.0.0"></script>
+  <script defer src="/app-runtime.js?v=1.0.0"></script>
+  <link rel="stylesheet" href="/style.css?v=1.0.0">
+  <link rel="stylesheet" href="/mobile.css?v=1.0.0">
+  <link rel="stylesheet" href="/system.css?v=1.0.0">
+  <link rel="stylesheet" href="/smart-tools.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-experience.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-polish.css?v=1.0.0">
+  <script defer src="/smart-tools.js?v=1.0.0"></script>
+  <script defer src="/v10-experience.js?v=1.0.0"></script>
+  <script defer src="/v10-polish.js?v=1.0.0"></script>
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#mainContent">Bỏ qua điều hướng</a>
+  <header class="home-header" id="homeHeader">
+    <div class="home-nav-shell">
+      <a class="home-brand" href="/" aria-label="NexChat trang chủ">
+        <img src="/nexchat-logo.svg?v=1.0.0" alt="" width="42" height="42">
+        <span>NexChat</span><em>1.0.0</em>
+      </a>
+      <nav class="home-nav" id="homeNav" aria-label="Điều hướng chính">
+        <a href="#features" data-i18n="homeNavFeatures">Tính năng</a>
+        <a href="#security" data-i18n="homeNavSecurity">An toàn</a>
+        <a href="#privileges" data-i18n="homeNavPrivileges">Đặc quyền</a>
+        <a href="#experience" data-i18n="homeNavExperience">Trải nghiệm</a>
+      </nav>
+      <div class="home-nav-actions">
+        <label class="home-language" title="Ngôn ngữ">
+          <span aria-hidden="true">🌐</span><select id="homeLanguageSelect" name="language" autocomplete="language" data-language-select aria-label="Ngôn ngữ"></select>
+        </label>
+        <button id="homeThemeButton" class="home-theme-button" type="button" aria-expanded="false" aria-controls="homeOptions" title="Chọn giao diện" aria-label="Chọn giao diện">
+          <span class="home-theme-button-icon" aria-hidden="true">◐</span>
+        </button>
+        <button id="homeMotionButton" class="home-motion-control" type="button" data-v10-motion-trigger aria-haspopup="dialog" aria-expanded="false">
+          <span class="home-motion-control-icon" aria-hidden="true">✦</span>
+          <span class="home-motion-control-copy"><small data-v10-trigger-title>Chuyển động</small><b data-v10-trigger-label>Cân bằng</b></span>
+          <span class="classic-icon-host home-motion-control-chevron" data-classic-icon="chevron-down" aria-hidden="true"></span>
+        </button>
+        <a class="home-login-button" href="/login?tab=login" data-i18n="login">Đăng nhập</a>
+        <a class="home-register-button" href="/login?tab=register" data-i18n="register">Đăng ký</a>
+        <button id="homeMenuButton" class="home-menu-button" type="button" aria-expanded="false" aria-controls="homeNav" aria-label="Mở menu"><i></i><i></i><i></i></button>
+      </div>
+      <div id="homeOptions" class="home-options-panel home-theme-panel hidden" role="dialog" aria-modal="false" aria-labelledby="homeOptionsTitle">
+        <div class="home-options-head">
+          <div><strong id="homeOptionsTitle">Giao diện</strong><small>Chọn màu hiển thị. Chuyển động được điều khiển bằng nút riêng trên thanh điều hướng.</small></div>
+          <button id="homeOptionsClose" class="home-options-close" type="button" aria-label="Đóng bảng giao diện" title="Đóng bảng giao diện">×</button>
+        </div>
+        <div class="home-options-current" aria-live="polite">
+          <span>Đang sử dụng</span>
+          <strong><i id="homeThemeState">Tự động</i></strong>
+          <small>Thay đổi được áp dụng ngay và không ảnh hưởng chế độ chuyển động.</small>
+        </div>
+        <section class="home-option-group" aria-labelledby="homeThemeLabel">
+          <div class="home-option-label"><span aria-hidden="true">◐</span><div><strong id="homeThemeLabel"><b>1</b><span data-i18n="homeAppearance">Giao diện</span></strong><small>Chọn đúng một chế độ màu ở hàng này.</small></div></div>
+          <div class="home-choice-grid" data-home-theme>
+            <button type="button" data-value="auto" class="active"><i aria-hidden="true">◑</i><span><b data-i18n="homeAuto">Tự động</b><small data-i18n="homeThemeAutoDesc">Theo cài đặt thiết bị</small></span><em aria-hidden="true">✓</em></button>
+            <button type="button" data-value="light"><i aria-hidden="true">☀</i><span><b data-i18n="homeLight">Sáng</b><small data-i18n="homeThemeLightDesc">Nền sáng rõ ràng</small></span><em aria-hidden="true">✓</em></button>
+            <button type="button" data-value="dark"><i aria-hidden="true">◒</i><span><b data-i18n="homeDark">Tối</b><small data-i18n="homeThemeDarkDesc">Dịu mắt ban đêm</small></span><em aria-hidden="true">✓</em></button>
+          </div>
+        </section>
+        <p class="home-options-note"><span aria-hidden="true">✦</span><span>Nút “Chuyển động” mở trung tâm V10 với 5 mức hiệu ứng và khả năng tự thích ứng thiết bị.</span></p>
+      </div>
+    </div>
+  </header>
+  <div id="homeOptionsScrim" class="home-options-scrim hidden" aria-hidden="true"></div>
+
+  <main id="mainContent">
+    <section class="home-hero">
+      <canvas id="homeCosmos" class="home-cosmos-canvas" aria-hidden="true"></canvas>
+      <div class="home-cosmos-nebula" aria-hidden="true"></div>
+      <div class="home-ambient home-ambient-one" aria-hidden="true"></div>
+      <div class="home-ambient home-ambient-two" aria-hidden="true"></div>
+      <div class="home-hero-shell">
+        <div class="home-hero-copy home-reveal">
+          <div class="home-trust-pill"><span></span><b data-i18n="homeTrust">Nhanh · Riêng tư · Đồng bộ</b></div>
+          <div class="home-hero-signature" aria-hidden="true"><i></i><i></i><i></i><span>LIVE CONNECTION</span></div>
+          <h1 class="home-kinetic-title"><span data-i18n="homeHeroLine1">Chat mượt. Kết nối thật.</span><strong data-i18n="homeHeroLine2">Trải nghiệm xứng tầm.</strong></h1>
+          <p data-i18n="homeHeroText">NexChat giúp bạn trò chuyện nhanh, an toàn và đồng bộ trên mọi thiết bị.</p>
+          <div class="home-hero-actions">
+            <a class="home-primary-cta" href="/login?tab=register"><span data-i18n="homeStart">Bắt đầu ngay</span><b aria-hidden="true">→</b></a>
+            <a class="home-secondary-cta" href="#experience"><span aria-hidden="true">▶</span><span data-i18n="homeExplore">Xem trải nghiệm</span></a>
+          </div>
+          <div class="home-live-rail" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="home-proof-grid">
+            <div><strong>Realtime</strong><span data-i18n="homeProofRealtime">Tin nhắn và trạng thái tức thì</span></div>
+            <div><strong>9</strong><span data-i18n="homeProofLanguages">ngôn ngữ giao diện</span></div>
+            <div><strong>Mobile-first</strong><span data-i18n="homeProofMobile">Tối ưu thông minh theo thiết bị</span></div>
+          </div>
+        </div>
+
+        <div class="home-product-stage home-reveal" aria-label="Bản xem trước NexChat">
+          <div class="home-stage-orbit orbit-one" aria-hidden="true"></div>
+          <div class="home-stage-orbit orbit-two" aria-hidden="true"></div>
+          <div class="home-phone-card">
+            <div class="home-phone-top"><span class="home-phone-avatar">N</span><div><strong>NexChat</strong><small><i></i><span data-i18n="homeOnlineNow">Đang hoạt động</span></small></div><button type="button" tabindex="-1">•••</button></div>
+            <div class="home-phone-messages">
+              <div class="home-day-chip" data-i18n="homeToday">Hôm nay</div>
+              <article class="home-demo-message other"><span class="home-demo-avatar">A</span><div><p data-i18n="homeDemoOne">Chào mừng bạn đến với NexChat ✨</p><time>22:08</time></div></article>
+              <article class="home-demo-message mine vip-demo"><div><i class="home-v-badge">V</i><p data-i18n="homeDemoTwo">Giao diện mới mượt và đẹp thật!</p><time>22:09 · ✓✓</time></div></article>
+              <article class="home-demo-message other legend-demo"><span class="home-demo-avatar legend-avatar">L</span><div><i class="home-l-badge">L</i><span class="home-legend-wing wing-left"></span><span class="home-legend-wing wing-right"></span><p data-i18n="homeDemoThree">LEGEND đã sẵn sàng cho trải nghiệm khác biệt.</p><time>22:10</time></div></article>
+            </div>
+            <div class="home-phone-composer"><button type="button" tabindex="-1">＋</button><span data-i18n="homeComposer">Nhập tin nhắn...</span><b>➤</b></div>
+          </div>
+          <div class="home-floating-card home-floating-secure"><span>🛡</span><div><strong data-i18n="homeSecureCard">Bảo vệ chủ động</strong><small data-i18n="homeSecureCardText">Phiên đăng nhập và dữ liệu riêng tư</small></div></div>
+          <div class="home-floating-card home-floating-fast"><span>⚡</span><div><strong data-i18n="homeFastCard">Phản hồi tức thì</strong><small data-i18n="homeFastCardText">Realtime, nhẹ và ổn định</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-logo-strip" aria-label="Điểm nổi bật">
+      <div><span>◈</span><b data-i18n="homeStripOne">Tin nhắn thông minh</b></div>
+      <div><span>◎</span><b data-i18n="homeStripTwo">Hồ sơ chuyên nghiệp</b></div>
+      <div><span>✦</span><b data-i18n="homeStripThree">Đặc quyền VIP & LEGEND</b></div>
+      <div><span>⌁</span><b data-i18n="homeStripFour">Đồng bộ đa thiết bị</b></div>
+    </section>
+
+    <section id="features" class="home-section home-features">
+      <div class="home-section-heading home-reveal"><span data-i18n="homeFeatureEyebrow">MỘT NƠI CHO MỌI KẾT NỐI</span><h2 data-i18n="homeFeatureTitle">Đơn giản khi sử dụng. Mạnh mẽ ở bên trong.</h2><p data-i18n="homeFeatureText">Từng chi tiết được thiết kế để cuộc trò chuyện nhanh hơn, rõ ràng hơn và ít gián đoạn hơn.</p></div>
+      <div class="home-feature-grid">
+        <article class="home-feature-card feature-large home-reveal"><div class="home-feature-icon">↯</div><h3 data-i18n="homeFeatureRealtime">Realtime thông minh</h3><p data-i18n="homeFeatureRealtimeText">Trạng thái gửi, đã xem, đang nhập và kết nối được cập nhật đúng phần cần thiết thay vì tải lại toàn bộ.</p><div class="home-mini-timeline"><span></span><span></span><span></span><b></b></div></article>
+        <article class="home-feature-card home-reveal"><div class="home-feature-icon">☰</div><h3 data-i18n="homeFeatureWorld">Chat thế giới có kiểm soát</h3><p data-i18n="homeFeatureWorldText">Slow mode, chống spam, chỉ đọc và thông báo toàn server được quản trị theo thời gian thực.</p></article>
+        <article class="home-feature-card home-reveal"><div class="home-feature-icon">◉</div><h3 data-i18n="homeFeatureMedia">Ảnh và tệp rõ nét</h3><p data-i18n="homeFeatureMediaText">Xem ảnh toàn màn hình trong web, tải lười và giữ nguyên dữ liệu tệp gốc.</p></article>
+        <article class="home-feature-card feature-wide home-reveal"><div><div class="home-feature-icon">◇</div><h3 data-i18n="homeFeatureProfile">Hồ sơ có chiều sâu</h3><p data-i18n="homeFeatureProfileText">Ảnh bìa, giới thiệu, công việc, trường học, trạng thái và quyền riêng tư cùng nằm trong một bố cục chuyên nghiệp.</p></div><div class="home-profile-preview"><div class="home-profile-cover"></div><span>B</span><strong>bantumlum1</strong><small>@bantumlum1</small><i>● NexChat</i></div></article>
+      </div>
+    </section>
+
+    <section id="security" class="home-section home-security-section">
+      <div class="home-security-shell">
+        <div class="home-security-visual home-reveal"><div class="home-shield-core">N</div><i class="security-ring r1"></i><i class="security-ring r2"></i><i class="security-ring r3"></i><span class="security-node n1">✓</span><span class="security-node n2">•••</span><span class="security-node n3">🔒</span></div>
+        <div class="home-security-copy home-reveal"><span data-i18n="homeSecurityEyebrow">AN TOÀN THEO THIẾT KẾ</span><h2 data-i18n="homeSecurityTitle">Bảo vệ tài khoản mà không làm trải nghiệm trở nên phức tạp.</h2><p data-i18n="homeSecurityText">NexChat kiểm soát phiên đăng nhập, quyền truy cập tệp, nguồn yêu cầu, giới hạn thao tác và bảo mật quản trị nhiều lớp.</p><ul><li><b>01</b><span><strong data-i18n="homeSecurityOne">Phiên đăng nhập được quản lý</strong><small data-i18n="homeSecurityOneText">Theo dõi và đăng xuất thiết bị từ hồ sơ cá nhân.</small></span></li><li><b>02</b><span><strong data-i18n="homeSecurityTwo">Tệp riêng tư có kiểm tra</strong><small data-i18n="homeSecurityTwoText">Kiểm tra định dạng thật và quyền xem trước khi trả dữ liệu.</small></span></li><li><b>03</b><span><strong data-i18n="homeSecurityThree">Quản trị bảo mật hai lớp</strong><small data-i18n="homeSecurityThreeText">Giới hạn thử sai và tách riêng bước xác minh quản trị.</small></span></li></ul></div>
+      </div>
+    </section>
+
+    <section id="privileges" class="home-section home-privilege-section">
+      <div class="home-section-heading home-reveal"><span data-i18n="homePrivilegeEyebrow">DẤU ẤN RIÊNG</span><h2 data-i18n="homePrivilegeTitle">Hai biểu tượng. Hai cấp độ trải nghiệm.</h2><p data-i18n="homePrivilegeText">VIP mang sắc kim cương bạch kim. LEGEND dùng tông kim cương tối và ánh vàng, chuyển động tinh tế theo thiết bị.</p></div>
+      <div class="home-tier-grid">
+        <article class="home-tier-card vip-tier-card home-reveal"><div class="home-tier-emblem home-tier-v">V</div><span>VIP</span><h3 data-i18n="homeVipTitle">Đặc quyền hiện đại</h3><p data-i18n="homeVipText">Biểu tượng đổi màu, viền ánh sáng và quyền sử dụng hiệu ứng bóng chat trong thời hạn sở hữu.</p><ul><li data-i18n="homeVipOne">Nhận diện nổi bật nhưng không lấn nội dung</li><li data-i18n="homeVipTwo">Hiệu ứng nhẹ, phù hợp cả điện thoại</li><li data-i18n="homeVipThree">Thời hạn chỉ chủ sở hữu nhìn thấy</li></ul></article>
+        <article class="home-tier-card legend-tier-card home-reveal"><div class="home-tier-cosmos"><span class="cosmos-wing left"></span><div class="home-tier-emblem home-tier-l">L</div><span class="cosmos-wing right"></span><i></i><b></b></div><span>LEGEND</span><h3 data-i18n="homeLegendTitle">Dấu ấn tối thượng</h3><p data-i18n="homeLegendText">Bề mặt kim cương tối, phản xạ ánh vàng và hiệu ứng chiều sâu nhiều lớp nhưng vẫn tự giảm tải khi thiết bị yếu.</p><ul><li data-i18n="homeLegendOne">Cánh cân đối, không che nội dung</li><li data-i18n="homeLegendTwo">Tự dừng khi nằm ngoài màn hình</li><li data-i18n="homeLegendThree">Hồ sơ và tin nhắn đồng bộ cùng phong cách</li></ul></article>
+      </div>
+    </section>
+
+    <section id="experience" class="home-section home-experience-section">
+      <div class="home-experience-shell home-reveal"><div><span data-i18n="homeExperienceEyebrow">TRẢI NGHIỆM THÍCH ỨNG</span><h2 data-i18n="homeExperienceTitle">Mượt trên máy mạnh. Vẫn nhẹ trên điện thoại phổ thông.</h2><p data-i18n="homeExperienceText">Chế độ tự động theo dõi khả năng hiển thị, tạm dừng hiệu ứng ngoài màn hình và giảm những lớp trang trí tốn tài nguyên — không khóa chức năng.</p><div class="home-experience-chips"><span data-i18n="homeChipOne">Tự điều chỉnh chuyển động</span><span data-i18n="homeChipTwo">Tối ưu bàn phím mobile</span><span data-i18n="homeChipThree">Phục hồi kết nối realtime</span><span data-i18n="homeChipFour">Tải ảnh theo nhu cầu</span></div></div><div class="home-performance-meter"><div><span></span><span></span><span></span><span></span><span></span></div><strong>Auto Performance</strong><small data-i18n="homePerformanceText">Giữ chức năng, giảm tác vụ thừa</small></div></div>
+    </section>
+
+    <section class="home-final-cta">
+      <div class="home-final-shell home-reveal"><img src="/nexchat-logo.svg?v=1.0.0" alt="" width="74" height="74"><div><span data-i18n="homeFinalEyebrow">SẴN SÀNG KẾT NỐI?</span><h2 data-i18n="homeFinalTitle">Bắt đầu cuộc trò chuyện của bạn trên NexChat.</h2></div><a href="/login?tab=register" class="home-primary-cta"><span data-i18n="homeCreateNow">Tạo tài khoản ngay</span><b>→</b></a></div>
+    </section>
+  </main>
+
+  <footer class="home-footer"><div><a class="home-brand" href="/"><img src="/nexchat-logo.svg?v=1.0.0" alt="" width="34" height="34"><span>NexChat</span></a><p data-i18n="homeFooterText">Kết nối realtime theo cách riêng của bạn.</p></div><nav><a href="#features" data-i18n="homeNavFeatures">Tính năng</a><a href="#security" data-i18n="homeNavSecurity">An toàn</a><a href="/login?tab=login" data-i18n="login">Đăng nhập</a><a href="/login?tab=register" data-i18n="register">Đăng ký</a></nav><small>© 2026 NexChat · V1.0.0</small></footer>
+
+  <button id="homeBackToTop" class="home-back-to-top" type="button" aria-label="Cuộn lên đầu trang"><span aria-hidden="true">↑</span><b data-i18n="homeBackToTop">Đầu trang</b></button>
+
+  <script src="/i18n.js?v=1.0.0"></script>
+  <script src="/home.js?v=1.0.0"></script>
+</body>
+</html>

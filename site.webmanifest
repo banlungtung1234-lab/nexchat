@@ -1,0 +1,37 @@
+{
+  "id": "/",
+  "name": "NexChat",
+  "short_name": "NexChat",
+  "description": "Nền tảng trò chuyện realtime hiện đại, riêng tư và tối ưu cho mọi thiết bị.",
+  "lang": "vi",
+  "start_url": "/chat",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#090b18",
+  "theme_color": "#6456e8",
+  "categories": ["social", "communication", "productivity"],
+  "icons": [
+    {
+      "src": "/nexchat-logo.svg?v=1.0.0",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mở trò chuyện",
+      "short_name": "Trò chuyện",
+      "url": "/chat",
+      "icons": [{"src": "/nexchat-logo.svg?v=1.0.0", "sizes": "any", "type": "image/svg+xml"}]
+    },
+    {
+      "name": "Hỗ trợ Admin",
+      "short_name": "Hỗ trợ",
+      "url": "/support",
+      "icons": [{"src": "/nexchat-logo.svg?v=1.0.0", "sizes": "any", "type": "image/svg+xml"}]
+    }
+  ]
+}

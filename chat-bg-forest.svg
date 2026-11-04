@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16383d"/>
+      <stop offset="0.38" stop-color="#2f685a"/>
+      <stop offset="1" stop-color="#6cbea0"/>
+    </linearGradient>
+    <radialGradient id="mistLight" cx="24%" cy="20%" r="55%">
+      <stop offset="0" stop-color="#d6ffea" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#d6ffea" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur18"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <rect width="1600" height="1000" fill="url(#mistLight)"/>
+  <g filter="url(#blur18)" opacity="0.7">
+    <ellipse cx="284" cy="176" rx="190" ry="56" fill="#e5ffef" fill-opacity="0.2"/>
+    <ellipse cx="1120" cy="132" rx="240" ry="58" fill="#dbffee" fill-opacity="0.16"/>
+    <ellipse cx="1310" cy="270" rx="130" ry="34" fill="#f0fff5" fill-opacity="0.12"/>
+  </g>
+  <path d="M0 478c113-42 202-46 320-17 101 25 191 76 310 77 111 2 200-53 308-74 123-25 247 8 362 47 94 32 181 40 300 20V1000H0z" fill="#4a8f78" fill-opacity="0.32"/>
+  <path d="M0 576c128-20 216 15 337 54 99 32 205 47 326 30 121-17 193-63 303-77 149-20 258 18 387 69 68 27 142 39 247 36V1000H0z" fill="#2e6e59" fill-opacity="0.44"/>
+  <path d="M0 664c100-44 204-55 332-13 117 38 213 86 371 78 132-6 226-58 343-76 134-20 261 10 392 73 56 27 106 40 162 51V1000H0z" fill="#174639" fill-opacity="0.62"/>
+  <g fill="#133629" opacity="0.88">
+    <path d="M48 1000V676h42v324z"/><path d="M108 1000V616h38v384z"/><path d="M172 1000V706h32v294z"/><path d="M240 1000V632h44v368z"/><path d="M326 1000V684h38v316z"/>
+    <path d="M1180 1000V654h40v346z"/><path d="M1260 1000V598h48v402z"/><path d="M1340 1000V712h32v288z"/><path d="M1412 1000V646h43v354z"/><path d="M1490 1000V694h34v306z"/>
+  </g>
+  <g opacity="0.5" fill="#dfffee">
+    <circle cx="188" cy="262" r="2"/><circle cx="246" cy="304" r="1.4"/><circle cx="398" cy="252" r="1.6"/><circle cx="680" cy="288" r="1.7"/><circle cx="942" cy="238" r="1.4"/><circle cx="1190" cy="288" r="1.8"/><circle cx="1380" cy="254" r="1.5"/>
+  </g>
+  <rect y="832" width="1600" height="168" fill="#0b231a" fill-opacity="0.7"/>
+</svg>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#5b5bd6">
+  <link rel="icon" href="/nexchat-logo.svg?v=1.0.0" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest?v=1.0.0">
+  <title>Hỗ trợ tài khoản · NexChat</title>
+  <script src="/theme-init.js?v=1.0.0"></script>
+  <script defer src="/app-runtime.js?v=1.0.0"></script>
+  <link rel="stylesheet" href="/style.css?v=1.0.0">
+  <link rel="stylesheet" href="/mobile.css?v=1.0.0">
+  <link rel="stylesheet" href="/system.css?v=1.0.0">
+  <link rel="stylesheet" href="/smart-tools.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-experience.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-polish.css?v=1.0.0">
+  <script defer src="/smart-tools.js?v=1.0.0"></script>
+  <script defer src="/v10-experience.js?v=1.0.0"></script>
+  <script defer src="/v10-polish.js?v=1.0.0"></script>
+</head>
+<body class="support-page">
+  <a class="skip-link" href="#supportMain">Bỏ qua đầu trang</a>
+  <div id="pageLoader" class="page-loader"><img src="/nexchat-logo.svg?v=1.0.0" alt=""><span class="loader-ring"></span></div>
+  <main id="supportMain" class="support-shell" tabindex="-1">
+    <header class="support-header">
+      <a class="brand" href="/support"><img class="brand-logo" src="/nexchat-logo.svg?v=1.0.0" alt="NexChat"><span>NexChat</span></a>
+      <div class="support-header-actions">
+        <label class="language-picker"><span class="language-icon"><span class="classic-icon-host" data-classic-icon="language" aria-hidden="true"></span></span><select id="supportLanguageSelect" name="language" autocomplete="language" data-language-select aria-label="Ngôn ngữ"></select></label>
+        <button id="supportLogout" class="secondary-button" data-logout="support" type="button"><span class="classic-icon-host" data-classic-icon="logout" aria-hidden="true"></span><span data-i18n="exit">Thoát</span></button>
+      </div>
+    </header>
+    <section class="support-card">
+      <div class="support-info">
+        <div class="avatar avatar-xl admin-avatar">A</div>
+        <div><span class="eyebrow" data-i18n="supportAccount">HỖ TRỢ TÀI KHOẢN</span><h1 data-i18n="chatWithAdmin">Trò chuyện với quản trị viên</h1><p id="supportDescription" data-i18n="supportDescription">Hãy mô tả vấn đề của bạn. Quản trị viên có thể kiểm tra tài khoản và đặt lại mật khẩu.</p></div>
+      </div>
+      <div id="supportAccount" class="support-account"></div>
+      <section id="messages" class="messages support-messages"><div class="conversation-loading"><span class="spinner"></span><p data-i18n="loadingMessages">Đang tải cuộc trò chuyện...</p></div></section>
+      <div id="typingIndicator" class="typing-indicator hidden"><span class="typing-avatar"><span class="classic-icon-host" data-classic-icon="message" aria-hidden="true"></span></span><span id="typingText"></span><span class="typing-dots"><i></i><i></i><i></i></span></div>
+      <div id="attachmentPreview" class="attachment-preview hidden"></div>
+      <form id="messageForm" class="composer support-composer">
+        <input id="fileInput" aria-label="Chọn tệp đính kèm" type="file" hidden>
+        <button id="attachButton" class="icon-button attach-button" type="button" data-i18n-title="attachFile" aria-label="Đính kèm tệp"><span class="classic-icon-host" data-classic-icon="paperclip" aria-hidden="true"></span></button>
+        <textarea id="messageInput" aria-label="Nội dung cần hỗ trợ" rows="1" maxlength="2000" data-i18n-placeholder="supportInput" placeholder="Nhập nội dung cần hỗ trợ..."></textarea>
+        <button class="send-button" type="submit" data-i18n-title="send" aria-label="Gửi tin nhắn"><span class="classic-icon-host" data-classic-icon="send" aria-hidden="true"></span></button>
+      </form>
+    </section>
+  </main>
+  <div id="noticeModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card modal-small"><div class="modal-icon"><span class="classic-icon-host" data-classic-icon="bell" aria-hidden="true"></span></div><h3 data-i18n="notification">Thông báo</h3><p id="noticeMessage"></p><div class="modal-actions single"><button type="button" class="primary-button" data-close-modal="noticeModal" data-i18n="understood">Đã hiểu</button></div></div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/i18n.js?v=1.0.0"></script>
+  <script src="/ui.js?v=1.0.0"></script>
+  <script src="/support.js?v=1.0.0"></script>
+</body>
+</html>

@@ -1,0 +1,2173 @@
+/* =========================================================
+   NEXCHAT V10.0.0 · MOBILE REBUILD
+   Stable mobile layout, visible controls, safe notification flow
+   ========================================================= */
+
+:root {
+  --mobile-safe-top: env(safe-area-inset-top, 0px);
+  --mobile-safe-right: env(safe-area-inset-right, 0px);
+  --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --mobile-safe-left: env(safe-area-inset-left, 0px);
+  --mobile-control: 42px;
+}
+
+/* Icon visibility must never depend on a font or external CDN. */
+.classic-icon-host {
+  display: inline-grid !important;
+  place-items: center !important;
+  flex: 0 0 auto !important;
+  min-width: 1em;
+  min-height: 1em;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.classic-ui-icon,
+.classic-icon {
+  display: block !important;
+  width: 1.2em;
+  height: 1.2em;
+  min-width: 14px;
+  min-height: 14px;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: currentColor !important;
+  stroke: currentColor !important;
+  fill: none;
+}
+button .classic-icon-host,
+button .classic-ui-icon,
+button .classic-icon { pointer-events: none; }
+
+/* Login identifier can be either username or phone. */
+.login-identifier-control { padding-right: 48px; }
+.login-identifier-hint {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  color: #7b78a2;
+  opacity: .78;
+  pointer-events: none;
+}
+.login-identifier-hint .classic-icon { width: 17px; height: 17px; }
+
+@media (max-width: 980px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  body.smart-app-page {
+    width: 100%;
+    height: var(--mobile-app-height, 100dvh) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body.smart-app-page .app-shell,
+  body.smart-app-page .smart-shell {
+    width: 100% !important;
+    max-width: none !important;
+    height: var(--mobile-app-height, 100dvh) !important;
+    min-height: 0 !important;
+    display: block !important;
+    overflow: hidden !important;
+  }
+
+  body.smart-app-page .smart-chat-panel {
+    position: relative !important;
+    width: 100% !important;
+    height: var(--mobile-app-height, 100dvh) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    isolation: isolate;
+  }
+
+  /* The server notice becomes a normal row below the chat header on mobile. */
+  body.has-server-announcement.app-page {
+    padding-top: 0 !important;
+  }
+  body.has-server-announcement.app-page .app-shell,
+  body.has-server-announcement.app-page .smart-shell,
+  body.has-server-announcement.app-page .chat-panel,
+  body.has-server-announcement.app-page .smart-chat-panel {
+    height: var(--mobile-app-height, 100dvh) !important;
+  }
+  body.smart-app-page .server-announcement.server-announcement-inline {
+    position: relative !important;
+    inset: auto !important;
+    order: 1;
+    z-index: 30 !important;
+    width: calc(100% - 16px) !important;
+    height: auto !important;
+    min-height: 48px !important;
+    margin: 8px 8px 0 !important;
+    padding: 6px 8px !important;
+    display: grid !important;
+    grid-template-columns: 34px minmax(0, 1fr) auto !important;
+    gap: 7px !important;
+    flex: 0 0 auto !important;
+    border: 1px solid rgba(151, 137, 255, .32) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 24px rgba(27, 20, 86, .18) !important;
+    overflow: hidden !important;
+  }
+  body.smart-app-page .server-announcement-inline .server-announcement-icon {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 10px !important;
+  }
+  body.smart-app-page .server-announcement-inline .server-announcement-window {
+    min-width: 0 !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+  body.smart-app-page .server-announcement-inline .server-announcement-text {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+  body.smart-app-page .server-announcement-inline .server-announcement-position,
+  body.smart-app-page .server-announcement-inline .server-announcement-time {
+    height: 30px !important;
+    min-width: 44px !important;
+    padding: 0 7px !important;
+    font-size: 10px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Mobile header: every important action remains visible. */
+  body.smart-app-page .smart-chat-header {
+    order: 0;
+    position: relative !important;
+    inset: auto !important;
+    z-index: 35 !important;
+    width: 100% !important;
+    min-height: calc(62px + var(--mobile-safe-top)) !important;
+    padding: calc(8px + var(--mobile-safe-top)) max(8px, var(--mobile-safe-right)) 8px max(8px, var(--mobile-safe-left)) !important;
+    display: grid !important;
+    grid-template-columns: 42px 40px minmax(0, 1fr) 42px 42px !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+    overflow: visible !important;
+    backdrop-filter: blur(18px) saturate(1.15) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.15) !important;
+  }
+  body.smart-app-page .smart-chat-header::after { pointer-events: none !important; }
+  body.smart-app-page #openSidebar { grid-column: 1 !important; display: grid !important; }
+  body.smart-app-page #conversationAvatar { grid-column: 2 !important; display: grid !important; }
+  body.smart-app-page .chat-heading {
+    grid-column: 3 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+  body.smart-app-page .chat-heading h1,
+  body.smart-app-page .chat-heading p {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  body.smart-app-page .chat-heading h1 { font-size: 15px !important; line-height: 1.25 !important; }
+  body.smart-app-page .chat-heading p { margin-top: 2px !important; font-size: 10px !important; line-height: 1.25 !important; }
+  body.smart-app-page #smartConnectionChip { display: none !important; }
+  body.smart-app-page .chat-header-actions { display: contents !important; }
+  body.smart-app-page .chat-header-actions > * { display: none !important; }
+  body.smart-app-page #notificationCenterButton {
+    grid-column: 4 !important;
+    display: grid !important;
+  }
+  body.smart-app-page #mobileHeaderActionsButton {
+    grid-column: 5 !important;
+    display: grid !important;
+  }
+  body.smart-app-page .smart-chat-header .icon-button,
+  body.smart-app-page .smart-chat-header .avatar {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    border-radius: 14px !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+  }
+  body.smart-app-page .smart-chat-header .icon-button .classic-ui-icon,
+  body.smart-app-page .smart-chat-header .avatar .classic-ui-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  body.smart-app-page .notification-muted-dot {
+    right: 6px !important;
+    top: 6px !important;
+  }
+
+  /* All optional bars occupy real layout space and never float over messages. */
+  body.smart-app-page :is(
+    .conversation-quick-actions,
+    .feature-hint,
+    .message-search-bar,
+    .pending-delete-bar,
+    .contact-unavailable-bar,
+    .request-gate-bar,
+    .world-chat-state-bar,
+    .support-access-bar,
+    .pinned-message-bar,
+    .typing-indicator,
+    .composer-wrap
+  ) {
+    position: relative !important;
+    inset: auto !important;
+    flex: 0 0 auto !important;
+  }
+  body.smart-app-page .server-announcement-inline ~ :is(
+    .conversation-quick-actions,
+    .feature-hint,
+    .message-search-bar,
+    .pending-delete-bar,
+    .contact-unavailable-bar,
+    .request-gate-bar,
+    .world-chat-state-bar,
+    .support-access-bar,
+    .pinned-message-bar,
+    .special-panel,
+    .messages
+  ) { order: 2; }
+  body.smart-app-page .messages,
+  body.smart-app-page .smart-messages,
+  body.smart-app-page .special-panel {
+    order: 2;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scroll-padding-bottom: 18px;
+  }
+  body.smart-app-page .typing-indicator { order: 3; }
+  body.smart-app-page .composer-wrap { order: 4; }
+
+  body.smart-app-page .conversation-quick-actions {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 7px 8px !important;
+    display: flex !important;
+    gap: 7px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+  body.smart-app-page .conversation-quick-actions.hidden { display: none !important; }
+  body.smart-app-page .conversation-quick-actions button {
+    min-width: 82px !important;
+    min-height: 42px !important;
+    padding: 7px 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    border-radius: 13px !important;
+    scroll-snap-align: start;
+  }
+  body.smart-app-page .conversation-quick-actions .classic-ui-icon { width: 17px !important; height: 17px !important; }
+
+  body.smart-app-page :is(.feature-hint,.message-search-bar,.pending-delete-bar,.contact-unavailable-bar,.request-gate-bar,.world-chat-state-bar,.support-access-bar,.pinned-message-bar) {
+    width: calc(100% - 16px) !important;
+    margin: 8px 8px 0 !important;
+    border-radius: 15px !important;
+    min-width: 0 !important;
+  }
+  body.smart-app-page :is(.contact-unavailable-bar,.request-gate-bar,.world-chat-state-bar,.support-access-bar) {
+    grid-template-columns: 40px minmax(0,1fr) !important;
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+  body.smart-app-page :is(.contact-unavailable-bar,.request-gate-bar) > button {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-height: 42px !important;
+  }
+
+  /* Message area and bubbles. */
+  body.smart-app-page .messages {
+    padding: 14px 10px 12px !important;
+  }
+  body.smart-app-page .message-row {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  body.smart-app-page .message-stack { max-width: min(82%, 520px) !important; min-width: 0 !important; }
+  body.smart-app-page .message-row.mine .message-stack { max-width: min(88%, 560px) !important; }
+  body.smart-app-page .message-bubble {
+    max-width: 100% !important;
+    min-width: 42px !important;
+    padding: 10px 13px !important;
+    border-radius: 18px !important;
+    font-size: 15px !important;
+    line-height: 1.42 !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    hyphens: auto;
+    transform: translateZ(0);
+  }
+  body.smart-app-page .message-text { white-space: pre-wrap !important; overflow-wrap: anywhere !important; }
+  body.smart-app-page .message-meta { font-size: 10px !important; line-height: 1.25 !important; }
+  body.smart-app-page .message-avatar { width: 30px !important; height: 30px !important; min-width: 30px !important; }
+  body.smart-app-page .empty-state { padding: 28px 18px !important; }
+
+  /* Composer remains fully visible above browser and keyboard safe areas. */
+  body.smart-app-page .composer-wrap {
+    z-index: 32 !important;
+    width: 100% !important;
+    padding: 7px max(8px,var(--mobile-safe-right)) calc(7px + var(--mobile-safe-bottom)) max(8px,var(--mobile-safe-left)) !important;
+    margin: 0 !important;
+    backdrop-filter: blur(18px) saturate(1.15) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.15) !important;
+  }
+  body.smart-app-page .smart-composer,
+  body.smart-app-page .composer {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 50px !important;
+    display: grid !important;
+    grid-template-columns: 40px 40px minmax(0,1fr) 42px !important;
+    align-items: end !important;
+    gap: 4px !important;
+    padding: 4px !important;
+    border-radius: 18px !important;
+    overflow: visible !important;
+  }
+  body.smart-app-page .composer > #toolsButton { grid-column: 1 !important; }
+  body.smart-app-page .composer > #emojiButton { grid-column: 2 !important; }
+  body.smart-app-page .composer > #messageInput { grid-column: 3 !important; }
+  body.smart-app-page .composer > #sendButton { grid-column: 4 !important; }
+  body.smart-app-page .composer > #composerClearButton,
+  body.smart-app-page .composer > #messageCounter { display: none !important; }
+  body.smart-app-page .composer :is(.icon-button,.attach-button,.send-button) {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    border-radius: 13px !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+  body.smart-app-page .composer .send-button { width: 42px !important; min-width: 42px !important; }
+  body.smart-app-page .composer textarea {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    max-height: 126px !important;
+    padding: 9px 8px !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    resize: none !important;
+    overflow-y: auto !important;
+  }
+  body.smart-app-page .attachment-preview,
+  body.smart-app-page .emoji-picker,
+  body.smart-app-page .quick-tools {
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(66px + var(--mobile-safe-bottom)) !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: min(42dvh, 360px) !important;
+    overflow: auto !important;
+    border-radius: 18px !important;
+    z-index: 45 !important;
+  }
+
+  body.mobile-keyboard-open.smart-app-page .smart-chat-header {
+    min-height: 54px !important;
+    padding-top: 6px !important;
+  }
+  body.mobile-keyboard-open.smart-app-page .server-announcement-inline,
+  body.mobile-keyboard-open.smart-app-page .conversation-quick-actions {
+    display: none !important;
+  }
+  body.mobile-keyboard-open.smart-app-page .composer-wrap {
+    padding-bottom: 5px !important;
+  }
+
+  /* Professional mobile drawer. */
+  body.smart-app-page .sidebar,
+  body.smart-app-page .smart-sidebar {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    z-index: 5100 !important;
+    width: min(92vw, 390px) !important;
+    max-width: calc(100vw - 18px) !important;
+    height: var(--mobile-app-height, 100dvh) !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    transform: translate3d(-103%,0,0) !important;
+    transition: transform .22s cubic-bezier(.2,.8,.2,1) !important;
+    box-shadow: 24px 0 70px rgba(3,5,18,.34) !important;
+  }
+  body.smart-app-page .sidebar.open,
+  body.smart-app-page .sidebar.is-open,
+  body.smart-app-page .smart-sidebar.open,
+  body.smart-app-page .smart-sidebar.is-open {
+    transform: translate3d(0,0,0) !important;
+  }
+  body.smart-app-page .sidebar-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 5050 !important;
+    background: rgba(3,5,16,.56) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+  body.smart-app-page .sidebar-top {
+    min-height: calc(66px + var(--mobile-safe-top)) !important;
+    padding: calc(9px + var(--mobile-safe-top)) 12px 9px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 9px !important;
+    flex: 0 0 auto !important;
+  }
+  body.smart-app-page .sidebar-top .brand {
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  body.smart-app-page .sidebar-top .brand-logo { width: 38px !important; height: 38px !important; }
+  body.smart-app-page .sidebar-top .brand span { font-size: 18px !important; }
+  body.smart-app-page .sidebar-top .brand small { display: none !important; }
+  body.smart-app-page .sidebar-top-actions { display: flex !important; align-items: center !important; gap: 6px !important; }
+  body.smart-app-page .sidebar-theme-button {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    border-radius: 13px !important;
+  }
+  body.smart-app-page .sidebar-theme-button-copy,
+  body.smart-app-page .sidebar-theme-chevron { display: none !important; }
+  body.smart-app-page #closeSidebar { display: grid !important; width: 42px !important; height: 42px !important; }
+  body.smart-app-page .me-card {
+    margin: 8px 12px 10px !important;
+    min-height: 82px !important;
+    padding: 10px !important;
+    border-radius: 19px !important;
+    flex: 0 0 auto !important;
+  }
+  body.smart-app-page .me-card-avatar,
+  body.smart-app-page .me-card-avatar-shell { width: 52px !important; height: 52px !important; min-width: 52px !important; }
+  body.smart-app-page .chat-search-wrap {
+    margin: 0 12px 10px !important;
+    min-height: 46px !important;
+    border-radius: 15px !important;
+    flex: 0 0 auto !important;
+  }
+  body.smart-app-page .chat-search-wrap input { font-size: 16px !important; min-width: 0 !important; }
+  body.smart-app-page .sidebar-nav-heading { margin: 0 14px 6px !important; flex: 0 0 auto !important; }
+  body.smart-app-page .main-nav,
+  body.smart-app-page .smart-nav {
+    padding: 0 10px !important;
+    display: grid !important;
+    gap: 4px !important;
+    flex: 0 0 auto !important;
+  }
+  body.smart-app-page .nav-item {
+    width: 100% !important;
+    min-height: 52px !important;
+    grid-template-columns: 38px minmax(0,1fr) auto !important;
+    gap: 10px !important;
+    padding: 7px 9px !important;
+    border-radius: 15px !important;
+  }
+  body.smart-app-page .nav-icon {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    border-radius: 12px !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+  body.smart-app-page .nav-icon .classic-ui-icon { width: 19px !important; height: 19px !important; }
+  body.smart-app-page .nav-item strong { font-size: 13px !important; }
+  body.smart-app-page .nav-item small { font-size: 10px !important; }
+  body.smart-app-page .sidebar-actions {
+    margin: 8px 12px !important;
+    gap: 8px !important;
+    flex: 0 0 auto !important;
+  }
+  body.smart-app-page .sidebar-actions button { min-height: 44px !important; border-radius: 14px !important; }
+  body.smart-app-page .sidebar-scroll {
+    min-height: 80px !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 2px 8px 12px !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  body.smart-app-page .sidebar-section { margin-bottom: 12px !important; }
+  body.smart-app-page .section-title,
+  body.smart-app-page .section-toggle { min-height: 36px !important; }
+  body.smart-app-page .sidebar-footer {
+    position: relative !important;
+    inset: auto !important;
+    flex: 0 0 auto !important;
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) auto !important;
+    gap: 7px !important;
+    padding: 9px 12px calc(10px + var(--mobile-safe-bottom)) !important;
+    border-top: 1px solid rgba(124,121,164,.18) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+  }
+  body.smart-app-page .sidebar-footer-status { display: none !important; }
+  body.smart-app-page .sidebar-language { grid-column: 1 / -1 !important; width: 100% !important; min-height: 44px !important; }
+  body.smart-app-page .sidebar-settings-button { grid-column: 1 !important; width: 100% !important; min-height: 44px !important; }
+  body.smart-app-page .logout-button { grid-column: 2 !important; width: 48px !important; min-width: 48px !important; min-height: 44px !important; padding: 0 !important; }
+  body.smart-app-page .logout-button > span:last-child { display: none !important; }
+
+  body.smart-app-page .sidebar-theme-panel {
+    position: fixed !important;
+    z-index: 5200 !important;
+    left: 10px !important;
+    right: 10px !important;
+    top: auto !important;
+    bottom: calc(10px + var(--mobile-safe-bottom)) !important;
+    width: auto !important;
+    max-height: min(78dvh, 620px) !important;
+    overflow: auto !important;
+    margin: 0 !important;
+    padding: 14px !important;
+    border-radius: 22px !important;
+    transform-origin: center bottom !important;
+  }
+  body.smart-app-page .sidebar-theme-panel.hidden { display: none !important; }
+  body.smart-app-page .sidebar-theme-panel:not(.hidden) { display: block !important; }
+  body.smart-app-page .sidebar-theme-choices { display: grid !important; grid-template-columns: 1fr !important; gap: 9px !important; }
+  body.smart-app-page .sidebar-theme-choices > button {
+    min-height: 76px !important;
+    grid-template-columns: 62px minmax(0,1fr) 26px !important;
+    padding: 10px !important;
+    border-radius: 16px !important;
+  }
+
+  /* All mobile modals use a predictable bottom sheet. */
+  body.smart-app-page .modal-backdrop,
+  body.auth-page .modal-backdrop,
+  body.support-page .modal-backdrop,
+  body.admin-page .modal-backdrop {
+    padding: 10px max(10px,var(--mobile-safe-right)) calc(10px + var(--mobile-safe-bottom)) max(10px,var(--mobile-safe-left)) !important;
+    align-items: flex-end !important;
+    overflow: hidden !important;
+  }
+  body.smart-app-page .modal-card,
+  body.auth-page .modal-card,
+  body.support-page .modal-card,
+  body.admin-page .modal-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: min(90dvh, calc(var(--mobile-app-height,100dvh) - 20px)) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    border-radius: 24px 24px 16px 16px !important;
+    padding: 16px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.smart-app-page .mobile-header-actions-list { display: grid !important; grid-template-columns: 1fr !important; gap: 8px !important; }
+  body.smart-app-page .mobile-header-actions-list button {
+    width: 100% !important;
+    min-height: 62px !important;
+    display: grid !important;
+    grid-template-columns: 40px minmax(0,1fr) 20px !important;
+    align-items: center !important;
+    gap: 11px !important;
+    padding: 10px 12px !important;
+    text-align: left !important;
+    border-radius: 16px !important;
+  }
+  body.smart-app-page .mobile-header-actions-list button > .classic-ui-icon:first-child,
+  body.smart-app-page .mobile-header-actions-list button > .classic-icon-host:first-child {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 9px !important;
+    border-radius: 12px !important;
+    background: rgba(105,84,219,.1) !important;
+  }
+
+  .global-theme-menu.global-theme-menu-portal.is-mobile-sheet {
+    position: fixed !important;
+    z-index: 6000 !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: calc(10px + var(--mobile-safe-bottom)) !important;
+    width: min(430px, calc(100vw - 20px)) !important;
+    max-width: calc(100vw - 20px) !important;
+    max-height: min(78dvh, 580px) !important;
+    overflow-y: auto !important;
+    padding: 12px !important;
+    border-radius: 22px !important;
+    transform: translate(-50%,18px) scale(.985) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .global-theme-menu.global-theme-menu-portal.is-mobile-sheet.is-open {
+    transform: translate(-50%,0) scale(1) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+  .global-theme-menu.is-mobile-sheet > button {
+    width: 100% !important;
+    min-height: 60px !important;
+    grid-template-columns: 38px minmax(0,1fr) !important;
+    border-radius: 15px !important;
+  }
+
+  /* Profile/settings remain usable on narrow screens. */
+  body.smart-app-page :is(.profile-form-grid,.profile-editor-grid,.profile-editor-grid-details,.profile-editor-grid-controls,.profile-switch-grid,.account-settings-grid,.notification-settings-grid) {
+    grid-template-columns: 1fr !important;
+  }
+  body.smart-app-page .profile-save-dock {
+    position: sticky !important;
+    bottom: -16px !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    padding: 12px !important;
+    z-index: 5 !important;
+  }
+  body.smart-app-page .profile-save-dock > div:last-child { display: grid !important; grid-template-columns: 1fr !important; gap: 8px !important; }
+  body.smart-app-page .profile-save-dock button { width: 100% !important; min-height: 44px !important; }
+
+  /* Auth page mobile rebuild. */
+  body.auth-page {
+    min-height: var(--mobile-app-height,100dvh) !important;
+    overflow-x: hidden !important;
+  }
+  body.auth-page .auth-shell {
+    width: 100% !important;
+    min-height: var(--mobile-app-height,100dvh) !important;
+    padding: max(10px,var(--mobile-safe-top)) max(12px,var(--mobile-safe-right)) calc(14px + var(--mobile-safe-bottom)) max(12px,var(--mobile-safe-left)) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 12px !important;
+  }
+  body.auth-page .auth-showcase { display: none !important; }
+  body.auth-page .auth-card {
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    padding: 18px !important;
+    border-radius: 24px !important;
+  }
+  body.auth-page .auth-brand-row { margin-bottom: 14px !important; }
+  body.auth-page .auth-tabs { width: 100% !important; }
+  body.auth-page .field-control { min-height: 50px !important; }
+  body.auth-page input,
+  body.auth-page select,
+  body.auth-page textarea { font-size: 16px !important; }
+  body.auth-page .login-options-row { gap: 8px !important; align-items: center !important; }
+  body.auth-page .forgot-account-link { max-width: 52% !important; text-align: right !important; }
+
+  /* Admin/support pages: safe width and touch targets. */
+  body.admin-page,
+  body.support-page { overflow-x: hidden !important; }
+  body.admin-page :is(.admin-shell,.admin-main,.admin-content),
+  body.support-page :is(.support-shell,.support-card) { max-width: 100% !important; min-width: 0 !important; }
+  body.admin-page button,
+  body.support-page button { min-height: 42px; }
+  body.admin-page :is(input,select,textarea),
+  body.support-page :is(input,select,textarea) { font-size: 16px !important; }
+}
+
+@media (max-width: 560px) {
+  body.smart-app-page .smart-chat-header {
+    grid-template-columns: 40px 38px minmax(0,1fr) 40px 40px !important;
+    gap: 5px !important;
+    padding-left: max(6px,var(--mobile-safe-left)) !important;
+    padding-right: max(6px,var(--mobile-safe-right)) !important;
+  }
+  body.smart-app-page .smart-chat-header .icon-button,
+  body.smart-app-page .smart-chat-header .avatar {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+  body.smart-app-page .message-stack { max-width: 86% !important; }
+  body.smart-app-page .message-row.mine .message-stack { max-width: 91% !important; }
+  body.smart-app-page .server-announcement-inline .server-announcement-position { display: none !important; }
+  body.smart-app-page .sidebar { width: min(94vw, 370px) !important; }
+}
+
+@media (max-width: 380px) {
+  body.smart-app-page .smart-chat-header {
+    grid-template-columns: 38px minmax(0,1fr) 38px 38px !important;
+  }
+  body.smart-app-page #conversationAvatar { display: none !important; }
+  body.smart-app-page .chat-heading { grid-column: 2 !important; }
+  body.smart-app-page #notificationCenterButton { grid-column: 3 !important; }
+  body.smart-app-page #mobileHeaderActionsButton { grid-column: 4 !important; }
+  body.smart-app-page .chat-heading p { display: none !important; }
+  body.smart-app-page .smart-chat-header .icon-button {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
+  body.smart-app-page .composer {
+    grid-template-columns: 38px 38px minmax(0,1fr) 40px !important;
+  }
+  body.smart-app-page .composer :is(.icon-button,.attach-button) {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
+  body.smart-app-page .composer .send-button {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+  }
+  body.auth-page .auth-card { padding: 15px !important; }
+}
+
+@media (max-height: 560px) and (orientation: landscape) and (max-width: 980px) {
+  body.smart-app-page .smart-chat-header {
+    min-height: 50px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+  body.smart-app-page .server-announcement-inline,
+  body.smart-app-page .conversation-quick-actions { display: none !important; }
+  body.smart-app-page .composer-wrap { padding-top: 4px !important; padding-bottom: 4px !important; }
+  body.smart-app-page .sidebar-top { min-height: 54px !important; padding-top: 6px !important; padding-bottom: 6px !important; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  body.smart-app-page button,
+  body.smart-app-page .message-bubble,
+  body.smart-app-page .nav-item,
+  body.smart-app-page .conversation-item {
+    transition-duration: .12s !important;
+  }
+  body.smart-app-page button:hover,
+  body.smart-app-page .message-bubble:hover,
+  body.smart-app-page .nav-item:hover,
+  body.smart-app-page .conversation-item:hover {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.smart-app-page *,
+  body.smart-app-page *::before,
+  body.smart-app-page *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* =========================================================
+   NEXCHAT V10.0.0 · RESPONSIVE ADMIN ACCESS & DEVICE UNIFICATION
+   Fixes the cyber sidebar overriding the mobile drawer position.
+   ========================================================= */
+
+/* Stable viewport sizing for every touch device. */
+@media (max-width: 1024px) {
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body.admin-page {
+    --admin-page-gutter: 12px;
+    width: 100% !important;
+    height: var(--mobile-admin-height, 100dvh) !important;
+    min-height: 0 !important;
+    max-height: var(--mobile-admin-height, 100dvh) !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    overscroll-behavior: none;
+  }
+
+  /* Critical: the sidebar must be removed from the admin grid flow. */
+  body.admin-page .admin-shell,
+  body.admin-page.admin-cyberpunk .admin-shell {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: var(--mobile-admin-height, 100dvh) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  body.admin-page .admin-main,
+  body.admin-page.admin-cyberpunk .admin-main {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: var(--mobile-admin-height, 100dvh) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 var(--admin-page-gutter) calc(28px + var(--mobile-safe-bottom)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-top: calc(76px + var(--mobile-safe-top));
+    transform: none !important;
+  }
+
+  body.admin-page .admin-sidebar,
+  body.admin-page.admin-cyberpunk .admin-sidebar,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .admin-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 0 !important;
+    z-index: 5100 !important;
+    display: flex !important;
+    width: min(88vw, 380px) !important;
+    max-width: calc(100vw - 44px) !important;
+    height: var(--mobile-admin-height, 100dvh) !important;
+    min-height: 0 !important;
+    padding-top: var(--mobile-safe-top) !important;
+    overflow: hidden !important;
+    transform: translate3d(-106%, 0, 0) !important;
+    transition: transform .24s cubic-bezier(.2,.8,.2,1) !important;
+    will-change: transform;
+    box-shadow: 24px 0 64px rgba(2, 5, 20, .42) !important;
+  }
+
+  body.admin-page .admin-sidebar.open,
+  body.admin-page.admin-cyberpunk .admin-sidebar.open,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .admin-sidebar.open {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  body.admin-page.admin-sidebar-open { touch-action: none; }
+  body.admin-page.admin-sidebar-open .admin-main { pointer-events: none; }
+
+  body.admin-page #adminSidebarOverlay,
+  body.admin-page .admin-sidebar + .sidebar-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 5000 !important;
+    width: 100vw !important;
+    height: var(--mobile-admin-height, 100dvh) !important;
+    background: rgba(2, 5, 18, .66) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+  }
+
+  body.admin-page #openAdminSidebar.mobile-only,
+  body.admin-page #closeAdminSidebar.mobile-only {
+    display: inline-grid !important;
+  }
+
+  body.admin-page .admin-topbar,
+  body.admin-page.admin-cyberpunk .admin-topbar,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .admin-topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 120 !important;
+    width: auto !important;
+    min-height: calc(66px + var(--mobile-safe-top)) !important;
+    height: auto !important;
+    margin: 0 calc(var(--admin-page-gutter) * -1) 12px !important;
+    padding: calc(8px + var(--mobile-safe-top)) var(--admin-page-gutter) 8px !important;
+    display: grid !important;
+    grid-template-columns: 44px minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 9px !important;
+    overflow: visible !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  body.admin-page .admin-topbar #openAdminSidebar {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    border-radius: 14px !important;
+    place-items: center !important;
+  }
+
+  body.admin-page .admin-topbar-title {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+  body.admin-page .admin-topbar-title .eyebrow,
+  body.admin-page .admin-topbar-title h1 {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  body.admin-page .admin-topbar-title h1 {
+    margin: 3px 0 0 !important;
+    font-size: clamp(17px, 4.4vw, 21px) !important;
+    line-height: 1.15 !important;
+    animation: none !important;
+  }
+
+  body.admin-page .admin-topbar-tools {
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+  }
+  body.admin-page .admin-topbar-tools .connection-pill { display: none !important; }
+  body.admin-page :is(.admin-language-picker,.global-theme-button) {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    border-radius: 13px !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+  body.admin-page .admin-language-picker select {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+  }
+
+  /* Sidebar internals stay reachable even on short devices. */
+  body.admin-page .admin-sidebar .sidebar-top {
+    flex: 0 0 auto !important;
+    min-height: 60px !important;
+    padding: 8px 12px !important;
+  }
+  body.admin-page .admin-sidebar .admin-profile {
+    flex: 0 0 auto !important;
+    margin: 10px 12px !important;
+    padding: 11px !important;
+  }
+  body.admin-page .admin-sidebar .admin-filter {
+    flex: 0 0 auto !important;
+    padding: 0 12px 10px !important;
+  }
+  body.admin-page .admin-sidebar .admin-filter :is(input,select) {
+    width: 100% !important;
+    min-height: 46px !important;
+    font-size: 16px !important;
+  }
+  body.admin-page .admin-sidebar .admin-user-list {
+    flex: 1 1 auto !important;
+    min-height: 72px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.admin-page .admin-sidebar .light-logout {
+    flex: 0 0 auto !important;
+    width: calc(100% - 24px) !important;
+    min-height: 48px !important;
+    margin: 8px 12px calc(10px + var(--mobile-safe-bottom)) !important;
+  }
+
+  /* Dashboard hierarchy optimized for tablets and phones. */
+  body.admin-page :is(
+    .admin-command-strip,
+    .account-capacity-card,
+    .admin-security-activity,
+    .admin-report-center,
+    .system-admin-console,
+    .effect-admin-console,
+    .badge-admin-console,
+    .admin-empty
+  ) {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-block: 12px !important;
+    border-radius: 19px !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  body.admin-page .admin-command-strip {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) !important;
+    gap: 10px !important;
+    padding: 13px !important;
+  }
+  body.admin-page .admin-command-intro { min-width: 0 !important; }
+  body.admin-page .admin-command-intro small { line-height: 1.45 !important; }
+  body.admin-page .admin-command-badges {
+    width: 100% !important;
+    display: flex !important;
+    gap: 7px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+  body.admin-page .admin-command-badges::-webkit-scrollbar { display: none; }
+  body.admin-page .admin-command-badges span {
+    flex: 0 0 auto !important;
+    min-height: 36px !important;
+    padding: 8px 10px !important;
+    scroll-snap-align: start;
+  }
+
+  body.admin-page .stats-grid,
+  body.admin-page .stats-grid.admin-stats-extended,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    gap: 9px !important;
+    width: 100% !important;
+    margin: 12px 0 14px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  body.admin-page .stats-grid article,
+  body.admin-page .stats-grid.admin-stats-extended article,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .stats-grid article {
+    min-width: 0 !important;
+    min-height: 110px !important;
+    padding: 13px !important;
+    border-radius: 17px !important;
+    transform: none !important;
+    animation: none !important;
+    scroll-snap-align: unset !important;
+  }
+  body.admin-page .stats-grid article strong { font-size: 1.55rem !important; }
+
+  body.admin-page :is(.account-capacity-card,.system-admin-grid,.effect-admin-controls,.badge-admin-controls,.admin-report-layout,.admin-report-grid) {
+    grid-template-columns: minmax(0,1fr) !important;
+  }
+  body.admin-page :is(.account-capacity-card,.admin-security-activity,.admin-report-center,.system-admin-console,.effect-admin-console,.badge-admin-console) {
+    padding: 15px !important;
+  }
+  body.admin-page :is(.admin-security-activity-head,.system-admin-head,.effect-admin-head,.badge-admin-hero,.admin-report-center-head) {
+    align-items: stretch !important;
+    gap: 11px !important;
+  }
+  body.admin-page :is(.admin-audit-actions,.announcement-actions,.badge-admin-actions) {
+    width: 100% !important;
+  }
+  body.admin-page .admin-audit-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    gap: 8px !important;
+  }
+  body.admin-page .admin-audit-actions button { width: 100% !important; min-width: 0 !important; }
+
+  body.admin-page :is(.system-control-card,.world-config-surface,.world-admin-message-form,.announcement-control-card,.announcement-form) {
+    min-width: 0 !important;
+    padding: 12px !important;
+    border-radius: 16px !important;
+  }
+  body.admin-page :is(.world-control-grid,.announcement-time-row,.account-capacity-form) {
+    grid-template-columns: minmax(0,1fr) !important;
+  }
+  body.admin-page :is(.world-config-footer,.world-message-compose-footer) {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) !important;
+    align-items: stretch !important;
+    gap: 9px !important;
+  }
+  body.admin-page :is(.world-apply-button,.world-message-actions,.world-message-actions button,.announcement-actions button,.effect-admin-controls button) {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  body.admin-page .world-message-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) !important;
+  }
+  body.admin-page textarea { max-width: 100% !important; resize: vertical; }
+
+  /* Account detail workspace becomes an accessible full-screen view. */
+  body.admin-page .admin-workspace {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 6200 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: var(--mobile-admin-height,100dvh) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  body.admin-page .admin-workspace.hidden { display: none !important; }
+  body.admin-page .mobile-admin-workspace-head.mobile-only,
+  body.admin-page .mobile-admin-tabs.mobile-only { display: grid !important; }
+  body.admin-page .user-detail-panel,
+  body.admin-page .admin-chat-panel { min-width: 0 !important; min-height: 0 !important; }
+  body.admin-page .admin-chat-panel { height: 100% !important; }
+
+  /* Mobile modal and theme controls cannot escape the viewport. */
+  body.admin-page .modal-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 7000 !important;
+    width: 100vw !important;
+    height: var(--mobile-admin-height,100dvh) !important;
+  }
+  body.admin-page .modal-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: calc(var(--mobile-admin-height,100dvh) - 12px - var(--mobile-safe-top)) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  body.admin-page .global-theme-menu.global-theme-menu-portal.is-mobile-sheet,
+  body.admin-page .admin-theme-menu.global-theme-menu-portal.is-mobile-sheet {
+    z-index: 7600 !important;
+    width: min(360px, calc(100vw - 20px)) !important;
+    max-height: min(72dvh, 560px) !important;
+    padding: 12px !important;
+    border-radius: 22px !important;
+  }
+  body.admin-page .admin-theme-menu.is-mobile-sheet > button {
+    min-height: 66px !important;
+    padding: 10px !important;
+  }
+
+  body.admin-page button,
+  body.admin-page [role="button"] { touch-action: manipulation; }
+  body.admin-page :is(button,input,select,textarea) { font-size: max(16px, 1em); }
+}
+
+@media (max-width: 720px) {
+  body.admin-page { --admin-page-gutter: 9px; }
+  body.admin-page .stats-grid,
+  body.admin-page .stats-grid.admin-stats-extended,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .stats-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  }
+  body.admin-page .stats-grid article,
+  body.admin-page .stats-grid.admin-stats-extended article,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .stats-grid article {
+    min-height: 104px !important;
+    padding: 12px !important;
+  }
+  body.admin-page .admin-command-badges span { font-size: 9px !important; }
+  body.admin-page :is(.account-capacity-card,.admin-security-activity,.admin-report-center,.system-admin-console,.effect-admin-console,.badge-admin-console) {
+    padding: 13px !important;
+  }
+  body.admin-page .badge-admin-actions { display: grid !important; grid-template-columns: 1fr !important; gap: 8px !important; }
+}
+
+@media (max-width: 430px) {
+  body.admin-page { --admin-page-gutter: 8px; }
+  body.admin-page .admin-topbar {
+    grid-template-columns: 42px minmax(0,1fr) auto !important;
+    gap: 6px !important;
+  }
+  body.admin-page .admin-topbar #openAdminSidebar,
+  body.admin-page :is(.admin-language-picker,.global-theme-button) {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+  body.admin-page .admin-topbar-title .eyebrow { font-size: 8px !important; }
+  body.admin-page .admin-topbar-title h1 { font-size: 16px !important; }
+  body.admin-page .admin-sidebar,
+  body.admin-page.admin-cyberpunk .admin-sidebar,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .admin-sidebar {
+    width: min(92vw, 360px) !important;
+    max-width: calc(100vw - 28px) !important;
+  }
+  body.admin-page .stats-grid article > span,
+  body.admin-page .stats-grid article small { line-height: 1.35 !important; }
+  body.admin-page .admin-audit-actions { grid-template-columns: 1fr !important; }
+  body.admin-page .detail-list { grid-template-columns: 1fr !important; }
+  body.admin-page .admin-action-grid { grid-template-columns: 1fr !important; }
+  body.admin-page .admin-action-grid #manageBadgeButton { grid-column: auto !important; }
+}
+
+@media (max-width: 340px) {
+  body.admin-page .stats-grid,
+  body.admin-page .stats-grid.admin-stats-extended,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk .stats-grid {
+    grid-template-columns: minmax(0,1fr) !important;
+  }
+  body.admin-page .admin-topbar-title .eyebrow { display: none !important; }
+}
+
+@media (max-width: 1024px) and (max-height: 560px) and (orientation: landscape) {
+  body.admin-page .admin-topbar {
+    min-height: 54px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  body.admin-page .admin-topbar-title .eyebrow { display: none !important; }
+  body.admin-page .admin-command-strip { display: none !important; }
+  body.admin-page .admin-sidebar .admin-profile { display: none !important; }
+}
+
+/* Desktop and large tablet density without changing functionality. */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  body.admin-page .admin-shell { grid-template-columns: 286px minmax(0,1fr) !important; }
+  body.admin-page .admin-main { padding-inline: 22px !important; }
+  body.admin-page .stats-grid.admin-stats-extended { grid-template-columns: repeat(4,minmax(0,1fr)) !important; }
+}
+
+@media (min-width: 1367px) {
+  body.admin-page .admin-main > * {
+    width: min(100%, 1680px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  body.admin-page .stats-grid.admin-stats-extended {
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr)) !important;
+  }
+}
+
+/* Metric cards: preserve a clear label → value → explanation hierarchy. */
+@media (max-width: 1024px) {
+  body.admin-page .stats-grid article > span,
+  body.admin-page .stats-grid article > strong,
+  body.admin-page .stats-grid article > small {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  body.admin-page .stats-grid article > span {
+    display: block !important;
+    min-height: 30px !important;
+    font-size: 10.5px !important;
+    line-height: 1.35 !important;
+    font-weight: 700 !important;
+    overflow-wrap: anywhere;
+  }
+  body.admin-page .stats-grid article > strong {
+    display: block !important;
+    margin: 7px 0 5px !important;
+    line-height: 1 !important;
+    letter-spacing: -.04em !important;
+  }
+  body.admin-page .stats-grid article > small {
+    display: block !important;
+    min-height: 28px !important;
+    font-size: 9.5px !important;
+    line-height: 1.4 !important;
+    overflow-wrap: anywhere;
+  }
+}
+
+
+/* Final width guards for tablet layouts and touch-driven browsers. */
+@media (max-width: 1024px) {
+  body.admin-page :is(
+    .admin-command-strip,.account-capacity-card,.admin-security-activity,
+    .admin-report-center,.system-admin-console,.effect-admin-console,
+    .badge-admin-console,.admin-empty
+  ) {
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  body.support-page .support-composer {
+    width: auto !important;
+    max-width: calc(100% - 20px) !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  body.smart-app-page :is(.app-shell,.smart-shell,.smart-sidebar,.smart-chat-panel),
+  body.admin-page :is(.admin-shell,.admin-main,.admin-sidebar) {
+    animation: none !important;
+  }
+  body.smart-app-page .smart-chat-panel {
+    transform: none !important;
+  }
+}
+
+/* V1.0.0 · keep mobile sidebar overlay alive through one smooth close pass. */
+@media(max-width:900px){
+  body.smart-app-page .sidebar-overlay,
+  body.admin-page #adminSidebarOverlay,
+  body.admin-page .admin-sidebar + .sidebar-overlay{
+    opacity:0;
+    transition:opacity .22s ease,backdrop-filter .22s ease,-webkit-backdrop-filter .22s ease!important;
+  }
+  body.smart-app-page .sidebar-overlay.is-visible,
+  body.admin-page #adminSidebarOverlay.is-visible,
+  body.admin-page .admin-sidebar + .sidebar-overlay.is-visible{opacity:1}
+  body.smart-app-page .sidebar-overlay.is-closing,
+  body.admin-page #adminSidebarOverlay.is-closing,
+  body.admin-page .admin-sidebar + .sidebar-overlay.is-closing{opacity:0;pointer-events:auto!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.smart-app-page .sidebar-overlay,
+  body.admin-page #adminSidebarOverlay,
+  body.admin-page .admin-sidebar + .sidebar-overlay{transition-duration:.01ms!important}
+}
+
+
+/* NexChat V1.0.0 · instant stationary appearance picker */
+.global-theme-menu,
+.global-theme-menu.global-theme-menu-portal,
+.global-theme-menu.global-theme-menu-portal.is-mobile-sheet,
+.global-theme-menu.global-theme-menu-portal.is-open,
+.global-theme-menu.global-theme-menu-portal.is-mobile-sheet.is-open,
+.global-theme-control.open .global-theme-menu{
+  transform:none!important;
+  transform-origin:center!important;
+  transition:none!important;
+  animation:none!important;
+  will-change:auto!important;
+}
+
+/* =========================================================
+   NEXCHAT V1.0.0 · FINAL MOBILE BIG UPDATE
+   One coherent mobile system for Chat, Admin, Home, Login and Support.
+   Existing features remain in place; this layer only reorganizes them for
+   touch, safe areas, the virtual keyboard and narrow/landscape viewports.
+   ========================================================= */
+:root{
+  --m-app-h:var(--mobile-app-height,100dvh);
+  --m-safe-t:max(env(safe-area-inset-top,0px),0px);
+  --m-safe-r:max(env(safe-area-inset-right,0px),0px);
+  --m-safe-b:max(env(safe-area-inset-bottom,0px),0px);
+  --m-safe-l:max(env(safe-area-inset-left,0px),0px);
+  --m-gutter:12px;
+  --m-control:44px;
+  --m-radius:18px;
+  --m-sheet-radius:26px;
+  --m-touch-ease:cubic-bezier(.2,.78,.2,1);
+  --m-panel-shadow:0 24px 70px rgba(2,7,25,.38);
+}
+
+@media(max-width:1024px), (pointer:coarse){
+  html,body{width:100%;max-width:100%;overscroll-behavior:none;-webkit-text-size-adjust:100%}
+  body{min-height:var(--m-app-h);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  body.mobile-layer-open:not(.smart-app-page):not(.admin-page){overflow:hidden!important}
+  :where(button,a,[role="button"],input,select,textarea){font-family:inherit}
+  :where(button,a,[role="button"]){touch-action:manipulation}
+  :where(button,a,[role="button"]):focus-visible{outline:3px solid rgba(92,214,255,.28)!important;outline-offset:2px!important}
+  :where(input,select,textarea){font-size:16px!important}
+  .desktop-only{display:none!important}
+  .mobile-only{display:inline-grid!important}
+  .toast-container{left:var(--m-gutter)!important;right:var(--m-gutter)!important;bottom:calc(var(--m-gutter) + var(--m-safe-b))!important;width:auto!important;max-width:none!important}
+  .toast{width:100%!important;max-width:560px!important;margin-inline:auto!important}
+
+  /* Shared modal framework: predictable sheet, no jumping or double motion. */
+  .modal-backdrop{
+    position:fixed!important;inset:0!important;z-index:9000!important;
+    width:100vw!important;height:var(--m-app-h)!important;
+    padding:12px max(12px,var(--m-safe-r)) calc(12px + var(--m-safe-b)) max(12px,var(--m-safe-l))!important;
+    display:grid!important;align-items:end!important;justify-items:stretch!important;
+    overflow:hidden!important;background:rgba(2,6,20,.58)!important;
+    backdrop-filter:blur(8px) saturate(.92)!important;-webkit-backdrop-filter:blur(8px) saturate(.92)!important;
+  }
+  .modal-backdrop.hidden{display:none!important}
+  .modal-backdrop .modal-card{
+    width:100%!important;max-width:680px!important;max-height:min(88dvh,calc(var(--m-app-h) - 24px - var(--m-safe-t)))!important;
+    margin:0 auto!important;padding:16px!important;border-radius:var(--m-sheet-radius) var(--m-sheet-radius) 18px 18px!important;
+    overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+    transform:none!important;animation:none!important;transition:opacity .18s ease!important;
+    box-shadow:var(--m-panel-shadow)!important;
+  }
+  .modal-backdrop .modal-card::before{content:"";display:block;width:42px;height:4px;margin:0 auto 12px;border-radius:999px;background:rgba(150,159,199,.45)}
+  .modal-title-row{position:sticky!important;top:-16px!important;z-index:4!important;margin:-4px -2px 12px!important;padding:8px 2px 10px!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+  .modal-actions{position:sticky!important;bottom:-16px!important;z-index:5!important;padding:12px 0 calc(2px + var(--m-safe-b))!important;margin-top:12px!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+  .modal-actions :is(button,a){min-height:46px!important}
+  .modal-actions.single{grid-template-columns:1fr!important}
+  .modal-actions:not(.single){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .modal-card :is(input,select,textarea){width:100%!important;max-width:100%!important;min-height:46px!important}
+  .modal-card textarea{min-height:96px!important;resize:vertical}
+
+  /* Theme/motion menus appear at their final position, never fly from elsewhere. */
+  .global-theme-menu.global-theme-menu-portal.is-mobile-sheet,
+  .global-theme-menu.global-theme-menu-portal.is-open,
+  .global-theme-menu.global-theme-menu-portal.is-mobile-sheet.is-open{
+    position:fixed!important;left:12px!important;right:12px!important;top:auto!important;bottom:calc(12px + var(--m-safe-b))!important;
+    width:auto!important;max-width:none!important;max-height:min(74dvh,620px)!important;
+    margin:0!important;padding:12px!important;border-radius:24px!important;overflow:auto!important;
+    transform:none!important;animation:none!important;transition:none!important;opacity:1!important;visibility:visible!important;
+  }
+  .global-theme-menu.global-theme-menu-portal:not(.is-open){display:none!important}
+  .v10-motion-backdrop{padding:10px max(10px,var(--m-safe-r)) calc(10px + var(--m-safe-b)) max(10px,var(--m-safe-l))!important;align-items:end!important}
+  .v10-motion-panel{width:100%!important;max-width:680px!important;max-height:min(92dvh,calc(var(--m-app-h) - 18px))!important;margin:0 auto!important;border-radius:28px 28px 18px 18px!important;transform:none!important;animation:none!important}
+  .v10-motion-panel-head{position:sticky!important;top:0!important;z-index:4!important}
+  .v10-motion-panel-footer{position:sticky!important;bottom:0!important;z-index:4!important;padding-bottom:calc(12px + var(--m-safe-b))!important}
+}
+
+/* ===================== USER CHAT MOBILE ===================== */
+@media(max-width:980px){
+  body.smart-app-page{height:var(--m-app-h)!important;min-height:var(--m-app-h)!important;overflow:hidden!important;background:#071027!important}
+  body.smart-app-page .app-shell,
+  body.smart-app-page .smart-shell{height:var(--m-app-h)!important;min-height:0!important;width:100%!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;overflow:hidden!important}
+  body.smart-app-page .smart-chat-panel{height:var(--m-app-h)!important;min-height:0!important;width:100%!important;display:flex!important;flex-direction:column!important;border:0!important;border-radius:0!important;overflow:hidden!important;transform:none!important}
+
+  /* Header: menu, avatar, identity and one action gateway. All desktop actions stay available inside the gateway sheet. */
+  body.smart-app-page .smart-chat-header{
+    flex:0 0 auto!important;display:grid!important;
+    grid-template-columns:44px 42px minmax(0,1fr) 44px!important;align-items:center!important;gap:7px!important;
+    width:100%!important;min-height:calc(64px + var(--m-safe-t))!important;
+    padding:calc(8px + var(--m-safe-t)) max(9px,var(--m-safe-r)) 8px max(9px,var(--m-safe-l))!important;
+    border-radius:0!important;overflow:hidden!important;
+  }
+  body.smart-app-page .smart-chat-header>.chat-header-actions,
+  body.smart-app-page .smart-chat-header>#smartConnectionChip{display:none!important}
+  body.smart-app-page #openSidebar{grid-column:1!important;display:grid!important}
+  body.smart-app-page #conversationAvatar{grid-column:2!important;width:42px!important;height:42px!important;min-width:42px!important;border-radius:14px!important}
+  body.smart-app-page .chat-heading{grid-column:3!important;min-width:0!important;display:grid!important;gap:2px!important}
+  body.smart-app-page #conversationTitle{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:15px!important;line-height:1.2!important}
+  body.smart-app-page #conversationStatus{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:10.5px!important;line-height:1.2!important}
+  body.smart-app-page #mobileHeaderActionsButton{grid-column:4!important;display:grid!important;width:44px!important;height:44px!important;min-width:44px!important;border-radius:14px!important}
+  body.smart-app-page .smart-chat-header :is(#openSidebar,#mobileHeaderActionsButton){background:rgba(255,255,255,.055)!important;border:1px solid rgba(131,145,223,.16)!important}
+
+  /* Every former desktop action is listed in one readable mobile sheet. */
+  body.smart-app-page #mobileHeaderActionsModal .modal-card{max-height:min(82dvh,680px)!important}
+  body.smart-app-page .mobile-header-actions-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  body.smart-app-page .mobile-header-actions-list button{
+    min-width:0!important;min-height:86px!important;padding:12px!important;border-radius:18px!important;
+    display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:8px 10px!important;align-content:center!important;text-align:left!important;
+  }
+  body.smart-app-page .mobile-header-actions-list button>.classic-icon-host:first-child,
+  body.smart-app-page .mobile-header-actions-list button>.classic-ui-icon:first-child{grid-row:1/3!important;width:38px!important;height:38px!important;padding:9px!important;border-radius:13px!important}
+  body.smart-app-page .mobile-header-actions-list button>span{min-width:0!important;display:grid!important;gap:3px!important}
+  body.smart-app-page .mobile-header-actions-list button>span strong{font-size:12px!important;white-space:normal!important;line-height:1.25!important}
+  body.smart-app-page .mobile-header-actions-list button>span small{font-size:9.5px!important;line-height:1.35!important;display:-webkit-box!important;-webkit-line-clamp:2!important;line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+  body.smart-app-page .mobile-header-actions-list button>.classic-icon-host:last-child,
+  body.smart-app-page .mobile-header-actions-list button>.classic-ui-icon:last-child{display:none!important}
+
+  /* Status/feature rows scroll naturally and never squeeze the message list to zero. */
+  body.smart-app-page :is(.server-announcement-inline,.conversation-quick-actions,.feature-hint,.message-search-bar,.pending-delete-bar,.contact-unavailable-bar,.request-gate-bar,.world-chat-state-bar,.support-access-bar,.pinned-message-bar){flex:0 0 auto!important;max-width:calc(100% - 16px)!important;margin:7px 8px 0!important}
+  body.smart-app-page .conversation-quick-actions{display:flex!important;gap:7px!important;overflow-x:auto!important;scroll-snap-type:x proximity;scrollbar-width:none;padding:6px 8px!important}
+  body.smart-app-page .conversation-quick-actions.hidden{display:none!important}
+  body.smart-app-page .conversation-quick-actions::-webkit-scrollbar{display:none}
+  body.smart-app-page .conversation-quick-actions button{flex:0 0 auto!important;min-width:80px!important;min-height:40px!important;scroll-snap-align:start!important}
+  body.smart-app-page :is(.contact-unavailable-bar,.request-gate-bar,.world-chat-state-bar,.support-access-bar){grid-template-columns:38px minmax(0,1fr)!important;gap:9px!important;padding:10px!important}
+  body.smart-app-page :is(.contact-unavailable-bar,.request-gate-bar)>button{grid-column:1/-1!important;width:100%!important}
+  body.smart-app-page .message-search-bar{display:grid!important;grid-template-columns:24px minmax(0,1fr) 36px!important;min-height:46px!important;padding:5px 6px 5px 12px!important}
+  body.smart-app-page .message-search-bar.hidden{display:none!important}
+
+  /* Message viewport and touch behavior. */
+  body.smart-app-page .messages,
+  body.smart-app-page .smart-messages{flex:1 1 auto!important;min-height:0!important;width:100%!important;padding:14px 10px 12px!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;scrollbar-gutter:stable}
+  body.smart-app-page .special-panel{flex:1 1 auto!important;min-height:0!important;width:100%!important;padding:12px!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch}
+  body.smart-app-page .message-row{width:100%!important;max-width:100%!important;min-width:0!important;margin-block:6px!important;contain:layout style}
+  body.smart-app-page .message-stack{max-width:min(84%,620px)!important;min-width:0!important}
+  body.smart-app-page .message-row.mine .message-stack{max-width:min(90%,650px)!important}
+  body.smart-app-page .message-bubble{max-width:100%!important;min-width:42px!important;padding:10px 13px!important;font-size:14.5px!important;line-height:1.46!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+  body.smart-app-page .message-bubble:hover{transform:none!important}
+  body.smart-app-page .message-avatar{width:30px!important;height:30px!important;min-width:30px!important}
+  body.smart-app-page .message-meta{font-size:9.5px!important;gap:5px!important;flex-wrap:wrap!important}
+  body.smart-app-page .message-more{opacity:0!important;pointer-events:none!important}
+  body.smart-app-page .message-row.long-press-pending .message-bubble{transform:scale(.985)!important;filter:brightness(.96)!important}
+  body.smart-app-page .message-row.long-press-confirmed .message-bubble{box-shadow:0 0 0 3px rgba(102,215,255,.22),0 16px 34px rgba(3,8,26,.24)!important}
+  body.smart-app-page .message-image-button,
+  body.smart-app-page .message-attachment.image-attachment img,
+  body.smart-app-page .message-attachment video{max-width:min(76vw,420px)!important;max-height:52dvh!important;border-radius:14px!important}
+  body.smart-app-page .message-attachment audio{width:min(76vw,340px)!important;max-width:100%!important}
+  body.smart-app-page .reaction-pill{min-height:30px!important;padding:4px 8px!important}
+  body.smart-app-page .scroll-bottom-button{right:max(12px,var(--m-safe-r))!important;bottom:calc(82px + var(--m-safe-b))!important;width:42px!important;height:42px!important;z-index:40!important}
+  body.smart-app-page .typing-indicator{margin:0 10px 5px!important;min-height:36px!important}
+
+  /* Composer: all sending functions remain reachable, including clear draft. */
+  body.smart-app-page .composer-wrap,
+  body.smart-app-page .smart-composer-wrap{flex:0 0 auto!important;width:100%!important;padding:7px max(8px,var(--m-safe-r)) calc(7px + var(--m-safe-b)) max(8px,var(--m-safe-l))!important;margin:0!important;z-index:45!important}
+  body.smart-app-page .composer,
+  body.smart-app-page .smart-composer{
+    position:relative!important;width:100%!important;min-height:54px!important;
+    display:grid!important;grid-template-columns:40px 40px minmax(0,1fr) 42px!important;align-items:end!important;gap:5px!important;
+    padding:5px!important;border-radius:19px!important;overflow:visible!important;
+  }
+  body.smart-app-page #toolsButton{grid-column:1!important}
+  body.smart-app-page #emojiButton{grid-column:2!important}
+  body.smart-app-page #messageInput{grid-column:3!important;padding-right:36px!important}
+  body.smart-app-page #sendButton{grid-column:4!important}
+  body.smart-app-page .composer :is(.icon-button,.attach-button,.emoji-button,.send-button){width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;border-radius:13px!important;padding:0!important;display:grid!important;place-items:center!important}
+  body.smart-app-page .composer .send-button{width:42px!important;min-width:42px!important}
+  body.smart-app-page .composer textarea{width:100%!important;min-width:0!important;min-height:40px!important;max-height:min(126px,24dvh)!important;padding:9px 7px!important;margin:0!important;font-size:16px!important;line-height:1.36!important;resize:none!important;overflow-y:auto!important}
+  body.smart-app-page .composer-clear-button{position:absolute!important;right:49px!important;top:50%!important;z-index:3!important;transform:translateY(-50%)!important;width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;border-radius:10px!important;padding:0!important}
+  body.smart-app-page .composer-clear-button.hidden{display:none!important}
+  body.smart-app-page .message-counter{display:none!important}
+  body.smart-app-page :is(.attachment-preview,.emoji-picker,.quick-tools,#effectActivationDock){position:fixed!important;left:8px!important;right:8px!important;bottom:calc(70px + var(--m-safe-b))!important;width:auto!important;max-width:none!important;max-height:min(44dvh,390px)!important;overflow:auto!important;border-radius:20px!important;z-index:5100!important;margin:0!important}
+  body.smart-app-page :is(.attachment-preview,.emoji-picker,.quick-tools,#effectActivationDock).hidden{display:none!important}
+  body.smart-app-page .quick-tools{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;padding:8px!important}
+  body.smart-app-page .quick-tools button{min-width:0!important;min-height:54px!important;display:grid!important;grid-template-columns:24px minmax(0,1fr)!important;gap:6px!important;padding:8px!important;text-align:left!important}
+  body.smart-app-page .quick-tools button span:last-child{display:block!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:10px!important}
+  body.smart-app-page .emoji-picker{grid-template-columns:repeat(7,minmax(0,1fr))!important;padding:10px!important}
+  body.smart-app-page .emoji-picker button{min-height:42px!important;font-size:21px!important}
+  body.smart-app-page .attachment-preview{display:grid!important;grid-template-columns:52px minmax(0,1fr) 38px!important;gap:10px!important;padding:10px!important;align-items:center!important}
+  body.smart-app-page .attachment-preview-image{width:52px!important;height:52px!important;object-fit:cover!important;border-radius:13px!important}
+  body.smart-app-page .v10-effect-activation-dock{padding:8px!important}
+
+  /* Sidebar drawer: desktop capabilities are preserved, but grouped for one-hand use. */
+  body.smart-app-page .sidebar,
+  body.smart-app-page .smart-sidebar{
+    position:fixed!important;inset:0 auto 0 0!important;z-index:5200!important;
+    width:min(94vw,400px)!important;max-width:calc(100vw - 14px)!important;height:var(--m-app-h)!important;min-height:0!important;
+    display:flex!important;flex-direction:column!important;overflow:hidden!important;
+    transform:translate3d(-103%,0,0)!important;transition:transform .24s var(--m-touch-ease)!important;
+    box-shadow:28px 0 80px rgba(2,6,22,.46)!important;border-radius:0 26px 26px 0!important;
+  }
+  body.smart-app-page :is(.sidebar.open,.sidebar.is-open,.smart-sidebar.open,.smart-sidebar.is-open){transform:translate3d(0,0,0)!important}
+  body.smart-app-page .sidebar-overlay{position:fixed!important;inset:0!important;z-index:5150!important;background:rgba(2,6,19,.62)!important;backdrop-filter:blur(5px)!important;-webkit-backdrop-filter:blur(5px)!important}
+  body.smart-app-page .sidebar-top{flex:0 0 auto!important;min-height:calc(64px + var(--m-safe-t))!important;padding:calc(8px + var(--m-safe-t)) 10px 8px 13px!important;display:flex!important;align-items:center!important;gap:8px!important}
+  body.smart-app-page .sidebar-top .brand{min-width:0!important;flex:1!important;gap:9px!important}
+  body.smart-app-page .sidebar-top .brand-logo{width:38px!important;height:38px!important}
+  body.smart-app-page .sidebar-top .brand span{font-size:18px!important;white-space:nowrap!important}
+  body.smart-app-page .sidebar-top-actions{display:flex!important;gap:6px!important;align-items:center!important}
+  body.smart-app-page .sidebar-theme-button{width:116px!important;min-width:116px!important;height:44px!important;padding:5px 8px!important;display:grid!important;grid-template-columns:30px minmax(0,1fr) 14px!important;gap:5px!important;border-radius:14px!important}
+  body.smart-app-page .sidebar-theme-button-copy{display:grid!important;min-width:0!important;line-height:1.05!important}
+  body.smart-app-page .sidebar-theme-button-copy small{font-size:7px!important;letter-spacing:.06em!important}
+  body.smart-app-page .sidebar-theme-button-copy b{font-size:9px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  body.smart-app-page .sidebar-theme-chevron{display:grid!important;width:14px!important;height:14px!important}
+  body.smart-app-page #closeSidebar{display:grid!important;width:42px!important;height:42px!important;min-width:42px!important;border-radius:13px!important}
+  body.smart-app-page .me-card{flex:0 0 auto!important;margin:8px 12px 10px!important;min-height:78px!important;padding:10px!important;border-radius:20px!important}
+  body.smart-app-page .me-card-avatar-shell{width:52px!important;height:52px!important;min-width:52px!important}
+  body.smart-app-page .me-card-avatar{width:46px!important;height:46px!important;min-width:46px!important}
+  body.smart-app-page .chat-search-wrap{flex:0 0 auto!important;margin:0 12px 9px!important;min-height:46px!important;border-radius:15px!important}
+  body.smart-app-page .sidebar-nav-heading{flex:0 0 auto!important;margin:0 14px 5px!important}
+  body.smart-app-page .main-nav,
+  body.smart-app-page .smart-nav{flex:0 0 auto!important;display:grid!important;gap:4px!important;padding:0 10px!important}
+  body.smart-app-page .nav-item{min-height:50px!important;padding:6px 9px!important;border-radius:15px!important;grid-template-columns:38px minmax(0,1fr) auto!important;gap:9px!important}
+  body.smart-app-page .nav-icon{width:38px!important;height:38px!important;min-width:38px!important;border-radius:12px!important}
+  body.smart-app-page .nav-item strong{font-size:12.5px!important}
+  body.smart-app-page .nav-item small{font-size:9.5px!important}
+  body.smart-app-page .sidebar-actions{flex:0 0 auto!important;margin:7px 12px!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  body.smart-app-page .sidebar-actions button{min-height:42px!important;border-radius:14px!important}
+  body.smart-app-page .sidebar-scroll{flex:1 1 auto!important;min-height:74px!important;overflow-y:auto!important;overflow-x:hidden!important;padding:2px 8px 10px!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  body.smart-app-page .sidebar-section{margin-bottom:10px!important;padding:10px!important;border-radius:18px!important}
+  body.smart-app-page .sidebar-footer{flex:0 0 auto!important;position:relative!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;padding:9px 12px calc(10px + var(--m-safe-b))!important}
+  body.smart-app-page .sidebar-footer-status{display:flex!important;grid-column:1/-1!important;min-height:42px!important;padding:8px 10px!important}
+  body.smart-app-page .sidebar-language{grid-column:1/-1!important;width:100%!important;min-height:44px!important}
+  body.smart-app-page .sidebar-settings-button,
+  body.smart-app-page .logout-button{width:100%!important;min-width:0!important;min-height:44px!important;padding:0 10px!important}
+  body.smart-app-page .logout-button>span:last-child{display:inline!important}
+
+  /* Sidebar appearance panel is shown in place under the header, never animated from another origin. */
+  body.smart-app-page .sidebar-theme-panel{
+    position:fixed!important;z-index:5300!important;left:12px!important;right:12px!important;
+    top:calc(66px + var(--m-safe-t))!important;bottom:auto!important;width:auto!important;max-height:min(66dvh,580px)!important;
+    margin:0!important;padding:12px!important;border-radius:20px!important;overflow:auto!important;
+    transform:none!important;animation:none!important;transition:none!important;
+  }
+  body.smart-app-page .sidebar-theme-panel.hidden{display:none!important}
+  body.smart-app-page .sidebar-theme-panel:not(.hidden){display:block!important}
+  body.smart-app-page .sidebar-theme-choices{grid-template-columns:1fr!important;gap:8px!important}
+  body.smart-app-page .sidebar-theme-choices>button{min-height:72px!important;grid-template-columns:58px minmax(0,1fr) 24px!important;padding:9px!important;border-radius:16px!important}
+
+  /* Mobile special lists and full-screen account surfaces. */
+  body.smart-app-page .people-grid{grid-template-columns:1fr!important;gap:10px!important}
+  body.smart-app-page .person-card{display:grid!important;grid-template-columns:58px minmax(0,1fr)!important;text-align:left!important;padding:12px!important}
+  body.smart-app-page .person-card .person-profile-tap{display:contents!important}
+  body.smart-app-page .person-card .profile-avatar-medium{grid-row:1/4!important;width:58px!important;height:58px!important;margin:0!important}
+  body.smart-app-page .person-card>div:last-child{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;margin-top:8px!important}
+  body.smart-app-page :is(.request-message-card,.saved-message-card){display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;gap:10px!important;padding:12px!important}
+  body.smart-app-page .request-message-card>div:last-child{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
+  body.smart-app-page :is(#profileModal,#accountSettingsModal) .modal-card{width:100vw!important;max-width:100vw!important;height:var(--m-app-h)!important;max-height:var(--m-app-h)!important;border-radius:0!important;margin:0!important;padding:0!important}
+  body.smart-app-page :is(#profileModal,#accountSettingsModal){padding:0!important}
+  body.smart-app-page .profile-command-form,
+  body.smart-app-page .account-settings-grid{padding-bottom:calc(24px + var(--m-safe-b))!important}
+  body.smart-app-page .message-menu-actions{grid-template-columns:1fr!important;gap:8px!important}
+  body.smart-app-page .message-menu-actions button{min-height:54px!important;padding:11px 12px!important;border-radius:15px!important}
+  body.smart-app-page .reaction-row{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:6px!important}
+  body.smart-app-page .reaction-row button{width:100%!important;height:42px!important;max-width:none!important}
+}
+
+@media(max-width:560px){
+  :root{--m-gutter:9px}
+  body.smart-app-page .mobile-header-actions-list{grid-template-columns:1fr!important}
+  body.smart-app-page .mobile-header-actions-list button{min-height:66px!important;grid-template-columns:38px minmax(0,1fr)!important}
+  body.smart-app-page .message-stack{max-width:88%!important}
+  body.smart-app-page .message-row.mine .message-stack{max-width:93%!important}
+  body.smart-app-page .sidebar{width:min(96vw,390px)!important}
+  body.smart-app-page .sidebar-theme-button{width:104px!important;min-width:104px!important}
+}
+
+@media(max-width:390px){
+  body.smart-app-page .smart-chat-header{grid-template-columns:42px minmax(0,1fr) 42px!important;gap:6px!important}
+  body.smart-app-page #conversationAvatar{display:none!important}
+  body.smart-app-page .chat-heading{grid-column:2!important}
+  body.smart-app-page #mobileHeaderActionsButton{grid-column:3!important}
+  body.smart-app-page .sidebar-top .brand span{display:none!important}
+  body.smart-app-page .sidebar-theme-button{width:112px!important;min-width:112px!important}
+  body.smart-app-page .request-message-card>div:last-child{grid-template-columns:1fr!important}
+  body.smart-app-page .reaction-row{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+
+/* Virtual keyboard: preserve input and messages, temporarily collapse nonessential chrome. */
+@media(max-width:980px){
+  body.mobile-keyboard-open.smart-app-page .smart-chat-header{min-height:50px!important;padding-top:4px!important;padding-bottom:4px!important}
+  body.mobile-keyboard-open.smart-app-page #conversationAvatar,
+  body.mobile-keyboard-open.smart-app-page #conversationStatus,
+  body.mobile-keyboard-open.smart-app-page :is(.server-announcement-inline,.conversation-quick-actions,.feature-hint){display:none!important}
+  body.mobile-keyboard-open.smart-app-page .composer-wrap{padding-bottom:4px!important}
+  body.mobile-keyboard-open.smart-app-page .messages{padding-bottom:6px!important}
+  body.mobile-keyboard-open.smart-app-page :is(.attachment-preview,.emoji-picker,.quick-tools,#effectActivationDock){bottom:62px!important;max-height:min(34dvh,270px)!important}
+}
+
+/* Low-height landscape keeps all features reachable without hiding the composer. */
+@media(max-width:1024px) and (max-height:560px) and (orientation:landscape){
+  body.smart-app-page .smart-chat-header{min-height:50px!important;padding-top:4px!important;padding-bottom:4px!important}
+  body.smart-app-page #conversationAvatar{width:36px!important;height:36px!important;min-width:36px!important}
+  body.smart-app-page #conversationStatus{display:none!important}
+  body.smart-app-page :is(.server-announcement-inline,.conversation-quick-actions,.feature-hint){display:none!important}
+  body.smart-app-page .composer-wrap{padding-top:4px!important;padding-bottom:calc(4px + var(--m-safe-b))!important}
+  body.smart-app-page .composer{min-height:48px!important}
+  body.smart-app-page .composer textarea{max-height:70px!important}
+  body.smart-app-page .sidebar{width:min(62vw,410px)!important}
+  body.smart-app-page .sidebar-top{min-height:52px!important;padding-top:4px!important;padding-bottom:4px!important}
+  body.smart-app-page .me-card{display:none!important}
+  body.smart-app-page .nav-item{min-height:44px!important}
+}
+
+/* ===================== ADMIN MOBILE ===================== */
+@media(max-width:1024px){
+  body.admin-page{height:var(--m-app-h)!important;min-height:var(--m-app-h)!important;overflow:hidden!important}
+  body.admin-page .admin-shell{height:var(--m-app-h)!important;min-height:0!important;width:100%!important;display:block!important;overflow:hidden!important}
+  body.admin-page .admin-main{height:var(--m-app-h)!important;min-height:0!important;width:100%!important;max-width:100%!important;padding:0!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+  body.admin-page .admin-topbar{
+    position:sticky!important;top:0!important;z-index:70!important;display:grid!important;
+    grid-template-columns:44px minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important;
+    min-height:calc(64px + var(--m-safe-t))!important;padding:calc(8px + var(--m-safe-t)) max(9px,var(--m-safe-r)) 8px max(9px,var(--m-safe-l))!important;
+    border-radius:0!important;margin:0!important;
+  }
+  body.admin-page #openAdminSidebar{display:grid!important;width:44px!important;height:44px!important;min-width:44px!important;border-radius:14px!important}
+  body.admin-page .admin-topbar-title{min-width:0!important}
+  body.admin-page .admin-topbar-title h1{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:16px!important}
+  body.admin-page .admin-topbar-title .eyebrow{font-size:8px!important}
+  body.admin-page .admin-topbar-actions{display:flex!important;gap:6px!important;align-items:center!important;min-width:0!important}
+  body.admin-page .admin-topbar-actions>:not(.global-theme-button):not(.admin-language-picker):not(#adminMotionButton):not(.admin-online-chip){display:none!important}
+  body.admin-page :is(.global-theme-button,.admin-language-picker,#adminMotionButton,.admin-online-chip){min-width:40px!important;height:40px!important;max-width:118px!important;border-radius:13px!important}
+  body.admin-page :is(.global-theme-button,.admin-language-picker,#adminMotionButton) :is(small,b,.v10-motion-trigger-copy){display:none!important}
+  body.admin-page .admin-command-strip{position:sticky!important;top:calc(64px + var(--m-safe-t))!important;z-index:60!important;margin:8px var(--m-gutter)!important;padding:7px!important;display:flex!important;gap:7px!important;overflow-x:auto!important;scrollbar-width:none!important;scroll-snap-type:x proximity}
+  body.admin-page .admin-command-strip::-webkit-scrollbar{display:none}
+  body.admin-page .admin-command-strip>*{flex:0 0 auto!important;scroll-snap-align:start!important}
+  body.admin-page .admin-content{width:100%!important;max-width:none!important;padding:0 var(--m-gutter) calc(24px + var(--m-safe-b))!important;overflow:visible!important}
+  body.admin-page .stats-grid,
+  body.admin-page .stats-grid.admin-stats-extended{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  body.admin-page .stats-grid article{min-height:106px!important;padding:12px!important;border-radius:18px!important}
+  body.admin-page :is(.account-capacity-card,.admin-security-activity,.admin-report-center,.system-admin-console,.effect-admin-console,.badge-admin-console,.admin-audit-panel,.world-config-surface,.support-moderation-card){width:100%!important;max-width:100%!important;margin:10px 0!important;padding:13px!important;border-radius:20px!important;overflow:hidden!important}
+  body.admin-page :is(.capacity-grid,.security-grid,.system-control-grid,.effect-grid,.badge-admin-form,.admin-action-grid,.world-control-grid,.announcement-grid){grid-template-columns:1fr!important}
+  body.admin-page :is(.world-config-footer,.world-message-compose-footer,.announcement-actions,.effect-admin-controls,.badge-admin-actions){display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+  body.admin-page :is(.world-config-footer,.world-message-compose-footer,.announcement-actions,.effect-admin-controls,.badge-admin-actions) button{width:100%!important}
+  body.admin-page .admin-table-wrap{width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+  body.admin-page table{min-width:680px!important}
+
+  /* Admin drawer and user workspace. */
+  body.admin-page .admin-sidebar{
+    position:fixed!important;inset:0 auto 0 0!important;z-index:6200!important;
+    width:min(94vw,390px)!important;max-width:calc(100vw - 14px)!important;height:var(--m-app-h)!important;
+    display:flex!important;flex-direction:column!important;overflow:hidden!important;
+    transform:translate3d(-103%,0,0)!important;transition:transform .24s var(--m-touch-ease)!important;
+    border-radius:0 26px 26px 0!important;box-shadow:28px 0 80px rgba(2,6,22,.48)!important;
+  }
+  body.admin-page.admin-sidebar-open .admin-sidebar,
+  body.admin-page .admin-sidebar.open,
+  body.admin-page .admin-sidebar.is-open{transform:translate3d(0,0,0)!important}
+  body.admin-page #adminSidebarOverlay{position:fixed!important;inset:0!important;z-index:6150!important;background:rgba(2,6,19,.62)!important;backdrop-filter:blur(5px)!important}
+  body.admin-page .admin-sidebar-header{min-height:calc(64px + var(--m-safe-t))!important;padding-top:calc(8px + var(--m-safe-t))!important}
+  body.admin-page .admin-user-list{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
+  body.admin-page .admin-sidebar-footer{padding-bottom:calc(10px + var(--m-safe-b))!important}
+  body.admin-page .admin-workspace{
+    position:fixed!important;inset:0!important;z-index:6400!important;width:100vw!important;max-width:100vw!important;height:var(--m-app-h)!important;min-height:0!important;
+    margin:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;display:grid!important;grid-template-rows:auto auto minmax(0,1fr)!important;
+  }
+  body.admin-page .admin-workspace.hidden{display:none!important}
+  body.admin-page .mobile-admin-workspace-head{display:grid!important;grid-template-columns:minmax(0,1fr) 44px!important;align-items:center!important;min-height:calc(58px + var(--m-safe-t))!important;padding:calc(7px + var(--m-safe-t)) 10px 7px 14px!important;position:sticky!important;top:0!important;z-index:5!important}
+  body.admin-page .mobile-admin-tabs{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;padding:7px 10px!important;position:sticky!important;top:calc(58px + var(--m-safe-t))!important;z-index:5!important}
+  body.admin-page .mobile-admin-tabs button{min-height:42px!important;border-radius:13px!important}
+  body.admin-page .admin-workspace-grid{display:block!important;min-height:0!important;height:100%!important;overflow:hidden!important}
+  body.admin-page :is(.user-detail-panel,.admin-chat-panel){height:100%!important;min-height:0!important;max-width:100%!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
+  body.admin-page .mobile-panel-hidden{display:none!important}
+  body.admin-page .admin-chat-panel{display:grid!important;grid-template-rows:auto minmax(0,1fr) auto auto!important}
+  body.admin-page .admin-messages{min-height:0!important;overflow-y:auto!important}
+  body.admin-page .admin-composer{margin:7px max(8px,var(--m-safe-r)) calc(7px + var(--m-safe-b)) max(8px,var(--m-safe-l))!important}
+}
+
+@media(max-width:560px){
+  body.admin-page .stats-grid,
+  body.admin-page .stats-grid.admin-stats-extended{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.admin-page .admin-topbar-actions .admin-online-chip{display:none!important}
+}
+@media(max-width:350px){
+  body.admin-page .stats-grid,
+  body.admin-page .stats-grid.admin-stats-extended{grid-template-columns:1fr!important}
+}
+
+/* ===================== LOGIN / REGISTER MOBILE ===================== */
+@media(max-width:760px){
+  body.auth-page{min-height:var(--m-app-h)!important;overflow-x:hidden!important;overflow-y:auto!important}
+  body.auth-page .auth-shell{width:100%!important;min-height:var(--m-app-h)!important;padding:calc(10px + var(--m-safe-t)) max(10px,var(--m-safe-r)) calc(14px + var(--m-safe-b)) max(10px,var(--m-safe-l))!important;display:flex!important;align-items:center!important;justify-content:center!important}
+  body.auth-page .auth-showcase{display:none!important}
+  body.auth-page .auth-card-wrap{width:100%!important;max-width:560px!important;margin:auto!important}
+  body.auth-page .auth-card{width:100%!important;max-width:100%!important;max-height:none!important;margin:0!important;padding:18px!important;border-radius:26px!important;overflow:visible!important}
+  body.auth-page .auth-card-top{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;gap:7px!important;align-items:center!important}
+  body.auth-page .auth-language-picker{max-width:132px!important;min-width:0!important}
+  body.auth-page .auth-title h1{font-size:clamp(26px,8vw,36px)!important;line-height:1.05!important}
+  body.auth-page .auth-tabs{position:sticky!important;top:calc(4px + var(--m-safe-t))!important;z-index:4!important;min-height:54px!important;border-radius:17px!important;backdrop-filter:blur(18px)!important}
+  body.auth-page .auth-tab{min-height:46px!important}
+  body.auth-page .auth-form{gap:13px!important}
+  body.auth-page .field-control{min-height:50px!important;border-radius:15px!important}
+  body.auth-page .primary-button{min-height:50px!important;border-radius:15px!important}
+  body.auth-page .login-options-row{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;gap:8px!important;align-items:center!important}
+  body.auth-page .forgot-account-link{text-align:right!important;max-width:100%!important;line-height:1.3!important}
+  body.auth-page .auth-security-grid{grid-template-columns:1fr!important;gap:8px!important}
+  body.mobile-keyboard-open.auth-page .auth-shell{align-items:flex-start!important;padding-top:6px!important}
+  body.mobile-keyboard-open.auth-page .auth-card{border-radius:18px!important;padding:14px!important}
+  body.mobile-keyboard-open.auth-page .auth-title{display:none!important}
+}
+
+/* ===================== SUPPORT MOBILE ===================== */
+@media(max-width:860px){
+  body.support-page{height:var(--m-app-h)!important;min-height:var(--m-app-h)!important;overflow:hidden!important}
+  body.support-page .support-shell{height:var(--m-app-h)!important;min-height:0!important;width:100%!important;max-width:none!important;padding:0!important;display:block!important}
+  body.support-page .support-card{height:var(--m-app-h)!important;min-height:0!important;width:100%!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;display:grid!important;grid-template-rows:auto minmax(0,1fr) auto auto!important;overflow:hidden!important}
+  body.support-page .support-info{min-height:calc(64px + var(--m-safe-t))!important;padding:calc(8px + var(--m-safe-t)) 10px 8px!important;position:sticky!important;top:0!important;z-index:4!important}
+  body.support-page .support-messages{min-height:0!important;overflow-y:auto!important;padding:12px 10px!important;-webkit-overflow-scrolling:touch}
+  body.support-page .support-composer{width:auto!important;margin:7px max(8px,var(--m-safe-r)) calc(7px + var(--m-safe-b)) max(8px,var(--m-safe-l))!important}
+  body.support-page .support-composer textarea{font-size:16px!important;max-height:120px!important}
+}
+
+/* ===================== HOME MOBILE ===================== */
+@media(max-width:820px){
+  body.home-page{overflow-x:hidden!important}
+  body.home-page .home-header{padding-top:var(--m-safe-t)!important}
+  body.home-page .home-nav-shell{min-height:64px!important;padding:8px max(10px,var(--m-safe-r)) 8px max(10px,var(--m-safe-l))!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important}
+  body.home-page .home-brand img{width:38px!important;height:38px!important}
+  body.home-page .home-brand span{font-size:18px!important}
+  body.home-page .home-brand em{display:none!important}
+  body.home-page .home-nav-actions{gap:5px!important}
+  body.home-page :is(.home-language,.home-theme-button,.home-motion-control){width:40px!important;min-width:40px!important;height:40px!important;padding:0!important;border-radius:13px!important;display:grid!important;place-items:center!important}
+  body.home-page .home-language select{position:absolute!important;inset:0!important;opacity:0!important}
+  body.home-page :is(.home-motion-control-copy,.home-motion-control-chevron){display:none!important}
+  body.home-page :is(.home-login-button,.home-register-button){display:none!important}
+  body.home-page .home-menu-button{display:grid!important;width:40px!important;height:40px!important;border-radius:13px!important}
+  body.home-page .home-nav{
+    position:fixed!important;z-index:8000!important;left:10px!important;right:10px!important;top:calc(66px + var(--m-safe-t))!important;
+    display:none!important;grid-template-columns:1fr!important;gap:7px!important;padding:12px!important;border-radius:22px!important;
+    max-height:calc(var(--m-app-h) - 82px - var(--m-safe-b))!important;overflow:auto!important;
+  }
+  body.home-page .home-nav.open,
+  body.home-page .home-nav.is-open{display:grid!important}
+  body.home-page .home-nav a{min-height:48px!important;padding:0 14px!important;border-radius:14px!important;display:flex!important;align-items:center!important}
+  body.home-page .home-hero{min-height:auto!important;padding:calc(86px + var(--m-safe-t)) 0 46px!important}
+  body.home-page .home-hero-shell{grid-template-columns:1fr!important;gap:36px!important;width:min(100% - 24px,680px)!important}
+  body.home-page .home-hero-copy{text-align:center!important}
+  body.home-page .home-trust-pill,.home-hero-signature{margin-inline:auto!important}
+  body.home-page .home-kinetic-title{font-size:clamp(42px,13vw,72px)!important;line-height:.98!important}
+  body.home-page .home-hero-copy>p{font-size:15px!important;line-height:1.6!important}
+  body.home-page .home-hero-actions{justify-content:center!important;display:grid!important;grid-template-columns:1fr!important;gap:9px!important}
+  body.home-page .home-hero-actions a{width:100%!important;min-height:50px!important;justify-content:center!important}
+  body.home-page .home-proof-grid{grid-template-columns:1fr!important;gap:8px!important;text-align:left!important}
+  body.home-page .home-product-stage{min-height:520px!important;transform:scale(.92);transform-origin:center top!important;margin-bottom:-40px!important}
+  body.home-page .home-phone-card{width:min(100%,340px)!important}
+  body.home-page .home-floating-card{max-width:180px!important;font-size:10px!important}
+  body.home-page .home-options-panel{position:fixed!important;left:10px!important;right:10px!important;top:calc(66px + var(--m-safe-t))!important;width:auto!important;max-height:calc(var(--m-app-h) - 82px - var(--m-safe-b))!important;overflow:auto!important;border-radius:22px!important;transform:none!important;animation:none!important}
+  body.home-page :is(.home-feature-grid,.home-security-grid,.home-privilege-grid,.home-experience-grid){grid-template-columns:1fr!important}
+  body.home-page section{scroll-margin-top:80px}
+}
+
+@media(max-width:420px){
+  body.home-page .home-product-stage{transform:scale(.82);margin-bottom:-90px!important}
+  body.home-page .home-floating-card{display:none!important}
+}
+
+/* Touch hardware should not retain desktop hover lifts or constant entrance animations. */
+@media(hover:none),(pointer:coarse){
+  body.smart-app-page :is(.smart-shell,.smart-sidebar,.smart-chat-panel,.message-row),
+  body.admin-page :is(.admin-shell,.admin-main,.admin-sidebar,.admin-section-card),
+  body.auth-page .auth-card,
+  body.support-page .support-card{animation:none!important}
+  body.smart-app-page :is(.nav-item,.conversation-item,.message-bubble,.me-card):hover,
+  body.admin-page :is(.stats-grid article,.admin-user-item):hover{transform:none!important}
+}
+
+/* Economy/static modes keep the final layout while removing costly decoration. */
+html[data-performance="economy"] body.mobile-ui-active :is(.smart-shell::before,.smart-shell::after,.admin-atmosphere-particles,.admin-atmosphere-meteors,.home-cosmos-nebula),
+html[data-v10-motion-resolved="economy"] body.mobile-ui-active :is(.smart-shell::before,.smart-shell::after,.admin-atmosphere-particles,.admin-atmosphere-meteors),
+html[data-v10-motion-resolved="static"] body.mobile-ui-active :is(.smart-shell::before,.smart-shell::after,.admin-atmosphere-particles,.admin-atmosphere-meteors){animation:none!important;opacity:.24!important}
+
+@media(prefers-reduced-motion:reduce){
+  body.mobile-ui-active *,body.mobile-ui-active *::before,body.mobile-ui-active *::after{scroll-behavior:auto!important}
+  body.mobile-ui-active :is(.smart-shell::before,.smart-shell::after,.send-button,.admin-atmosphere-particles,.admin-atmosphere-meteors){animation:none!important}
+}
+
+@media(max-width:980px){
+  body.smart-app-page .sidebar-theme-panel{
+    left:12px!important;right:auto!important;width:min(calc(94vw - 24px),376px)!important;max-width:calc(100vw - 24px)!important;
+  }
+}
+
+/* =========================================================
+   NEXCHAT V1.0.0 · CROSS-DEVICE FEATURE PARITY FIX
+   Shared controls, support workspace and mobile drawers behave consistently
+   from 280px phones through tablets and desktop breakpoints.
+   ========================================================= */
+@media(max-width:820px){
+  body.home-page .home-hero-shell{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  body.home-page .home-hero-copy,
+  body.home-page .home-hero-actions,
+  body.home-page .home-hero-actions>a{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  body.home-page .home-hero-actions{
+    grid-template-columns:minmax(0,1fr)!important;
+    justify-items:stretch!important;
+  }
+}
+
+@media(max-width:860px){
+  body.support-page{
+    padding:0!important;
+    width:100%!important;
+    height:var(--m-app-h)!important;
+    min-height:var(--m-app-h)!important;
+    overflow:hidden!important;
+  }
+  body.support-page .support-shell{
+    width:100%!important;
+    height:var(--m-app-h)!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    display:grid!important;
+    grid-template-rows:auto minmax(0,1fr)!important;
+    overflow:hidden!important;
+  }
+  body.support-page .support-header{
+    position:relative!important;
+    z-index:8!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:calc(58px + var(--m-safe-t))!important;
+    padding:calc(7px + var(--m-safe-t)) max(10px,var(--m-safe-r)) 7px max(10px,var(--m-safe-l))!important;
+    display:flex!important;
+    align-items:center!important;
+    gap:8px!important;
+    border-radius:0!important;
+    overflow:visible!important;
+  }
+  body.support-page .support-header .brand{
+    min-width:0!important;
+    flex:1 1 auto!important;
+  }
+  body.support-page .support-header-actions{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:6px!important;
+    min-width:0!important;
+    height:auto!important;
+  }
+  body.support-page .support-header-actions .language-picker{
+    min-width:44px!important;
+    max-width:128px!important;
+    height:44px!important;
+  }
+  body.support-page .support-header-actions .global-theme-control,
+  body.support-page .support-header-actions .global-theme-button{
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    flex:0 0 44px!important;
+  }
+  body.support-page #supportLogout{
+    min-width:44px!important;
+    width:44px!important;
+    height:44px!important;
+    padding:0!important;
+    display:grid!important;
+    place-items:center!important;
+  }
+  body.support-page #supportLogout>span:last-child{display:none!important}
+  body.support-page .support-card{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    border:0!important;
+    border-radius:0!important;
+    display:grid!important;
+    grid-template-rows:auto auto minmax(0,1fr) auto auto auto!important;
+    overflow:hidden!important;
+  }
+  body.support-page .support-info{
+    position:relative!important;
+    top:auto!important;
+    min-height:0!important;
+    padding:10px 12px 8px!important;
+    gap:10px!important;
+    align-items:center!important;
+    overflow:hidden!important;
+  }
+  body.support-page .support-info .admin-avatar{
+    width:46px!important;
+    height:46px!important;
+    min-width:46px!important;
+    font-size:15px!important;
+  }
+  body.support-page .support-info h1{
+    margin:2px 0 3px!important;
+    font-size:clamp(17px,4.8vw,21px)!important;
+    line-height:1.15!important;
+  }
+  body.support-page .support-info p{
+    font-size:11px!important;
+    line-height:1.35!important;
+    display:-webkit-box!important;
+    -webkit-line-clamp:2!important;
+    line-clamp:2!important;
+    -webkit-box-orient:vertical!important;
+    overflow:hidden!important;
+  }
+  body.support-page .support-account{
+    margin:0 10px 7px!important;
+    padding:8px 10px!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:4px 10px!important;
+    border-radius:12px!important;
+    font-size:10px!important;
+    line-height:1.35!important;
+    min-width:0!important;
+  }
+  body.support-page .support-account>span{
+    min-width:0!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
+  }
+  body.support-page .support-account>span:first-child{
+    grid-column:1/-1!important;
+  }
+  body.support-page .support-messages{
+    min-height:0!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    padding:10px!important;
+  }
+  body.support-page .typing-indicator,
+  body.support-page .attachment-preview{
+    max-width:calc(100% - 20px)!important;
+    margin-inline:10px!important;
+  }
+  body.support-page .support-composer{
+    width:auto!important;
+    min-width:0!important;
+    margin:7px max(8px,var(--m-safe-r)) calc(7px + var(--m-safe-b)) max(8px,var(--m-safe-l))!important;
+    flex:0 0 auto!important;
+  }
+}
+
+@media(max-width:380px){
+  body.support-page .support-header .brand span{display:none!important}
+  body.support-page .support-header-actions .language-picker{
+    width:44px!important;
+    min-width:44px!important;
+    max-width:44px!important;
+    padding:0!important;
+  }
+  body.support-page .support-header-actions .language-picker select{
+    position:absolute!important;
+    inset:0!important;
+    opacity:0!important;
+  }
+  body.support-page .support-account{
+    grid-template-columns:1fr!important;
+  }
+  body.support-page .support-account>span:first-child{grid-column:auto!important}
+}
+
+@media(max-width:1024px){
+  body.admin-page #adminSidebarOverlay.hidden{
+    display:none!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+  body.admin-page #adminSidebarOverlay{
+    transition:opacity .22s ease,backdrop-filter .22s ease,-webkit-backdrop-filter .22s ease!important;
+  }
+}
+
+/* V1.0.0 · deterministic Admin drawer parity on tablets and low-power devices. */
+@media (max-width:1024px){
+  html[data-admin-theme] body.admin-page.admin-cyberpunk.admin-sidebar-open #adminSidebar.admin-sidebar,
+  html[data-admin-theme] body.admin-page.admin-cyberpunk #adminSidebar.admin-sidebar.open,
+  body.admin-page.admin-sidebar-open #adminSidebar.admin-sidebar,
+  body.admin-page #adminSidebar.admin-sidebar.open,
+  body.admin-page #adminSidebar.admin-sidebar.is-open{
+    transform:translate3d(0,0,0)!important;
+  }
+  body.admin-page.admin-low-power #adminSidebar.admin-sidebar,
+  body.admin-page.performance-lite #adminSidebar.admin-sidebar{
+    transition:none!important;
+  }
+}
+
+
+/* =========================================================
+   NEXCHAT V1.0.0 · MOBILE MOTION + DESKTOP FEATURE PARITY
+   Motion controls are touch-safe and desktop conversation actions remain
+   reachable from the mobile action sheet without hiding sending features.
+   ========================================================= */
+@media(max-width:980px){
+  body.smart-app-page #voiceRecordButton{grid-column:4!important;grid-row:1!important;width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important}
+  body.smart-app-page #sendButton{grid-column:4!important;grid-row:1!important}
+  body.smart-app-page .mobile-header-actions-list{align-content:start!important;overflow:visible!important}
+  body.smart-app-page .mobile-header-actions-list button{touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important}
+  body.smart-app-page .v10-motion-backdrop{z-index:2147483000!important}
+  body.smart-app-page .v10-motion-options>button,
+  body.smart-app-page .v10-motion-scale-options>button{min-height:64px!important;pointer-events:auto!important;touch-action:manipulation!important}
+}
+@media(max-width:420px){
+  body.smart-app-page .mobile-header-actions-list{grid-template-columns:1fr!important}
+  body.smart-app-page .mobile-header-actions-list button{min-height:70px!important;grid-template-columns:38px minmax(0,1fr)!important}
+}
+
+
+/* =========================================================
+   NEXCHAT V1.0.0 · COMPLETE MOBILE PARITY + STABILITY PASS
+   Keeps every desktop capability reachable, separates mobile motion choices
+   from desktop preferences and lowers visual cost automatically on weak phones.
+   ========================================================= */
+@media(max-width:1024px), (pointer:coarse) and (max-width:1366px){
+  body.mobile-ui-active{max-width:100vw!important;overflow-x:hidden!important}
+  body.mobile-ui-active :is(.app-shell,.admin-shell,.support-shell,.auth-shell){max-width:100vw!important}
+  body.mobile-ui-active :is(button,[role="button"],a,input,select,textarea){min-width:0}
+
+  /* Complete action hub: descriptions remain readable and the list scrolls. */
+  body.smart-app-page #mobileHeaderActionsModal .modal-card{
+    display:grid!important;
+    grid-template-rows:auto minmax(0,1fr)!important;
+    overflow:hidden!important;
+  }
+  body.smart-app-page #mobileHeaderActionsModal .mobile-header-actions-list{
+    min-height:0!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    padding:2px 1px calc(8px + var(--m-safe-b))!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  body.smart-app-page .mobile-header-actions-list button>span small{
+    display:block!important;
+    -webkit-line-clamp:unset!important;
+    line-clamp:unset!important;
+    overflow:visible!important;
+    white-space:normal!important;
+  }
+
+  /* Motion center always receives touch and stays above every chat/admin layer. */
+  .v10-motion-backdrop{z-index:2147483000!important;pointer-events:auto!important}
+  .v10-motion-panel{pointer-events:auto!important;isolation:isolate!important}
+  .v10-motion-scroll{overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important}
+  .v10-motion-options>button,.v10-motion-scale-options>button{
+    position:relative!important;z-index:2!important;pointer-events:auto!important;
+    touch-action:pan-y!important;-webkit-user-select:none!important;user-select:none!important;
+  }
+  .v10-motion-options>button::before,.v10-motion-scale-options>button::before{pointer-events:none!important}
+
+  /* Composer parity: attachment, emoji, input, voice and send remain reachable. */
+  body.smart-app-page .smart-composer{grid-template-columns:40px 40px minmax(0,1fr) 42px!important}
+  body.smart-app-page #voiceRecordButton,
+  body.smart-app-page #sendButton{grid-column:4!important;grid-row:1!important;align-self:center!important}
+  body.smart-app-page #toolsButton,body.smart-app-page #emojiButton{align-self:center!important}
+  body.smart-app-page #messageInput{min-width:0!important;max-width:100%!important}
+  body.smart-app-page :is(.quick-tools,.emoji-picker,.attachment-preview,#effectActivationDock){max-width:calc(100vw - 16px)!important}
+
+  /* Admin keeps the same controls as desktop without overflowing the top bar. */
+  body.admin-page #adminMotionButton{
+    width:42px!important;min-width:42px!important;height:42px!important;min-height:42px!important;
+    padding:0!important;border-radius:13px!important;display:grid!important;place-items:center!important;
+  }
+  body.admin-page #adminMotionButton .v10-motion-trigger-copy{display:none!important}
+  body.admin-page #adminMotionButton .v10-motion-trigger-icon{width:30px!important;height:30px!important;margin:0!important}
+  body.admin-page .admin-topbar-tools{max-width:96px!important;overflow:visible!important}
+
+  /* Full-screen profile/settings keep sticky actions and usable scrolling. */
+  body.smart-app-page :is(#profileModal,#accountSettingsModal) .modal-card{
+    display:flex!important;flex-direction:column!important;overflow-y:auto!important;overscroll-behavior:contain!important;
+  }
+  body.smart-app-page :is(#profileModal,#accountSettingsModal) .modal-actions{
+    margin-top:auto!important;flex:0 0 auto!important;
+  }
+}
+
+/* Weak-phone budget: preserve features, remove only expensive decoration. */
+@media(max-width:1024px){
+  html[data-runtime-quality="limited"] body.mobile-ui-active :is(.modal-backdrop,.sidebar-overlay){
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  }
+  html[data-runtime-quality="limited"] body.mobile-ui-active :is(
+    .v10-sidebar-cosmos,.v10-polish-ambient,.admin-atmosphere-particles,.admin-atmosphere-meteors,
+    .v11-cosmos-ribbon,.v11-cosmos-lens,.v11-cosmos-grid,.floating-symbols,.ambient-orb
+  ){display:none!important}
+  html[data-runtime-quality="limited"] body.mobile-ui-active :is(
+    .message-bubble,.conversation-item,.nav-item,.modal-card,.smart-composer,.profile-rank-badge
+  ){animation:none!important;transition-duration:.12s!important;filter:none!important}
+  html[data-runtime-quality="limited"] body.mobile-ui-active .smart-chat-panel::before,
+  html[data-runtime-quality="limited"] body.mobile-ui-active .smart-chat-panel::after,
+  html[data-runtime-quality="limited"] body.mobile-ui-active .smart-messages::before,
+  html[data-runtime-quality="limited"] body.mobile-ui-active .smart-messages::after{
+    animation:none!important;filter:none!important;opacity:.22!important
+  }
+}
+
+@media(max-width:380px){
+  body.smart-app-page .mobile-header-actions-list button{padding:10px!important;gap:7px!important}
+  body.smart-app-page .mobile-header-actions-list button>span strong{font-size:11.5px!important}
+  body.smart-app-page .mobile-header-actions-list button>span small{font-size:9px!important}
+  body.admin-page .admin-topbar-tools{gap:4px!important;max-width:88px!important}
+  body.admin-page #adminMotionButton,
+  body.admin-page :is(.admin-language-picker,.global-theme-button){width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important}
+}

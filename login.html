@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#5b5bd6">
+  <link rel="icon" href="/nexchat-logo.svg?v=1.0.0" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest?v=1.0.0">
+  <title>Đăng nhập · NexChat</title>
+  <script src="/theme-init.js?v=1.0.0"></script>
+  <script defer src="/app-runtime.js?v=1.0.0"></script>
+  <link rel="stylesheet" href="/style.css?v=1.0.0">
+  <link rel="stylesheet" href="/mobile.css?v=1.0.0">
+  <link rel="stylesheet" href="/system.css?v=1.0.0">
+  <link rel="stylesheet" href="/smart-tools.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-experience.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-polish.css?v=1.0.0">
+  <script defer src="/smart-tools.js?v=1.0.0"></script>
+  <script defer src="/v10-experience.js?v=1.0.0"></script>
+  <script defer src="/v10-polish.js?v=1.0.0"></script>
+</head>
+<body class="auth-page">
+  <a class="skip-link" href="#mainContent">Bỏ qua điều hướng</a>
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.7 2.5 4.1 5.5 4.1 9S14.7 18.5 12 21c-2.7-2.5-4.1-5.5-4.1-9S9.3 5.5 12 3Z"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20"/><circle cx="9.5" cy="7" r="3"/><path d="M17 11a3 3 0 1 0 0-6M21 20v-1.5a4 4 0 0 0-3-3.87"/></symbol>
+    <symbol id="icon-headset" viewBox="0 0 24 24"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><path d="M4 13h3v6H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 1-2ZM20 13h-3v6h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-1-2ZM17 19c-.8 1.3-2.3 2-4 2h-1"/></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M7.2 3.5 4.8 5.2c-.8.6-1.1 1.6-.8 2.6 1.5 5.3 5 8.8 10.3 10.3 1 .3 2-.1 2.6-.8l1.7-2.4-4-2-1.5 1.6c-2.2-.9-3.8-2.5-4.7-4.7L10 8.3l-2.8-4.8Z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="icon-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M15 8l2 2M17 6l2 2"/></symbol>
+    <symbol id="icon-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.6L16.5 9"/></symbol>
+    <symbol id="icon-tag" viewBox="0 0 24 24"><path d="M20 13 13 20l-9-9V4h7l9 9Z"/><circle cx="8.5" cy="8.5" r="1.2"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.8 8.1 7 10 4.2-1.9 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24"><path d="M12 4 3.7 19h16.6L12 4Z"/><path d="M12 9v4M12 16.5h.01"/></symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h6l-1 8 9-13h-6V2Z"/></symbol>
+  </svg>
+
+  <div id="pageLoader" class="page-loader"><img src="/nexchat-logo.svg?v=1.0.0" alt=""><span class="loader-ring"></span></div>
+  <main id="mainContent" class="auth-shell">
+    <section class="auth-showcase">
+      <div class="auth-showcase-top">
+        <a class="brand brand-light" href="/"><img class="brand-logo" src="/nexchat-logo.svg?v=1.0.0" alt="NexChat"><span>NexChat</span></a>
+      </div>
+      <div class="auth-showcase-art" aria-hidden="true">
+        <span class="auth-art-ring auth-art-ring-one"></span>
+        <span class="auth-art-ring auth-art-ring-two"></span>
+        <span class="auth-art-core"><img src="/nexchat-logo.svg?v=1.0.0" alt=""></span>
+        <i class="auth-art-node node-one"></i>
+        <i class="auth-art-node node-two"></i>
+        <i class="auth-art-node node-three"></i>
+      </div>
+      <div class="showcase-copy">
+        <span class="eyebrow" data-i18n="connectSafe">KẾT NỐI AN TOÀN</span>
+        <h1 data-i18n="heroTitle">Trò chuyện realtime, gọn gàng và riêng tư.</h1>
+        <p data-i18n="heroText">Chat thế giới, kết bạn, nhắn riêng và nhận hỗ trợ trực tiếp từ quản trị viên.</p>
+      </div>
+    </section>
+
+    <section class="auth-card-wrap">
+      <div class="auth-card">
+        <div class="auth-card-top">
+          <a class="auth-mobile-brand brand" href="/"><img class="brand-logo" src="/nexchat-logo.svg?v=1.0.0" alt="NexChat"><span>NexChat</span></a>
+          <label class="language-picker auth-language-picker" title="Ngôn ngữ"><span class="language-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-globe"></use></svg></span><select id="authLanguageSelect" name="language" autocomplete="language" data-language-select aria-label="Ngôn ngữ"></select></label>
+        </div>
+        <div class="auth-heading">
+          <h2 id="authTitle" data-i18n="welcomeBack">Chào mừng trở lại</h2>
+          <p id="authSubtitle" data-i18n="loginSubtitle">Đăng nhập để tiếp tục cuộc trò chuyện.</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" type="button" data-tab="login" data-i18n="login">Đăng nhập</button>
+          <button class="auth-tab" type="button" data-tab="register" data-i18n="register">Đăng ký</button>
+        </div>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <label class="field">
+            <span data-i18n="loginIdentifier">Tên đăng nhập, số điện thoại hoặc email</span>
+            <div class="field-control login-identifier-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-user"></use></svg></span><input id="loginUsername" name="identifier" autocomplete="username" inputmode="text" maxlength="120" data-i18n-placeholder="loginIdentifierPlaceholder" placeholder="Nhập tên đăng nhập, số điện thoại hoặc email" required></div>
+          </label>
+          <label class="field">
+            <span data-i18n="password">Mật khẩu</span>
+            <div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-key"></use></svg></span><input id="loginPassword" name="password" type="password" autocomplete="current-password" maxlength="72" data-i18n-placeholder="enterPassword" placeholder="Nhập mật khẩu" required><button class="password-toggle" type="button" data-toggle-password="loginPassword" data-i18n="show">Hiện</button></div>
+          </label>
+          <div class="login-options-row login-options-compact">
+            <label class="remember-login-compact" for="rememberLogin" title="Chỉ lưu tên tài khoản và duy trì phiên trên thiết bị này; không lưu mật khẩu.">
+              <input id="rememberLogin" name="rememberLogin" type="checkbox" role="switch" aria-label="Lưu đăng nhập trên thiết bị cá nhân">
+              <span class="remember-login-copy"><strong data-i18n="rememberLogin">Lưu đăng nhập</strong></span>
+              <span class="remember-login-switch" aria-hidden="true"><i></i></span>
+            </label>
+            <button id="forgotButton" class="link-button forgot-account-link" type="button" data-i18n="forgotAccount">Quên mật khẩu / tên đăng nhập?</button>
+          </div>
+          <button class="primary-button full-button" type="submit"><span data-i18n="signIn">Đăng nhập</span><span class="button-loader" aria-hidden="true"></span></button>
+        </form>
+
+        <form id="registerForm" class="auth-form hidden" novalidate>
+          <label class="field"><span data-i18n="username">Tên đăng nhập</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-user"></use></svg></span><input id="registerUsername" name="username" autocomplete="username" maxlength="24" data-i18n-placeholder="enterUsername" placeholder="Nhập tên đăng nhập" required></div></label>
+          <label class="field"><span data-i18n="phone">Số điện thoại</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-phone"></use></svg></span><input id="registerPhone" name="phone" class="phone-input" inputmode="tel" autocomplete="tel" maxlength="12" pattern="(?:0(?:3|5|7|8|9)[0-9]{8}|\+84(?:3|5|7|8|9)[0-9]{8})" aria-describedby="registerPhoneError" data-i18n-placeholder="enterPhone" placeholder="Nhập số điện thoại" required></div><small id="registerPhoneError" class="field-error hidden" role="alert"></small></label>
+          <label class="field"><span data-i18n="emailOptional">Email (không bắt buộc)</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-mail"></use></svg></span><input id="registerEmail" name="email" type="email" autocomplete="email" maxlength="120" data-i18n-placeholder="enterEmail" placeholder="Nhập email"></div></label>
+          <label class="field"><span data-i18n="password">Mật khẩu</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-key"></use></svg></span><input id="registerPassword" name="newPassword" type="password" autocomplete="new-password" minlength="8" maxlength="72" data-i18n-placeholder="enterPassword" placeholder="Nhập mật khẩu" required><button class="password-toggle" type="button" data-toggle-password="registerPassword" data-i18n="show">Hiện</button></div><div id="passwordStrength" class="password-strength" data-level="0" aria-live="polite"><span><i></i></span><small id="passwordStrengthText">Tối thiểu 8 ký tự, gồm chữ và số</small></div></label>
+          <label class="field"><span data-i18n="confirmPassword">Nhập lại mật khẩu</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-check-circle"></use></svg></span><input id="registerConfirmPassword" name="confirmPassword" type="password" autocomplete="new-password" maxlength="72" data-i18n-placeholder="enterConfirmPassword" placeholder="Nhập lại mật khẩu" required><button class="password-toggle" type="button" data-toggle-password="registerConfirmPassword" data-i18n="show">Hiện</button></div></label>
+          <button class="primary-button full-button" type="submit"><span data-i18n="createAccountButton">Tạo tài khoản</span><span class="button-loader" aria-hidden="true"></span></button>
+        </form>
+        <p id="formMessage" class="form-message" role="alert"></p>
+        <aside class="auth-security-summary" aria-label="Thông tin bảo vệ tài khoản" data-i18n-aria-label="authSecurityAria">
+          <div class="auth-security-item"><span class="auth-security-icon auth-security-icon-shield" aria-hidden="true"><svg class="classic-icon"><use href="#icon-shield"></use></svg></span><p><strong data-i18n="passwordHashTitle">Bảo vệ mật khẩu</strong><small data-i18n="passwordHashText">Hệ thống không lưu mật khẩu gốc, chỉ giữ dữ liệu xác minh một chiều.</small></p></div>
+          <div class="auth-security-item"><span class="auth-security-icon auth-security-icon-lock" aria-hidden="true"><svg class="classic-icon"><use href="#icon-lock"></use></svg></span><p><strong data-i18n="privateSessionTitle">Phiên đăng nhập an toàn</strong><small data-i18n="privateSessionText">Cookie HttpOnly giúp hạn chế mã trên trang truy cập phiên đăng nhập.</small></p></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div id="loginSuccessModal" class="modal-backdrop hidden" data-locked="true" role="dialog" aria-modal="true" aria-labelledby="loginSuccessTitle">
+    <div class="modal-card modal-small login-success-card">
+      <div class="login-success-visual" aria-hidden="true">
+        <span class="login-success-ring"></span>
+        <span id="loginSuccessCheck" class="login-success-check"><svg class="classic-icon"><use href="#icon-check-circle"></use></svg></span>
+      </div>
+      <h3 id="loginSuccessTitle">Đăng nhập thành công!</h3>
+      <p id="loginSuccessMessage">Đang mở NexChat...</p>
+      <div class="login-success-progress" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
+
+  <div id="nicknameModal" class="modal-backdrop hidden" data-locked="true" role="dialog" aria-modal="true">
+    <div class="modal-card modal-small success-modal-card">
+      <div class="success-confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="modal-icon success-modal-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-check-circle"></use></svg></div>
+      <h3 data-i18n="profileCreated">Tạo tài khoản thành công!</h3>
+      <p data-i18n="nicknamePrompt">Hãy tạo biệt danh để mọi người dễ nhận ra bạn.</p>
+      <form id="nicknameForm" class="modal-form">
+        <label class="field"><span data-i18n="nickname">Biệt danh</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-tag"></use></svg></span><input id="nicknameInput" name="nickname" maxlength="24" autocomplete="off" data-i18n-placeholder="nicknamePlaceholder" placeholder="Nhập biệt danh" required></div><small data-i18n="nicknameRules">Biệt danh 2–24 ký tự và không chứa nội dung không phù hợp.</small></label>
+        <p id="nicknameMessage" class="form-message"></p>
+        <button type="submit" class="primary-button full-button"><span data-i18n="saveAndContinue">Lưu và tiếp tục</span><span class="button-loader"></span></button>
+      </form>
+    </div>
+  </div>
+
+  <div id="secondFactorModal" class="modal-backdrop second-factor-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="secondFactorTitle" aria-describedby="secondFactorDescription">
+    <div class="modal-card second-factor-card">
+      <div class="second-factor-visual" aria-hidden="true">
+        <span class="second-factor-orbit orbit-a"></span><span class="second-factor-orbit orbit-b"></span>
+        <div class="second-factor-shield"><svg class="classic-icon"><use href="#icon-shield"></use></svg><i></i></div>
+      </div>
+      <div class="second-factor-content">
+        <span class="second-factor-step"><i></i><span data-i18n="secondSecurityStep">BƯỚC XÁC MINH CUỐI</span></span>
+        <h3 id="secondFactorTitle" data-i18n="secondSecurity">Bảo mật mức 2</h3>
+        <p id="secondFactorDescription" data-i18n="secondSecurityText">Nhập mật khẩu bảo mật của quản trị viên để tiếp tục.</p>
+        <form id="secondFactorForm" class="modal-form second-factor-form" novalidate>
+          <label class="field second-factor-field"><span data-i18n="secondPassword">Mật khẩu mức 2</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-lock"></use></svg></span><input id="secondPassword" name="adminSecondPassword" type="password" autocomplete="current-password" maxlength="72" data-i18n-placeholder="secondPasswordPlaceholder" placeholder="Nhập mã bảo mật" required aria-describedby="secondFactorHint secondFactorMessage"><button class="password-toggle" type="button" data-toggle-password="secondPassword" data-i18n="show">Hiện</button></div><small id="secondFactorHint" data-i18n="secondSecurityHint">Mã này tách biệt với mật khẩu đăng nhập quản trị.</small></label>
+          <p id="secondFactorMessage" class="form-message" role="alert"></p>
+          <div class="second-factor-trust"><span aria-hidden="true">✓</span><p><strong data-i18n="secondSecuritySafe">Phiên xác minh được bảo vệ</strong><small data-i18n="secondSecuritySafeText">NexChat không hiển thị hoặc lưu mã trong giao diện.</small></p></div>
+          <div class="modal-actions second-factor-actions"><button type="button" class="secondary-button" data-close-modal="secondFactorModal" data-i18n="cancel">Hủy</button><button type="submit" class="primary-button"><span data-i18n="verifyAdmin">Mở khóa quản trị</span><span class="button-loader"></span></button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="userSecondFactorModal" class="modal-backdrop hidden" data-locked="true" role="dialog" aria-modal="true" aria-labelledby="userSecondFactorTitle">
+    <div class="modal-card modal-small second-factor-card user-second-factor-card">
+      <div class="user-second-factor-visual" aria-hidden="true"><span class="user-second-factor-ring ring-one"></span><span class="user-second-factor-ring ring-two"></span><span class="user-second-factor-core"><svg class="classic-icon"><use href="#icon-shield"></use></svg><i></i></span></div>
+      <span class="second-factor-eyebrow" data-i18n="userSecurityLevel2">BẢO MẬT CẤP 2</span>
+      <h3 id="userSecondFactorTitle" data-i18n="userSecondFactorTitle">Xác minh đăng nhập</h3>
+      <p data-i18n="userSecondFactorText">Tài khoản đã bật bảo mật cấp 2. Nhập mật khẩu cấp 2 để tiếp tục.</p>
+      <form id="userSecondFactorForm" class="modal-form" novalidate>
+        <label class="field"><span data-i18n="secondPassword">Mật khẩu mức 2</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-lock"></use></svg></span><input id="userSecondPassword" name="userSecondPassword" type="password" autocomplete="one-time-code" maxlength="72" placeholder="Nhập mật khẩu cấp 2" required><button class="password-toggle" type="button" data-toggle-password="userSecondPassword" data-i18n="show">Hiện</button></div></label>
+        <p id="userSecondFactorMessage" class="form-message" role="alert"></p>
+        <div class="modal-actions"><button id="cancelUserSecondFactor" type="button" class="secondary-button" data-i18n="cancel">Hủy</button><button type="submit" class="primary-button"><span data-i18n="verify">Xác minh</span><span class="button-loader"></span></button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="recoveryModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="recoveryTitle">
+    <div class="modal-card modal-small recovery-card">
+      <div class="modal-icon recovery-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-phone"></use></svg></div>
+      <span class="recovery-eyebrow" data-i18n="accountRecovery">KHÔI PHỤC TÀI KHOẢN</span>
+      <h3 id="recoveryTitle" data-i18n="recoveryTitle">Khôi phục tài khoản</h3>
+      <p id="recoveryDescription" data-i18n="recoveryPasswordText">Nhập tên đăng nhập và số điện thoại đã đăng ký để liên hệ quản trị viên.</p>
+
+      <form id="recoveryForm" class="modal-form" novalidate>
+      <div id="recoveryIdentityStep">
+      <div class="recovery-mode-tabs" role="tablist" aria-label="Chọn hình thức khôi phục">
+        <button class="recovery-mode-button active" type="button" role="tab" aria-selected="true" data-recovery-mode="password">
+          <span class="recovery-mode-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-lock"></use></svg></span>
+          <span class="recovery-mode-copy"><strong data-i18n="forgotPasswordMode">Quên mật khẩu</strong><small data-i18n="forgotPasswordModeText">Tôi vẫn nhớ tên đăng nhập</small></span>
+        </button>
+        <button class="recovery-mode-button" type="button" role="tab" aria-selected="false" data-recovery-mode="username">
+          <span class="recovery-mode-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-user"></use></svg></span>
+          <span class="recovery-mode-copy"><strong data-i18n="forgotUsernameMode">Quên tên đăng nhập</strong><small data-i18n="forgotUsernameModeText">Tìm tài khoản bằng số điện thoại</small></span>
+        </button>
+      </div>
+
+        <label id="recoveryUsernameField" class="field">
+          <span data-i18n="username">Tên đăng nhập</span>
+          <div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-user"></use></svg></span><input id="recoveryUsername" name="recoveryUsername" type="text" autocomplete="username" maxlength="24" data-i18n-placeholder="enterUsername" placeholder="Nhập tên đăng nhập" required></div>
+        </label>
+        <div id="recoveryUsernameNotice" class="recovery-notice hidden" role="status">
+          <span class="recovery-notice-icon" aria-hidden="true">✓</span>
+          <span data-i18n="usernameRecoveryNotice">Không cần nhớ tên đăng nhập. NexChat sẽ tìm tài khoản theo số điện thoại đã đăng ký.</span>
+        </div>
+        <label class="field"><span data-i18n="phone">Số điện thoại</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-phone"></use></svg></span><input id="recoveryPhone" name="recoveryPhone" class="phone-input" inputmode="tel" autocomplete="tel" maxlength="12" pattern="(?:0(?:3|5|7|8|9)[0-9]{8}|\+84(?:3|5|7|8|9)[0-9]{8})" aria-describedby="recoveryPhoneError recoveryPhoneHint" data-i18n-placeholder="enterPhone" placeholder="Nhập số điện thoại" required></div><small id="recoveryPhoneHint" class="field-hint" data-i18n="phoneRecoveryHint">Sử dụng đúng số điện thoại đã đăng ký với tài khoản.</small><small id="recoveryPhoneError" class="field-error hidden" role="alert"></small></label>
+        </div>
+        <div id="recoveryCodeStep" class="hidden">
+          <label class="field"><span data-i18n="recoveryCodeLabel">Mã xác minh SMS</span><div class="field-control"><span class="field-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-lock"></use></svg></span><input id="recoveryCode" name="recoveryCode" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{4,10}" maxlength="10" data-i18n-placeholder="recoveryCodePlaceholder" placeholder="Nhập mã gồm 4–10 chữ số"></div></label>
+          <p class="field-hint" data-i18n="recoveryCodeHint">Mã chỉ có hiệu lực trong 10 phút. Không chia sẻ mã này với bất kỳ ai.</p>
+          <button id="recoveryRestart" type="button" class="link-button" data-i18n="recoveryStartOver">Đổi số điện thoại / gửi mã mới</button>
+        </div>
+        <p id="recoveryMessage" class="form-message" role="alert" aria-live="polite"></p>
+        <div class="modal-actions"><button type="button" class="secondary-button" data-close-modal="recoveryModal" data-i18n="cancel">Hủy</button><button type="submit" class="primary-button"><span id="recoverySubmitText" data-i18n="sendVerificationCode">Gửi mã xác minh</span><span class="button-loader"></span></button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="restrictionModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card modal-small"><div class="modal-icon danger-icon" aria-hidden="true"><svg class="classic-icon"><use href="#icon-alert"></use></svg></div><h3 id="restrictionTitle" data-i18n="accountRestricted">Tài khoản bị hạn chế</h3><p id="restrictionMessage"></p><div id="restrictionDetails" class="restriction-details"></div><div class="modal-actions single"><button type="button" class="primary-button" data-close-modal="restrictionModal" data-i18n="understood">Đã hiểu</button></div></div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/i18n.js?v=1.0.0"></script>
+  <script src="/ui.js?v=1.0.0"></script>
+  <script src="/login.js?v=1.0.0"></script>
+</body>
+</html>

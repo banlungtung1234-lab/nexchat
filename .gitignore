@@ -1,0 +1,14 @@
+node_modules/
+.env
+*.log
+npm-debug.log*
+*.tmp
+.sessions/
+.session-secret
+.admin-credentials.json
+.vapid-keys.json
+store.json
+store.json.*
+store.corrupt-*.json
+store.seed.json.tmp*
+uploads/

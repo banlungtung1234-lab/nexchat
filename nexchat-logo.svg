@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">NexChat</title><desc id="desc">Biểu tượng bong bóng trò chuyện hình chữ N</desc>
+  <defs>
+    <linearGradient id="g" x1="20" y1="18" x2="238" y2="236" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6C63FF"/><stop offset=".52" stop-color="#5B5BD6"/><stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#34348f" flood-opacity=".28"/></filter>
+  </defs>
+  <path filter="url(#s)" fill="url(#g)" d="M39 29h178c15 0 27 12 27 27v119c0 15-12 27-27 27h-56l-32 34c-7 7-19 3-19-7v-27H39c-15 0-27-12-27-27V56c0-15 12-27 27-27Z"/>
+  <path fill="#fff" d="M65 70c0-9 11-13 17-7l79 78V78c0-7 6-13 13-13s13 6 13 13v99c0 9-11 13-17 7L91 106v63c0 7-6 13-13 13s-13-6-13-13V70Z"/>
+  <circle cx="198" cy="60" r="12" fill="#B9F3FF" opacity=".95"/>
+</svg>

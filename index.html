@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#6456e8">
+  <link rel="icon" href="/nexchat-logo.svg?v=1.0.0" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest?v=1.0.0">
+  <title>NexChat</title>
+  <script src="/theme-init.js?v=1.0.0"></script>
+  <script defer src="/app-runtime.js?v=1.0.0"></script>
+  <link rel="stylesheet" href="/style.css?v=1.0.0">
+  <link rel="stylesheet" href="/mobile.css?v=1.0.0">
+  <link rel="stylesheet" href="/system.css?v=1.0.0">
+  <link rel="stylesheet" href="/smart-tools.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-experience.css?v=1.0.0">
+  <link rel="stylesheet" href="/v10-polish.css?v=1.0.0">
+  <link rel="stylesheet" href="/bubble-effects.css?v=1.0.0">
+  <script defer src="/smart-tools.js?v=1.0.0"></script>
+  <script defer src="/v10-experience.js?v=1.0.0"></script>
+  <script defer src="/v10-polish.js?v=1.0.0"></script>
+</head>
+<body class="app-page smart-app-page">
+  <a class="skip-link" href="#chatMain">Bỏ qua thanh bên</a>
+  <div id="pageLoader" class="page-loader"><img src="/nexchat-logo.svg?v=1.0.0" alt=""><span class="loader-ring"></span></div>
+  <div class="smart-grid-bg" aria-hidden="true"></div>
+  <div class="ambient-orb ambient-one"></div><div class="ambient-orb ambient-two"></div><div class="ambient-orb ambient-three"></div>
+  <div class="floating-symbols" aria-hidden="true"><i>✦</i><i>●</i><i>✧</i><i>◆</i><i>✦</i></div>
+  <div class="app-shell smart-shell">
+    <aside id="sidebar" class="sidebar smart-sidebar">
+      <div class="sidebar-top">
+        <a class="brand" href="/chat"><img class="brand-logo" src="/nexchat-logo.svg?v=1.0.0" alt="NexChat"><span>NexChat</span></a>
+        <div class="sidebar-top-actions">
+          <button id="sidebarThemeButton" class="sidebar-theme-button" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="sidebarThemePanel" title="Đổi không gian thanh bên" data-i18n-title="sidebarThemeButtonTitle">
+            <span class="sidebar-theme-button-icon"><span class="classic-icon-host" data-sidebar-theme-current-icon data-classic-icon="sparkles" aria-hidden="true"></span></span>
+            <span class="sidebar-theme-button-copy"><small data-i18n="sidebarSpaceLabel">Không gian</small><b data-sidebar-theme-current-label>Vũ trụ</b></span>
+            <span class="classic-icon-host sidebar-theme-chevron" data-classic-icon="chevron-down" aria-hidden="true"></span>
+          </button>
+          <button id="closeSidebar" class="icon-button mobile-only" type="button" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button>
+        </div>
+      </div>
+      <div id="sidebarThemePanel" class="sidebar-theme-panel hidden" role="dialog" aria-label="Chọn không gian thanh bên" aria-hidden="true">
+        <div class="sidebar-theme-panel-head"><span><small data-i18n="sidebarThemePrivateLabel">GIAO DIỆN RIÊNG</small><strong data-i18n="sidebarThemeTitle">Không gian thanh bên</strong></span><button id="closeSidebarThemePanel" type="button" aria-label="Đóng bảng giao diện"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div>
+        <div class="sidebar-theme-choices" role="radiogroup" aria-label="Chọn giao diện thanh bên">
+          <button type="button" data-sidebar-theme-choice="cosmic" role="radio" aria-checked="false">
+            <span class="sidebar-theme-preview preview-cosmic"><i></i><i></i><i></i></span>
+            <span><strong data-i18n="sidebarThemeCosmic">Vũ trụ viễn tưởng</strong><small data-i18n="sidebarThemeCosmicDesc">Không gian tối, tinh vân và năng lượng neon</small></span>
+            <b class="sidebar-theme-check"><span class="classic-icon-host" data-classic-icon="check" aria-hidden="true"></span></b>
+          </button>
+          <button type="button" data-sidebar-theme-choice="heaven" role="radio" aria-checked="false">
+            <span class="sidebar-theme-preview preview-heaven"><i></i><i></i><i></i></span>
+            <span><strong data-i18n="sidebarThemeHeaven">Ánh sáng thiên đường</strong><small data-i18n="sidebarThemeHeavenDesc">Mây sáng, pha lê và ánh bình minh dịu nhẹ</small></span>
+            <b class="sidebar-theme-check"><span class="classic-icon-host" data-classic-icon="check" aria-hidden="true"></span></b>
+          </button>
+        </div>
+        <p><span class="classic-icon-host" data-classic-icon="info" aria-hidden="true"></span><span data-i18n="sidebarThemeNote">Chỉ thay đổi khu vực thanh bên. Vùng nhắn tin vẫn theo chế độ sáng/tối chung.</span></p>
+      </div>
+      <button id="meCard" class="me-card profile-entry skeleton-card" type="button" aria-label="Mở hồ sơ của bạn"></button>
+      <div class="chat-search-wrap"><span class="classic-icon-host" data-classic-icon="search" aria-hidden="true"></span><input id="chatSearch" type="search" aria-label="Tìm người, nhóm và tin nhắn" placeholder="Tìm người, nhóm, tin nhắn..." data-i18n-placeholder="chatSearchPlaceholder"><button id="searchHistoryButton" type="button" title="Lịch sử tìm kiếm" aria-label="Lịch sử tìm kiếm" data-i18n-title="searchHistoryTitle"><span class="classic-icon-host" data-classic-icon="history" aria-hidden="true"></span></button></div>
+      <div class="sidebar-nav-heading"><span data-i18n="connectionCenter">TRUNG TÂM KẾT NỐI</span><i aria-hidden="true"></i></div>
+      <nav class="main-nav smart-nav">
+        <button class="nav-item active" type="button" data-open-scope="world"><span class="nav-icon"><span class="classic-icon-host" data-classic-icon="globe" aria-hidden="true"></span></span><span><strong data-i18n="worldChat">Chat thế giới</strong><small data-i18n="allMembers">Mọi thành viên</small></span></button>
+        <button class="nav-item" type="button" data-open-scope="requests"><span class="nav-icon"><span class="classic-icon-host" data-classic-icon="inbox" aria-hidden="true"></span></span><span><strong data-extra-i18n="messageRequests">Tin nhắn chờ</strong><small data-extra-i18n="strangerMessages">Tin nhắn từ người lạ</small></span><b id="requestMessageBadge" class="badge hidden">0</b></button>
+        <button class="nav-item" type="button" data-open-scope="suggestions"><span class="nav-icon"><span class="classic-icon-host" data-classic-icon="sparkles" aria-hidden="true"></span></span><span><strong data-extra-i18n="suggestions">Gợi ý kết bạn</strong><small data-extra-i18n="discoverPeople">Khám phá người mới</small></span></button>
+        <button class="nav-item" type="button" data-open-scope="saved"><span class="nav-icon"><span class="classic-icon-host" data-classic-icon="bookmark" aria-hidden="true"></span></span><span><strong data-extra-i18n="savedMessages">Tin nhắn đã lưu</strong><small data-extra-i18n="savedForLater">Xem lại sau</small></span></button>
+        <button class="nav-item" type="button" data-open-scope="support"><span class="nav-icon"><span class="classic-icon-host" data-classic-icon="headset" aria-hidden="true"></span></span><span><strong data-i18n="adminSupport">Hỗ trợ Admin</strong><small data-i18n="privateConversation">Trò chuyện riêng</small></span><b id="supportBadge" class="badge hidden">0</b></button>
+      </nav>
+      <div class="sidebar-actions split-actions"><button id="addFriendButton" class="secondary-button" type="button"><span class="classic-icon-host" data-classic-icon="user-plus" aria-hidden="true"></span><span data-i18n="addFriend">Thêm bạn</span></button><button id="createGroupButton" class="secondary-button" type="button"><span class="classic-icon-host" data-classic-icon="users" aria-hidden="true"></span><span data-extra-i18n="newGroup">Tạo nhóm</span></button></div>
+      <div class="sidebar-scroll">
+        <section class="sidebar-section"><div class="section-title"><span><span class="classic-icon-host" data-classic-icon="pin" aria-hidden="true"></span><span data-extra-i18n="pinnedChats">Đã ghim</span></span><b id="pinnedCount">0</b></div><div id="pinnedList" class="conversation-list"></div></section>
+        <section class="sidebar-section"><div class="section-title"><span data-i18n="friendRequests">Lời mời kết bạn</span><b id="requestCount">0</b></div><div id="requestList" class="compact-list"></div></section>
+        <section class="sidebar-section"><div class="section-title"><span data-i18n="friends">Bạn bè</span><b id="friendCount">0</b></div><div id="friendList" class="conversation-list"></div></section>
+        <section class="sidebar-section"><div class="section-title"><span><span class="classic-icon-host" data-classic-icon="users" aria-hidden="true"></span><span data-extra-i18n="groups">Nhóm chat</span></span><b id="groupCount">0</b></div><div id="groupList" class="conversation-list"></div></section>
+        <section class="sidebar-section collapsible-section"><button class="section-toggle" type="button" data-toggle-section="archivedList"><span><span class="classic-icon-host" data-classic-icon="archive" aria-hidden="true"></span><span data-i18n="archived">Đã lưu trữ</span></span><span class="classic-icon-host section-chevron" data-classic-icon="chevron-down" aria-hidden="true"></span></button><div id="archivedList" class="conversation-list section-content hidden"></div></section>
+      </div>
+      <div class="sidebar-footer sidebar-utility-dock" aria-label="Tiện ích tài khoản">
+        <div class="sidebar-footer-status sidebar-sync-dot" role="status" title="Đồng bộ realtime">
+          <span><i aria-hidden="true"></i><b data-i18n="systemStatus">Trạng thái hệ thống</b></span>
+          <small data-i18n="realtimeSync">Đồng bộ realtime</small>
+        </div>
+        <label class="language-picker sidebar-language sidebar-utility-language">
+          <span class="classic-icon-host" data-classic-icon="language" aria-hidden="true"></span>
+          <select id="chatLanguageSelect" name="language" autocomplete="language" data-language-select aria-label="Ngôn ngữ"></select>
+        </label>
+        <button id="accountSettingsButton" class="sidebar-settings-button sidebar-utility-button" type="button" data-i18n-aria-label="settings" title="Cài đặt">
+          <span class="classic-icon-host" data-classic-icon="shield" aria-hidden="true"></span><span data-i18n="settings">Cài đặt</span>
+        </button>
+        <button id="logoutButton" class="logout-button sidebar-utility-button sidebar-utility-logout" data-logout="user" type="button" data-i18n-aria-label="logout" title="Đăng xuất">
+          <span class="classic-icon-host" data-classic-icon="logout" aria-hidden="true"></span><span data-i18n="logout">Đăng xuất</span>
+        </button>
+      </div>
+    </aside>
+    <div id="sidebarOverlay" class="sidebar-overlay hidden"></div>
+
+    <main id="chatMain" class="chat-panel smart-chat-panel" tabindex="-1">
+      <header class="chat-header smart-chat-header">
+        <button id="openSidebar" class="icon-button mobile-only" type="button" aria-label="Mở menu"><span class="classic-icon-host" data-classic-icon="menu" aria-hidden="true"></span></button>
+        <button id="conversationAvatar" class="avatar avatar-lg world-avatar clickable-avatar" type="button" aria-label="Mở thông tin cuộc trò chuyện"><span class="classic-icon-host" data-classic-icon="globe" aria-hidden="true"></span></button>
+        <div class="chat-heading"><h1 id="conversationTitle" data-i18n="worldChat">Chat thế giới</h1><p id="conversationStatus" data-i18n="worldStatus">Mọi thành viên đã đăng nhập đều có thể tham gia</p></div>
+        <div id="smartConnectionChip" class="smart-connection-chip" data-connection-state><span class="connection-wave"><i></i><i></i><i></i></span><b data-connection-label>Đã kết nối</b></div>
+        <button id="mobileHeaderActionsButton" class="icon-button mobile-only mobile-header-actions-button" type="button" aria-label="Thao tác cuộc trò chuyện" data-i18n-aria-label="mobileActionsAria"><span class="classic-icon-host" data-classic-icon="more" aria-hidden="true"></span></button>
+        <div class="chat-header-actions">
+          <button id="notificationCenterButton" class="icon-button notification-center-button" type="button" title="Thông báo" aria-label="Mở cài đặt thông báo"><span class="classic-icon-host" data-classic-icon="bell" aria-hidden="true"></span><i id="notificationMutedDot" class="notification-muted-dot hidden" aria-hidden="true"></i></button>
+          <button id="searchToggleButton" class="icon-button" type="button" title="Tìm kiếm"><span class="classic-icon-host" data-classic-icon="search" aria-hidden="true"></span></button>
+          <button id="mediaVaultButton" class="icon-button" type="button" title="Kho tệp"><span class="classic-icon-host" data-classic-icon="folder" aria-hidden="true"></span></button>
+          <button id="themeButton" class="icon-button hidden" type="button" title="Hình nền"><span class="classic-icon-host" data-classic-icon="palette" aria-hidden="true"></span></button>
+          <button id="effectButton" class="icon-button hidden" type="button" title="Hiệu ứng"><span class="classic-icon-host" data-classic-icon="sparkles" aria-hidden="true"></span></button>
+          <button id="motionModeButton" class="v10-motion-trigger" data-v10-motion-trigger type="button"><span class="v10-motion-trigger-icon" aria-hidden="true">✦</span><span class="v10-motion-trigger-copy"><b data-v10-trigger-title>Chuyển động</b><small data-v10-trigger-label>Thông minh</small></span></button>
+          <button id="interfaceScaleButton" class="icon-button interface-scale-button" type="button" title="Quy mô giao diện" aria-label="Điều chỉnh quy mô giao diện"><span class="scale-button-glyph" aria-hidden="true">Aa</span></button>
+          <button id="conversationMenuButton" class="icon-button hidden" type="button" title="Tùy chọn đoạn chat" aria-label="Tùy chọn đoạn chat"><span class="classic-icon-host" data-classic-icon="more" aria-hidden="true"></span></button>
+        </div>
+      </header>
+      <div id="conversationQuickActions" class="conversation-quick-actions hidden" aria-label="Thao tác nhanh đoạn chat">
+        <button id="quickProfileAction" type="button"><span class="classic-icon-host" data-classic-icon="user" aria-hidden="true"></span><b>Hồ sơ</b></button>
+        <button id="quickAliasAction" type="button"><span class="classic-icon-host" data-classic-icon="edit" aria-hidden="true"></span><b>Biệt danh</b></button>
+        <button id="quickPinAction" type="button"><span class="classic-icon-host" data-classic-icon="pin" aria-hidden="true"></span><b>Ghim</b></button>
+        <button id="quickMuteAction" type="button"><span class="classic-icon-host" data-classic-icon="bell-off" aria-hidden="true"></span><b>Thông báo</b></button>
+        <button id="quickMoreAction" type="button"><span class="classic-icon-host" data-classic-icon="more" aria-hidden="true"></span><b>Thêm</b></button>
+      </div>
+      <div id="featureHint" class="feature-hint hidden"><span class="classic-icon-host" data-classic-icon="lightbulb" aria-hidden="true"></span><p>Trên điện thoại, <b>nhấn giữ tin nhắn</b> để mở thao tác. Trên máy tính, dùng nút <b>•••</b>.</p><button id="closeFeatureHint" type="button" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div>
+      <div id="messageSearchBar" class="message-search-bar hidden"><span class="classic-icon-host" data-classic-icon="search" aria-hidden="true"></span><input id="messageSearchInput" aria-label="Tìm trong đoạn chat" type="search" placeholder="Tìm trong đoạn chat..."><button id="clearSearchButton" type="button" aria-label="Xóa tìm kiếm"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div>
+      <div id="pendingDeleteBar" class="pending-delete-bar hidden"><span><span class="classic-icon-host" data-classic-icon="trash" aria-hidden="true"></span>Đoạn chat đang chờ xóa. Bạn không thể gửi tin nhắn.</span><b id="deleteCountdown"></b><button id="undoDeleteButton" type="button">Khôi phục</button><button id="deleteNowButton" type="button">Xóa ngay</button></div>
+      <div id="contactUnavailableBar" class="contact-unavailable-bar hidden" role="status"><span class="contact-unavailable-icon"><span class="classic-icon-host" data-classic-icon="ban" aria-hidden="true"></span></span><div><strong>Hiện không thể liên lạc với người này</strong><small id="contactUnavailableText">Bạn vẫn có thể xem lại lịch sử trò chuyện.</small></div><button id="unblockContactButton" class="secondary-button hidden" type="button">Bỏ chặn</button></div>
+      <div id="requestGateBar" class="request-gate-bar hidden" role="status"><span class="request-gate-icon"><span class="classic-icon-host" data-classic-icon="inbox" aria-hidden="true"></span></span><div><strong>Tin nhắn đang chờ bạn chấp nhận</strong><small>Bạn có thể xem nội dung, nhưng cần chấp nhận trước khi trả lời.</small></div><button id="acceptRequestInline" class="primary-button" type="button">Chấp nhận</button><button id="deleteRequestInline" class="secondary-button" type="button">Xóa</button></div>
+      <div id="worldChatStateBar" class="world-chat-state-bar hidden" role="status"><span class="world-chat-state-icon"><span class="classic-icon-host" data-classic-icon="lock" aria-hidden="true"></span></span><div><strong id="worldChatStateTitle">Chat thế giới đang ở chế độ chỉ đọc</strong><small id="worldChatStateDescription">Bạn vẫn có thể xem toàn bộ tin nhắn cũ.</small></div><span id="worldChatModeChip" class="world-chat-mode-chip"></span></div>
+      <div id="supportAccessBar" class="support-access-bar hidden" role="status"><span class="support-access-icon"><span class="classic-icon-host" data-classic-icon="headset" aria-hidden="true"></span></span><div><strong id="supportAccessTitle">Kênh liên hệ Admin đang bị tạm khóa</strong><small id="supportAccessDescription">Bạn vẫn có thể xem lại lịch sử hỗ trợ.</small></div><span id="supportStrikeChip" class="support-strike-chip hidden">0/5</span></div>
+      <div id="pinnedMessageBar" class="pinned-message-bar hidden"><span class="classic-icon-host" data-classic-icon="pin" aria-hidden="true"></span><div><strong>Tin nhắn đã ghim</strong><small id="pinnedMessageText"></small></div><button id="nextPinnedButton" type="button">›</button></div>
+      <section id="specialPanel" class="special-panel hidden"></section>
+      <section id="messages" class="messages smart-messages" aria-live="polite"><div class="conversation-loading"><span class="spinner"></span><p data-i18n="loadingMessages">Đang tải tin nhắn...</p></div></section>
+      <div id="dropZone" class="drop-zone hidden"><div><span class="classic-icon-host" data-classic-icon="download" aria-hidden="true"></span><strong>Thả tệp để gửi</strong><small>Tối đa 30 MB</small></div></div>
+      <button id="scrollBottomButton" class="scroll-bottom-button hidden" type="button">↓</button>
+      <div id="typingIndicator" class="typing-indicator hidden"><span class="typing-avatar"><span class="classic-icon-host" data-classic-icon="message" aria-hidden="true"></span></span><span id="typingText"></span><span class="typing-dots"><i></i><i></i><i></i></span></div>
+      <footer class="composer-wrap smart-composer-wrap">
+        <div id="attachmentPreview" class="attachment-preview hidden"></div>
+        <div id="emojiPicker" class="emoji-picker hidden"></div>
+        <div id="quickTools" class="quick-tools hidden">
+          <button type="button" data-quick="camera"><span class="classic-icon-host" data-classic-icon="camera" aria-hidden="true"></span><span data-extra-i18n="camera">Chụp ảnh</span></button>
+          <button type="button" data-quick="voice"><span class="classic-icon-host" data-classic-icon="mic" aria-hidden="true"></span><span data-extra-i18n="voiceMessage">Tin nhắn thoại</span></button>
+          <button type="button" data-quick="location"><span class="classic-icon-host" data-classic-icon="map-pin" aria-hidden="true"></span><span data-extra-i18n="shareLocation">Chia sẻ vị trí</span></button>
+        </div>
+        <div id="effectActivationDock" class="v10-effect-activation-dock hidden" aria-live="polite">
+          <button id="effectActivationButton" class="v10-effect-activation" type="button">
+            <span class="v10-effect-activation-icon"><span class="classic-icon-host" data-classic-icon="sparkles" aria-hidden="true"></span></span>
+            <span class="v10-effect-activation-copy"><strong id="effectActivationTitle">Đặc quyền hiệu ứng đã mở</strong><small id="effectActivationState">Chạm để chọn hiệu ứng bóng chat</small></span>
+            <span class="v10-effect-activation-arrow" aria-hidden="true">›</span>
+          </button>
+          <span>Chỉ hiển thị khi Admin, VIP hoặc LEGEND đã cấp quyền.</span>
+        </div>
+        <div id="voiceRecorderBar" class="voice-recorder-bar hidden" role="status" aria-live="polite" aria-atomic="true">
+          <button id="voiceRecordCancelButton" class="voice-record-action voice-record-cancel" type="button" aria-label="Hủy ghi âm"><span class="classic-icon-host" data-classic-icon="trash" aria-hidden="true"></span></button>
+          <span class="voice-record-live" aria-hidden="true"><i></i></span>
+          <div class="voice-record-main">
+            <div class="voice-record-topline"><strong id="voiceRecordTimer">00:00</strong><span id="voiceRecordState">Đang ghi âm</span></div>
+            <div id="voiceRecordWaveform" class="voice-record-waveform" aria-hidden="true"></div>
+            <small id="voiceRecordHint">Thả để gửi · Kéo sang trái để hủy · Kéo lên để khóa</small>
+          </div>
+          <span id="voiceRecordLock" class="voice-record-lock" aria-hidden="true"><span class="classic-icon-host" data-classic-icon="lock" aria-hidden="true"></span></span>
+          <button id="voiceRecordSendButton" class="voice-record-action voice-record-send" type="button" aria-label="Gửi tin nhắn thoại"><span class="classic-icon-host" data-classic-icon="send" aria-hidden="true"></span></button>
+        </div>
+        <form id="messageForm" class="composer smart-composer">
+          <input id="fileInput" aria-label="Chọn tệp đính kèm" type="file" hidden accept="image/*,video/*,audio/*,.pdf,.zip,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv">
+          <button id="toolsButton" class="icon-button attach-button" type="button" aria-label="Thêm tệp"><span class="classic-icon-host" data-classic-icon="plus" aria-hidden="true"></span></button>
+          <button id="emojiButton" class="icon-button emoji-button" type="button" aria-label="Biểu cảm" aria-haspopup="dialog" aria-expanded="false"><span class="classic-icon-host" data-classic-icon="smile" aria-hidden="true"></span></button>
+          <textarea id="messageInput" aria-label="Nội dung tin nhắn" rows="1" maxlength="4000" placeholder="Nhắn vào chat thế giới..."></textarea>
+          <button id="composerClearButton" class="composer-clear-button hidden" type="button" title="Xóa nội dung đang soạn" aria-label="Xóa nội dung đang soạn"><span class="classic-icon-host" data-classic-icon="trash" aria-hidden="true"></span></button>
+          <span id="messageCounter" class="message-counter">0/4000</span>
+          <button id="voiceRecordButton" class="icon-button voice-record-button" type="button" aria-label="Nhấn giữ để ghi âm" title="Nhấn giữ để ghi âm"><span class="classic-icon-host" data-classic-icon="mic" aria-hidden="true"></span></button>
+          <button id="sendButton" class="send-button" type="submit" aria-label="Gửi"><span class="classic-icon-host" data-classic-icon="send" aria-hidden="true"></span></button>
+        </form>
+      </footer>
+    </main>
+  </div>
+
+  <div id="profileModal" class="modal-backdrop hidden"><div class="modal-card profile-modal-card modal-large">
+    <div class="profile-cover profile-cover-modern" id="myCover"><img id="myCoverPhoto" class="profile-cover-photo" alt="" hidden><div class="profile-cover-shade"></div><button id="editCoverButton" type="button" aria-label="Đổi ảnh bìa"><span class="classic-icon-host" data-classic-icon="image" aria-hidden="true"></span><span>Đổi ảnh bìa</span></button></div>
+    <div class="profile-avatar-wrap profile-avatar-wrap-modern"><button id="myAvatar" class="profile-avatar-big" type="button" aria-label="Ảnh đại diện"></button><button id="editAvatarButton" type="button" aria-label="Đổi ảnh đại diện"><span class="classic-icon-host" data-classic-icon="camera" aria-hidden="true"></span></button></div>
+    <div class="profile-modal-head profile-modal-head-modern"><div><span id="ownProfileKicker" class="profile-kicker">Hồ sơ cá nhân</span><h2 id="profileDisplayName"></h2><p id="profileUsername"></p><div id="ownRankPresentation" class="own-rank-presentation hidden"></div><div id="ownPrivilegeStatus" class="privilege-status-grid hidden" aria-live="polite"></div></div><button type="button" class="icon-button" data-close-modal="profileModal" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div>
+    <div class="profile-completion" aria-live="polite"><div><span>Độ hoàn thiện hồ sơ</span><b id="profileCompletionText">0%</b></div><i><em id="profileCompletionBar"></em></i><small>Hồ sơ đầy đủ giúp bạn bè nhận ra bạn nhanh hơn.</small></div>
+    <form id="profileForm" class="profile-form-grid profile-command-form">
+      <section class="profile-editor-section profile-editor-primary full">
+        <div class="profile-editor-section-head"><span class="profile-editor-section-icon"><span class="classic-icon-host" data-classic-icon="user" aria-hidden="true"></span></span><div><small>DANH TÍNH HIỂN THỊ</small><h3>Thông tin chính</h3><p>Những thông tin giúp bạn bè nhận ra bạn trong NexChat.</p></div></div>
+        <div class="profile-editor-grid">
+          <label><span>Biệt danh</span><input id="profileNickname" maxlength="24" autocomplete="nickname"></label>
+          <label class="full"><span>Giới thiệu <small>Tối đa 500 ký tự</small></span><textarea id="profileBio" maxlength="500" placeholder="Viết vài dòng ngắn về bạn..."></textarea></label>
+        </div>
+      </section>
+      <section class="profile-editor-section profile-editor-details full">
+        <div class="profile-editor-section-head"><span class="profile-editor-section-icon"><span class="classic-icon-host" data-classic-icon="info" aria-hidden="true"></span></span><div><small>THÔNG TIN CÁ NHÂN</small><h3>Chi tiết hồ sơ</h3><p>Bạn có thể để trống những mục không muốn công khai.</p></div></div>
+        <div class="profile-editor-grid profile-editor-grid-details">
+          <label><span>Nơi sống</span><input id="profileLocation" maxlength="80" autocomplete="address-level2"></label>
+          <label><span>Công việc</span><input id="profileWork" maxlength="100" autocomplete="organization-title"></label>
+          <label><span>Trường học</span><input id="profileSchool" maxlength="100"></label>
+          <label><span>Ngày sinh</span><input id="profileBirthday" type="date"></label>
+          <label class="full"><span>Tình trạng</span><input id="profileRelationship" maxlength="40" placeholder="Ví dụ: Độc thân"></label>
+        </div>
+      </section>
+      <section class="profile-editor-section profile-editor-privacy full">
+        <div class="profile-editor-section-head"><span class="profile-editor-section-icon"><span class="classic-icon-host" data-classic-icon="shield" aria-hidden="true"></span></span><div><small>QUYỀN RIÊNG TƯ</small><h3>Kiểm soát cách bạn xuất hiện</h3><p>Mỗi tùy chọn được lưu độc lập và có thể đổi bất cứ lúc nào.</p></div></div>
+        <div class="profile-switches profile-switch-grid">
+          <label><input id="profilePublic" type="checkbox"><span><b>Công khai hồ sơ</b><small>Cho phép người khác xem thông tin công khai.</small></span></label>
+          <label><input id="suggestionPublic" type="checkbox"><span><b>Gợi ý kết bạn</b><small>Cho phép hệ thống đề xuất tài khoản của bạn.</small></span></label>
+          <label><input id="avatarWorld" type="checkbox"><span><b>Ảnh ở chat thế giới</b><small>Hiện ảnh đại diện bên cạnh tin nhắn công khai.</small></span></label>
+        </div>
+      </section>
+      <section class="profile-editor-section profile-editor-chat full">
+        <div class="profile-editor-section-head"><span class="profile-editor-section-icon"><span class="classic-icon-host" data-classic-icon="message" aria-hidden="true"></span></span><div><small>TRẢI NGHIỆM NHẮN TIN</small><h3>Hiển thị &amp; tương tác</h3><p>Tối ưu cách tin nhắn và hiệu ứng hoạt động trên thiết bị này.</p></div></div>
+        <div class="profile-editor-grid profile-editor-grid-controls">
+          <label><span>Ai có thể nhắn tin</span><select id="whoCanMessage"><option value="everyone">Mọi người</option><option value="friends_of_friends">Bạn của bạn bè</option><option value="friends">Chỉ bạn bè</option><option value="none">Không ai</option></select></label>
+          <label><span>Chất lượng hiệu ứng</span><select id="visualQuality"><option value="auto">Tự động theo thiết bị</option><option value="full">Đầy đủ</option><option value="balanced">Cân bằng</option><option value="lite">Siêu nhẹ</option></select></label>
+          <div class="profile-motion-scale-bridge full"><span class="profile-motion-scale-icon"><span class="scale-button-glyph" aria-hidden="true">Aa</span></span><div class="profile-motion-scale-copy"><b>Quy mô giao diện</b><small>Đã chuyển vào Chế độ chuyển động để bạn quản lý chung với hiệu năng, chuyển động và khả năng hiển thị.</small></div><button id="profileMotionHubButton" class="secondary-button" type="button">Mở trung tâm</button><select id="interfaceScale" class="interface-scale-hidden-select" aria-hidden="true" tabindex="-1"><option value="auto">Tự động thông minh</option><option value="0.85">Nhỏ gọn · 85%</option><option value="0.95">Gọn · 95%</option><option value="1">Tiêu chuẩn · 100%</option><option value="1.1">Lớn · 110%</option><option value="1.2">Rất lớn · 120%</option></select></div>
+        </div>
+        <div class="profile-switches smart-message-settings profile-message-switches">
+          <label><input id="notifyRequests" type="checkbox"><span><b>Tin nhắn chờ</b><small>Thông báo khi người lạ gửi yêu cầu.</small></span></label>
+          <label><input id="showTyping" type="checkbox"><span><b>Trạng thái đang nhập</b><small>Hiện khi hai bên đang soạn tin.</small></span></label>
+          <label><input id="showReadReceipts" type="checkbox"><span><b>Đã xem</b><small>Cho bạn bè biết khi bạn đã đọc.</small></span></label>
+          <label><input id="showMessageTime" type="checkbox"><span><b>Giờ gửi</b><small>Hiện giờ ở tin cuối mỗi cụm.</small></span></label>
+          <label><input id="showMessageDate" type="checkbox"><span><b>Ngày gửi</b><small>Phân tách lịch sử theo ngày.</small></span></label>
+          <label><input id="showDeliveryStatus" type="checkbox"><span><b>Trạng thái gửi</b><small>Hiện Đã gửi / Đã xem.</small></span></label>
+          <label><input id="compactMessageMotion" type="checkbox"><span><b>Chuyển động nhẹ</b><small>Hiệu ứng mượt nhưng tiết kiệm tài nguyên.</small></span></label>
+        </div>
+      </section>
+      <div class="profile-save-dock full"><div><span class="classic-icon-host" data-classic-icon="shield" aria-hidden="true"></span><p><strong>Quyền kiểm soát thuộc về bạn</strong><small>Thay đổi chỉ được áp dụng sau khi bấm lưu.</small></p></div><div><button id="manageSessionsButton" class="secondary-button" type="button"><span class="classic-icon-host" data-classic-icon="monitor" aria-hidden="true"></span><span>Phiên đăng nhập</span></button><button class="primary-button" type="submit"><span class="classic-icon-host" data-classic-icon="check" aria-hidden="true"></span><span>Lưu hồ sơ</span></button></div></div>
+    </form>
+  </div></div>
+
+  <div id="accountSettingsModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="accountSettingsTitle">
+    <div class="modal-card modal-large account-settings-card">
+      <div class="account-settings-head">
+        <div class="account-settings-head-icon"><span class="classic-icon-host" data-classic-icon="shield" aria-hidden="true"></span></div>
+        <div><span class="account-settings-kicker">TRUNG TÂM TÀI KHOẢN</span><h2 id="accountSettingsTitle">Cài đặt &amp; bảo mật</h2><p>Quản lý thông tin đăng nhập, số điện thoại, email và các lớp bảo mật của tài khoản.</p></div>
+        <button type="button" class="icon-button" data-close-modal="accountSettingsModal" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button>
+      </div>
+      <div class="account-settings-summary">
+        <div><small>Tài khoản</small><strong id="settingsUsername">@username</strong></div>
+        <div><small>Bảo mật cấp 2</small><strong id="settingsLevel2State">Chưa bật</strong></div>
+        <div><small>Bảo mật cấp 3</small><strong id="settingsLevel3State">Chưa bật</strong></div>
+        <button id="settingsSessionsButton" class="secondary-button" type="button"><span class="classic-icon-host" data-classic-icon="monitor" aria-hidden="true"></span><span>Phiên đăng nhập</span></button>
+      </div>
+      <nav class="account-settings-tabs" aria-label="Nhóm cài đặt">
+        <button class="active" type="button" data-account-settings-tab="contact"><span class="classic-icon-host" data-classic-icon="user" aria-hidden="true"></span><span>Thông tin tài khoản</span></button>
+        <button type="button" data-account-settings-tab="password"><span class="classic-icon-host" data-classic-icon="key" aria-hidden="true"></span><span>Đổi mật khẩu</span></button>
+        <button type="button" data-account-settings-tab="security"><span class="classic-icon-host" data-classic-icon="shield" aria-hidden="true"></span><span>Bảo mật nâng cao</span></button>
+        <button type="button" data-account-settings-tab="notifications"><span class="classic-icon-host" data-classic-icon="bell" aria-hidden="true"></span><span>Thông báo thông minh</span></button>
+        <button type="button" data-account-settings-tab="smart"><span class="classic-icon-host" data-classic-icon="monitor" aria-hidden="true"></span><span data-smart-key="smartTools">Thiết bị &amp; tiện ích</span></button>
+      </nav>
+      <div class="account-settings-panels">
+        <section class="account-settings-panel active" data-account-settings-panel="contact">
+          <div class="settings-section-heading"><div><span>THÔNG TIN LIÊN HỆ</span><h3>Số điện thoại &amp; email</h3><p>Dùng để nhận diện tài khoản khi quên tên đăng nhập hoặc mật khẩu.</p></div></div>
+          <form id="accountContactForm" class="settings-form-grid" novalidate>
+            <label><span>Số điện thoại</span><input id="accountPhone" type="tel" inputmode="tel" maxlength="12" required></label>
+            <label><span>Email</span><input id="accountEmail" type="email" maxlength="120" placeholder="Có thể để trống"></label>
+            <label><span>Mật khẩu hiện tại</span><div class="field-control"><input id="contactCurrentPassword" type="password" maxlength="72" autocomplete="current-password" required><button class="password-toggle" type="button" data-toggle-password="contactCurrentPassword">Hiện</button></div></label>
+            <label id="contactLevel3Field" class="hidden"><span>Mã bảo mật cấp 3</span><input id="contactLevel3Pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"></label>
+            <p id="accountContactMessage" class="form-message full"></p>
+            <div class="settings-form-actions full"><button class="primary-button" type="submit">Lưu thông tin</button></div>
+          </form>
+        </section>
+        <section class="account-settings-panel" data-account-settings-panel="password">
+          <div class="settings-section-heading"><div><span>MẬT KHẨU ĐĂNG NHẬP</span><h3>Đổi mật khẩu</h3><p>Mật khẩu mới phải từ 8–72 ký tự, có ít nhất một chữ và một số. Các thiết bị khác sẽ tự đăng xuất.</p></div></div>
+          <form id="accountPasswordForm" class="settings-form-grid" novalidate>
+            <label><span>Mật khẩu hiện tại</span><div class="field-control"><input id="passwordCurrentPassword" type="password" maxlength="72" autocomplete="current-password" required><button class="password-toggle" type="button" data-toggle-password="passwordCurrentPassword">Hiện</button></div></label>
+            <label id="passwordLevel3Field" class="hidden"><span>Mã bảo mật cấp 3</span><input id="passwordLevel3Pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"></label>
+            <label><span>Mật khẩu mới</span><div class="field-control"><input id="passwordNewPassword" type="password" minlength="8" maxlength="72" autocomplete="new-password" required><button class="password-toggle" type="button" data-toggle-password="passwordNewPassword">Hiện</button></div></label>
+            <label><span>Nhập lại mật khẩu mới</span><div class="field-control"><input id="passwordConfirmPassword" type="password" minlength="8" maxlength="72" autocomplete="new-password" required><button class="password-toggle" type="button" data-toggle-password="passwordConfirmPassword">Hiện</button></div></label>
+            <p id="accountPasswordMessage" class="form-message full"></p>
+            <div class="settings-form-actions full"><button class="primary-button" type="submit">Đổi mật khẩu</button></div>
+          </form>
+        </section>
+        <section class="account-settings-panel" data-account-settings-panel="security">
+          <div class="security-level-grid">
+            <article class="security-level-card level-two-card">
+              <div class="security-level-card-head"><span class="security-level-number">02</span><div><small>LỚP ĐĂNG NHẬP BỔ SUNG</small><h3>Bảo mật cấp 2</h3><p>Yêu cầu một mật khẩu riêng sau khi nhập đúng mật khẩu đăng nhập.</p></div><label class="security-switch"><input id="level2Enabled" type="checkbox"><span><i></i></span></label></div>
+              <form id="level2SecurityForm" class="security-level-form" novalidate>
+                <label><span>Mật khẩu đăng nhập hiện tại</span><div class="field-control"><input id="level2CurrentPassword" type="password" maxlength="72" required><button class="password-toggle" type="button" data-toggle-password="level2CurrentPassword">Hiện</button></div></label>
+                <label id="level2CurrentSecretField" class="hidden"><span>Mật khẩu cấp 2 hiện tại</span><div class="field-control"><input id="level2CurrentSecret" type="password" maxlength="72"><button class="password-toggle" type="button" data-toggle-password="level2CurrentSecret">Hiện</button></div></label>
+                <label id="level2NewSecretField"><span>Mật khẩu cấp 2 mới</span><div class="field-control"><input id="level2NewSecret" type="password" minlength="6" maxlength="72"><button class="password-toggle" type="button" data-toggle-password="level2NewSecret">Hiện</button></div></label>
+                <label id="level2Level3Field" class="hidden"><span>Mã cấp 3</span><input id="level2Level3Pin" type="password" inputmode="numeric" maxlength="6"></label>
+                <p id="level2SecurityMessage" class="form-message"></p><button class="primary-button" type="submit">Lưu bảo mật cấp 2</button>
+              </form>
+            </article>
+            <article class="security-level-card level-three-card">
+              <div class="security-level-card-head"><span class="security-level-number">03</span><div><small>XÁC NHẬN THAY ĐỔI NHẠY CẢM</small><h3>Bảo mật cấp 3</h3><p>Dùng mã PIN 6 số khi đổi mật khẩu, số điện thoại hoặc email.</p></div><label class="security-switch"><input id="level3Enabled" type="checkbox"><span><i></i></span></label></div>
+              <form id="level3SecurityForm" class="security-level-form" novalidate>
+                <label><span>Mật khẩu đăng nhập hiện tại</span><div class="field-control"><input id="level3CurrentPassword" type="password" maxlength="72" required><button class="password-toggle" type="button" data-toggle-password="level3CurrentPassword">Hiện</button></div></label>
+                <label id="level3CurrentPinField" class="hidden"><span>Mã cấp 3 hiện tại</span><input id="level3CurrentPin" type="password" inputmode="numeric" maxlength="6"></label>
+                <label id="level3NewPinField"><span>Mã PIN 6 số mới</span><input id="level3NewPin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6"></label>
+                <p id="level3SecurityMessage" class="form-message"></p><button class="primary-button" type="submit">Lưu bảo mật cấp 3</button>
+              </form>
+            </article>
+          </div>
+          <div class="security-note"><span class="classic-icon-host" data-classic-icon="shield" aria-hidden="true"></span><p><strong>Không nên dùng cùng một mật khẩu cho cấp 1 và cấp 2.</strong><br>Mã cấp 3 chỉ gồm 6 số và không hiển thị cho quản trị viên.</p></div>
+        </section>
+        <section class="account-settings-panel notification-settings-panel" data-account-settings-panel="notifications">
+          <div class="notification-control-hero">
+            <span class="notification-control-orb"><span class="classic-icon-host" data-classic-icon="bell" aria-hidden="true"></span><i></i></span>
+            <div><span>TRUNG TÂM THÔNG BÁO</span><h3>Thông báo thông minh trên mọi thiết bị</h3><p>Nhận tin quan trọng ngay cả khi đã đóng NexChat. Hệ thống tự tránh gửi trùng khi bạn đang xem cuộc trò chuyện.</p></div>
+            <strong id="pushPermissionState" class="notification-permission-state">Chưa thiết lập</strong>
+          </div>
+          <div class="notification-device-card">
+            <div><span class="classic-icon-host" data-classic-icon="monitor" aria-hidden="true"></span><div><strong>Thông báo nền trên thiết bị này</strong><small id="pushDeviceDescription">Bật quyền trình duyệt để nhận thông báo khi thoát web.</small></div></div>
+            <button id="enablePushButton" class="primary-button" type="button"><span class="classic-icon-host" data-classic-icon="bell" aria-hidden="true"></span><span>Bật thông báo nền</span></button>
+          </div>
+          <form id="notificationSettingsForm" class="notification-settings-form" novalidate>
+            <div class="notification-switch-grid">
+              <label class="notification-switch-card notification-tone-blue"><input id="notificationsEnabled" type="checkbox"><span class="notification-switch-ui"><i></i></span><div><strong>Cho phép thông báo</strong><small>Tắt toàn bộ thông báo NexChat mà không ảnh hưởng tin nhắn.</small></div></label>
+              <label class="notification-switch-card notification-tone-purple"><input id="pushNotificationsEnabled" type="checkbox"><span class="notification-switch-ui"><i></i></span><div><strong>Thông báo khi thoát web</strong><small>Dùng Web Push cho tin riêng, nhóm, hỗ trợ và cập nhật tố cáo.</small></div></label>
+              <label class="notification-switch-card notification-tone-amber"><input id="notificationPreviewEnabled" type="checkbox"><span class="notification-switch-ui"><i></i></span><div><strong>Hiện nội dung xem trước</strong><small>Khi tắt, thông báo chỉ hiển thị người gửi và loại sự kiện.</small></div></label>
+              <label class="notification-switch-card notification-tone-cyan"><input id="notificationSoundEnabled" type="checkbox"><span class="notification-switch-ui"><i></i></span><div><strong>Âm báo khi đang mở web</strong><small>Chỉ phát khi có tin mới và cuộc trò chuyện hiện tại không mở.</small></div></label>
+            </div>
+            <div class="notification-schedule-grid">
+              <section class="notification-schedule-card">
+                <div><span class="classic-icon-host" data-classic-icon="bell-off" aria-hidden="true"></span><div><strong>Tạm tắt thông báo</strong><small id="notificationMuteStatus">Đang bật bình thường</small></div></div>
+                <label><span>Thời gian</span><select id="notificationMuteDuration"><option value="0">Không tắt</option><option value="30">30 phút</option><option value="60">1 giờ</option><option value="480">8 giờ</option><option value="1440">1 ngày</option><option value="10080">7 ngày</option><option value="permanent">Cho tới khi bật lại</option></select></label>
+              </section>
+              <section class="notification-schedule-card quiet-hours-card">
+                <div><span class="classic-icon-host" data-classic-icon="moon" aria-hidden="true"></span><div><strong>Khung giờ yên tĩnh</strong><small>Không gửi thông báo nền trong thời gian nghỉ.</small></div></div>
+                <label class="quiet-hours-toggle"><input id="quietHoursEnabled" type="checkbox"><span><i></i></span><b>Kích hoạt</b></label>
+                <div class="quiet-hours-times"><label><span>Từ</span><input id="quietHoursStart" type="time" value="22:00"></label><label><span>Đến</span><input id="quietHoursEnd" type="time" value="07:00"></label></div>
+              </section>
+            </div>
+            <div class="notification-smart-note"><span class="classic-icon-host" data-classic-icon="sparkles" aria-hidden="true"></span><p><strong>Điều phối thông minh:</strong> không gửi trùng khi tab đang hiển thị, tôn trọng tắt thông báo từng cuộc trò chuyện và ưu tiên cảnh báo bảo mật, hỗ trợ Admin.</p></div>
+            <p id="notificationSettingsMessage" class="form-message"></p>
+            <div class="settings-form-actions"><button class="primary-button" type="submit">Lưu cài đặt thông báo</button></div>
+          </form>
+        </section>
+        <section class="account-settings-panel" data-account-settings-panel="smart">
+          <div class="settings-section-heading"><div><span data-smart-key="smartKicker">TỐI ƯU THÔNG MINH</span><h3 data-smart-key="smartTitle">Trải nghiệm nhẹ và riêng tư</h3><p data-smart-key="smartDesc">Các tiện ích hoạt động độc lập, không thay đổi dữ liệu hay luồng chat hiện tại.</p></div></div>
+          <div class="nex-smart-settings-grid">
+            <article class="nex-smart-setting-card">
+              <div class="nex-smart-setting-head"><span class="nex-smart-setting-icon" aria-hidden="true">⚡</span><div><strong data-smart-key="performance">Hiệu năng</strong><small data-smart-key="performanceDesc">Tự cân bằng hiệu ứng theo thiết bị và kết nối.</small></div></div>
+              <div class="nex-smart-mode-grid" role="group" aria-label="Chế độ hiệu năng"><button type="button" data-smart-performance="auto" data-smart-key="auto">Tự động</button><button type="button" data-smart-performance="economy" data-smart-key="economy">Tiết kiệm</button><button type="button" data-smart-performance="full" data-smart-key="full">Đầy đủ</button></div>
+            </article>
+            <article class="nex-smart-setting-card">
+              <div class="nex-smart-setting-head"><span class="nex-smart-setting-icon" aria-hidden="true">▣</span><div><strong data-smart-key="privacy">Màn che riêng tư</strong><small data-smart-key="privacyDesc">Tự che nội dung khi quay lại tab và cho phép khóa nhanh bằng Ctrl/⌘ + Shift + L.</small></div></div>
+              <div class="nex-smart-toggle-row"><span><strong id="smartPrivacyStatus" data-smart-key="disabled">Đã tắt</strong><small>Ctrl/⌘ + Shift + L</small></span><label class="nex-smart-switch"><input id="smartPrivacyToggle" type="checkbox" aria-label="Bật màn che riêng tư"><i aria-hidden="true"></i></label></div>
+            </article>
+            <article class="nex-smart-setting-card">
+              <div class="nex-smart-setting-head"><span class="nex-smart-setting-icon" aria-hidden="true">⌂</span><div><strong data-smart-key="install">Cài NexChat</strong><small data-smart-key="installDesc">Mở nhanh như ứng dụng, không cần tải thêm gói nặng.</small></div></div>
+              <div class="nex-smart-card-action"><span id="smartInstallState" class="nex-smart-install-state" data-smart-key="unavailable">Chưa khả dụng</span><button id="smartInstallButton" class="primary-button" type="button" data-smart-key="installButton">Cài ứng dụng</button></div><small id="smartInstallHint" class="nex-smart-install-hint hidden"></small>
+            </article>
+            <article class="nex-smart-setting-card">
+              <div class="nex-smart-setting-head"><span class="nex-smart-setting-icon" aria-hidden="true">⌘</span><div><strong data-smart-key="shortcuts">Thao tác nhanh</strong><small data-smart-key="shortcutsDesc">Ctrl/⌘ + K mở bảng lệnh. Alt + S tìm kiếm. Alt + M nhập tin nhắn.</small></div></div>
+              <div class="nex-smart-shortcut-list"><span><kbd>Ctrl K</kbd><b data-smart-key="palette">Thao tác nhanh</b></span><span><kbd>Alt S</kbd><b data-smart-key="focusSearch">Tìm người và tin nhắn</b></span><span><kbd>Alt M</kbd><b data-smart-key="focusMessage">Đặt con trỏ vào ô nhắn tin</b></span></div><button id="smartOpenPaletteButton" class="secondary-button" type="button" data-smart-key="openPalette">Mở bảng lệnh</button>
+            </article>
+            <article class="nex-smart-setting-card is-wide">
+              <div class="nex-smart-setting-head"><span class="nex-smart-setting-icon" aria-hidden="true">▤</span><div><strong data-smart-key="notes">Ghi chú riêng</strong><small data-smart-key="notesDesc">Ghi chú chỉ lưu trên thiết bị này, không gửi lên máy chủ.</small></div></div>
+              <div class="nex-smart-card-action"><span class="nex-smart-install-state">Local only</span><button id="smartNotePaletteButton" class="secondary-button" type="button" data-smart-key="openPalette">Mở bảng lệnh</button></div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="publicProfileModal" class="modal-backdrop hidden"><div class="modal-card public-profile-card modal-medium"><div id="publicCover" class="profile-cover"><img id="publicCoverPhoto" class="profile-cover-photo" alt="" hidden></div><button class="modal-close-float" type="button" data-close-modal="publicProfileModal" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button><div id="publicProfileContent"></div><div id="publicProfileActions" class="modal-actions"></div></div></div>
+  <div id="addFriendModal" class="modal-backdrop hidden"><div class="modal-card modal-small"><div class="modal-icon"><span class="classic-icon-host" data-classic-icon="user-plus" aria-hidden="true"></span></div><h3 data-i18n="addFriendTitle">Thêm bạn mới</h3><form id="addFriendForm" class="modal-form"><label class="field"><span data-i18n="exactUsername">Tên đăng nhập chính xác</span><div class="field-control"><span>@</span><input id="friendUsername" maxlength="24" required></div></label><p id="addFriendMessage" class="form-message"></p><div class="modal-actions"><button type="button" class="secondary-button" data-close-modal="addFriendModal" data-i18n="cancel">Hủy</button><button type="submit" class="primary-button" data-i18n="sendRequest">Gửi lời mời</button></div></form></div></div>
+  <div id="groupModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="groupModalTitle"><div class="modal-card modal-medium group-create-card"><div class="group-create-head"><div class="modal-icon"><span class="classic-icon-host" data-classic-icon="users" aria-hidden="true"></span></div><div><span class="group-create-kicker">NHÓM TRÒ CHUYỆN MỚI</span><h3 id="groupModalTitle">Tạo nhóm chat</h3><p>Đặt tên rõ ràng và chọn những người bạn muốn thêm vào nhóm.</p></div></div><form id="groupForm" class="modal-form group-create-form" novalidate><label class="field"><span>Tên nhóm <small id="groupNameCounter">0/50</small></span><div class="field-control"><span class="field-icon"><span class="classic-icon-host" data-classic-icon="edit" aria-hidden="true"></span></span><input id="groupName" maxlength="50" autocomplete="off" placeholder="Ví dụ: Nhóm học tập" required aria-describedby="groupNameHelp"></div><small id="groupNameHelp">Tên nhóm có thể thay đổi sau khi tạo.</small></label><div class="group-member-field"><div class="group-member-label"><span>Chọn bạn bè</span><small>Chỉ người đã kết bạn và chưa bị chặn mới xuất hiện.</small></div><div id="groupMemberPicker" class="member-picker"></div></div><p id="groupFormMessage" class="form-message" role="alert"></p><div class="modal-actions"><button type="button" class="secondary-button" data-close-modal="groupModal">Hủy</button><button type="submit" class="primary-button"><span>Tạo nhóm</span><span class="button-loader"></span></button></div></form></div></div>
+  <div id="themeModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="themeModalTitle">
+    <div class="modal-card modal-medium wallpaper-picker-card">
+      <div class="wallpaper-picker-head">
+        <div class="wallpaper-picker-icon" aria-hidden="true"><span class="classic-icon-host" data-classic-icon="palette"></span></div>
+        <div class="wallpaper-picker-heading">
+          <span class="wallpaper-picker-kicker" data-i18n="themePickerKicker">CÁ NHÂN HÓA CUỘC TRÒ CHUYỆN</span>
+          <h3 id="themeModalTitle" data-i18n="chooseTheme">Chọn hình nền</h3>
+          <p data-i18n="themeOnlyPrivate">Hình nền chỉ áp dụng cho cuộc trò chuyện riêng.</p>
+        </div>
+        <button type="button" class="icon-button wallpaper-picker-close" data-close-modal="themeModal" data-i18n-aria-label="close" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button>
+      </div>
+      <div id="themeGrid" class="theme-grid wallpaper-grid" role="listbox" data-i18n-aria-label="chooseTheme" aria-label="Chọn hình nền"></div>
+      <div class="wallpaper-picker-footer">
+        <p><span class="classic-icon-host" data-classic-icon="sparkles" aria-hidden="true"></span><span data-i18n="themeApplyHint">Chạm vào một mẫu để áp dụng ngay.</span></p>
+        <button type="button" class="primary-button" data-close-modal="themeModal" data-i18n="close">Đóng</button>
+      </div>
+    </div>
+  </div>
+  <div id="effectModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="effectModalTitle">
+    <div class="modal-card modal-medium effect-studio-card">
+      <div class="effect-studio-head">
+        <span class="effect-studio-icon"><span class="classic-icon-host" data-classic-icon="sparkles" aria-hidden="true"></span></span>
+        <div class="effect-studio-copy"><h3 id="effectModalTitle">Hiệu ứng bong bóng đặc biệt</h3><p id="effectModalDescription">Quyền sử dụng được mở khi admin cấp hoặc khi tài khoản đang sở hữu VIP/LEGEND.</p></div>
+        <button type="button" class="effect-studio-close" data-close-modal="effectModal" data-i18n-aria-label="close" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button>
+      </div>
+      <div class="effect-live-stage">
+        <div class="effect-live-conversation"><span class="effect-live-avatar" aria-hidden="true">N</span><div class="effect-live-stack"><span id="effectLiveLabel" class="effect-live-label"></span><span id="effectLiveBubble" class="message-bubble effect-none bubble-rank-standard effect-live-bubble"><em>NexChat</em></span></div></div>
+        <div class="effect-world-notice effect-studio-notice"><span class="classic-icon-host" data-classic-icon="globe" aria-hidden="true"></span><span id="effectModalNotice">Tin nhắn vẫn được lưu nguyên vẹn; chỉ lớp hiệu ứng hiển thị bị tắt khi hết quyền.</span></div>
+      </div>
+      <div id="effectGrid" class="effect-grid" role="listbox"></div>
+      <div class="modal-actions single effect-studio-actions"><button id="effectModalClose" type="button" class="secondary-button" data-close-modal="effectModal">Đóng</button></div>
+    </div>
+  </div>
+  <div id="interfaceScaleModal" class="modal-backdrop hidden"><div class="modal-card modal-small interface-scale-card"><div class="modal-title-row"><div><span class="interface-scale-kicker" data-i18n="interfaceScaleKicker">HIỂN THỊ THÔNG MINH</span><h3 data-i18n="interfaceScaleTitle">Quy mô giao diện chat</h3><p data-i18n="interfaceScaleDescription">Toàn bộ khung chat sẽ phóng to hoặc thu nhỏ và luôn tự lấp đầy màn hình, không tạo khoảng trống.</p></div><button type="button" class="icon-button" data-close-modal="interfaceScaleModal" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div><div id="interfaceScaleChoices" class="interface-scale-choices"><button type="button" data-interface-scale="auto"><span>A</span><div><strong data-i18n="scaleAuto">Tự động</strong><small data-i18n="scaleAutoDesc">Cân theo màn hình và thiết bị</small></div><b>Auto</b></button><button type="button" data-interface-scale="0.85"><span>A</span><div><strong data-i18n="scaleCompact">Nhỏ gọn</strong><small data-i18n="scaleCompactDesc">Nhiều nội dung hơn</small></div><b>85%</b></button><button type="button" data-interface-scale="0.95"><span>A</span><div><strong data-i18n="scaleBalanced">Gọn</strong><small data-i18n="scaleBalancedDesc">Rộng rãi nhưng tiết kiệm</small></div><b>95%</b></button><button type="button" data-interface-scale="1"><span>A</span><div><strong data-i18n="scaleStandard">Tiêu chuẩn</strong><small data-i18n="scaleStandardDesc">Kích thước mặc định</small></div><b>100%</b></button><button type="button" data-interface-scale="1.1"><span>A</span><div><strong data-i18n="scaleLarge">Lớn</strong><small data-i18n="scaleLargeDesc">Dễ đọc hơn</small></div><b>110%</b></button><button type="button" data-interface-scale="1.2"><span>A</span><div><strong data-i18n="scaleXLarge">Rất lớn</strong><small data-i18n="scaleXLargeDesc">Tối ưu khả năng quan sát</small></div><b>120%</b></button></div><p class="interface-scale-note"><span class="classic-icon-host" data-classic-icon="monitor" aria-hidden="true"></span><span data-i18n="scaleNote">Thiết lập được lưu theo tài khoản và tự áp dụng lại trên thiết bị này.</span></p></div></div>
+  <div id="conversationMenu" class="modal-backdrop hidden"><div class="modal-card modal-medium action-modal"><h3>Tùy chọn đoạn chat</h3><div class="action-list grid-action-list">
+    <button id="viewProfileAction" type="button"><span class="classic-icon-host" data-classic-icon="user" aria-hidden="true"></span><div><strong>Xem hồ sơ</strong><small>Thông tin công khai</small></div></button>
+    <button id="aliasAction" type="button"><span class="classic-icon-host" data-classic-icon="edit" aria-hidden="true"></span><div><strong>Đặt biệt danh</strong><small>Tên riêng chỉ bạn thấy</small></div></button>
+    <button id="pinConversationAction" type="button"><span class="classic-icon-host" data-classic-icon="pin" aria-hidden="true"></span><div><strong>Ghim đoạn chat</strong><small>Tối đa 5 đoạn chat</small></div></button>
+    <button id="muteAction" type="button"><span class="classic-icon-host" data-classic-icon="bell-off" aria-hidden="true"></span><div><strong>Tắt thông báo</strong><small>Theo thời gian hoặc đến khi mở lại</small></div></button>
+    <button id="archiveAction" type="button"><span class="classic-icon-host" data-classic-icon="archive" aria-hidden="true"></span><div><strong>Lưu trữ</strong><small>Ẩn khỏi danh sách chính</small></div></button>
+    <button id="markUnreadAction" type="button"><span class="classic-icon-host" data-classic-icon="inbox" aria-hidden="true"></span><div><strong>Đánh dấu chưa đọc</strong><small>Nhắc bạn xem lại</small></div></button>
+    <button id="conversationNoteAction" type="button"><span class="classic-icon-host" data-classic-icon="edit" aria-hidden="true"></span><div><strong data-smart-key="conversationNote">Ghi chú cuộc trò chuyện</strong><small data-smart-key="notesDesc">Chỉ lưu trên thiết bị này</small></div></button>
+    <button id="reportUserAction" class="report-action" type="button"><span class="classic-icon-host" data-classic-icon="shield-alert" aria-hidden="true"></span><div><strong>Tố cáo người dùng</strong><small>Gửi thông tin để Admin điều tra</small></div></button>
+    <button id="deleteConversationAction" class="danger-action" type="button"><span class="classic-icon-host" data-classic-icon="trash" aria-hidden="true"></span><div><strong>Xóa đoạn chat</strong><small>Có 15 phút để khôi phục</small></div></button>
+    <button id="blockAction" class="danger-action" type="button"><span class="classic-icon-host" data-classic-icon="ban" aria-hidden="true"></span><div><strong>Chặn</strong><small>Ngừng liên hệ</small></div></button>
+  </div><div class="modal-actions single"><button type="button" class="secondary-button" data-close-modal="conversationMenu">Đóng</button></div></div></div>
+  <div id="mobileHeaderActionsModal" class="modal-backdrop mobile-action-sheet hidden"><div class="modal-card mobile-action-sheet-card"><span class="mobile-sheet-handle" aria-hidden="true"></span><div class="modal-title-row"><div><small class="mobile-sheet-kicker" data-i18n="mobileConversation">Cuộc trò chuyện</small><h3 data-i18n="mobileQuickActions">Thao tác nhanh</h3></div><button type="button" class="icon-button" data-close-modal="mobileHeaderActionsModal" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div><div id="mobileHeaderActionsList" class="mobile-header-actions-list"></div></div></div>
+  <div id="messageMenuModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-small message-menu-card">
+      <div class="message-menu-head">
+        <span class="message-menu-head-icon" aria-hidden="true"><span class="classic-icon-host" data-classic-icon="more"></span></span>
+        <div><small>THAO TÁC TIN NHẮN</small><h3>Tùy chọn tin nhắn</h3><p>Chọn thao tác hoặc thả cảm xúc nhanh.</p></div>
+      </div>
+      <div id="messageMenuActions" class="message-menu-actions"></div>
+      <section class="message-reaction-panel" aria-label="Cảm xúc nhanh">
+        <strong>Cảm xúc nhanh</strong>
+        <div class="reaction-row"><button type="button" aria-label="Thích">👍</button><button type="button" aria-label="Yêu thích">❤️</button><button type="button" aria-label="Cười">😂</button><button type="button" aria-label="Ngạc nhiên">😮</button><button type="button" aria-label="Buồn">😢</button><button type="button" aria-label="Tức giận">😡</button></div>
+      </section>
+      <div class="modal-actions single"><button type="button" class="secondary-button message-menu-close" data-close-modal="messageMenuModal">Đóng</button></div>
+    </div>
+  </div>
+  <div id="mediaVaultModal" class="modal-backdrop hidden"><div class="modal-card modal-large"><div class="modal-title-row"><h3>Kho ảnh, video và tệp</h3><button type="button" class="icon-button" data-close-modal="mediaVaultModal" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div><div id="mediaVaultGrid" class="media-vault-grid"></div></div></div>
+  <div id="sessionModal" class="modal-backdrop hidden"><div class="modal-card modal-medium"><h3>Phiên đăng nhập</h3><p>Tối đa 5 thiết bị. Bạn có thể đăng xuất thiết bị cũ.</p><div id="sessionList" class="session-list"></div><div class="modal-actions single"><button type="button" class="secondary-button" data-close-modal="sessionModal">Đóng</button></div></div></div>
+  <div id="searchModal" class="modal-backdrop hidden"><div class="modal-card modal-medium"><h3>Lịch sử và kết quả tìm kiếm</h3><div id="globalSearchResults"></div><div class="modal-actions"><button id="clearSearchHistory" type="button" class="secondary-button">Xóa lịch sử</button><button type="button" class="primary-button" data-close-modal="searchModal">Đóng</button></div></div></div>
+  <div id="muteModal" class="modal-backdrop hidden"><div class="modal-card modal-small"><h3>Tắt thông báo</h3><div class="choice-list"><button data-mute-minutes="60">1 giờ</button><button data-mute-minutes="480">8 giờ</button><button data-mute-minutes="1440">1 ngày</button><button data-mute-minutes="10080">7 ngày</button><button data-mute-minutes="permanent">Cho tới khi mở lại</button><button data-mute-minutes="unmute">Bật lại thông báo</button></div></div></div>
+
+  <div id="groupInfoModal" class="modal-backdrop hidden"><div class="modal-card modal-medium"><div class="modal-title-row"><h3>Thông tin nhóm</h3><button type="button" class="icon-button" data-close-modal="groupInfoModal" aria-label="Đóng"><span class="classic-icon-host" data-classic-icon="close" aria-hidden="true"></span></button></div><form id="groupInfoForm" class="modal-form"><label class="field"><span>Tên nhóm</span><input id="groupInfoName" maxlength="50"></label><div><span>Thành viên</span><div id="groupInfoMembers" class="group-member-list"></div></div><div id="groupAddArea"><span>Thêm bạn vào nhóm</span><select id="groupAddMember" aria-label="Chọn thành viên thêm vào nhóm"></select><button id="groupAddButton" class="secondary-button" type="button">Thêm thành viên</button></div><div class="modal-actions"><button id="leaveGroupButton" class="danger-button" type="button">Rời nhóm</button><button class="primary-button" type="submit">Lưu tên nhóm</button></div></form></div></div>
+  <div id="cameraModal" class="modal-backdrop hidden"><div class="modal-card modal-large"><h3>Chụp và chỉnh ảnh</h3><div class="camera-stage"><video id="cameraVideo" autoplay playsinline></video><canvas id="cameraCanvas"></canvas></div><div class="image-filters"><button data-filter="none">Gốc</button><button data-filter="grayscale(1)">Đen trắng</button><button data-filter="sepia(.8)">Cổ điển</button><button data-filter="contrast(1.35)">Tương phản</button></div><div class="modal-actions"><button id="closeCameraButton" type="button" class="secondary-button">Hủy</button><button id="captureButton" type="button" class="primary-button">Chụp</button><button id="usePhotoButton" type="button" class="primary-button hidden">Dùng ảnh</button></div></div></div>
+  <div id="confirmModal" class="modal-backdrop hidden"><div class="modal-card modal-small"><div class="modal-icon danger-icon"><span class="classic-icon-host" data-classic-icon="shield-alert" aria-hidden="true"></span></div><h3 id="confirmTitle">Xác nhận</h3><p id="confirmMessage"></p><div class="modal-actions"><button id="confirmCancel" class="secondary-button" type="button">Hủy</button><button id="confirmAccept" class="danger-button" type="button">Xác nhận</button></div></div></div>
+  <div id="promptModal" class="modal-backdrop hidden"><div class="modal-card modal-small"><h3 id="promptTitle"></h3><input id="promptInput" aria-label="Nhập giá trị" class="standalone-input"><div class="modal-actions"><button id="promptCancel" class="secondary-button" type="button">Hủy</button><button id="promptAccept" class="primary-button" type="button">Lưu</button></div></div></div>
+  <div id="reportModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+    <div class="modal-card modal-medium report-modal-card">
+      <div class="report-modal-head"><span class="report-modal-icon"><span class="classic-icon-host" data-classic-icon="shield-alert" aria-hidden="true"></span></span><div><span>TRUNG TÂM AN TOÀN</span><h3 id="reportModalTitle">Tố cáo vi phạm</h3><p id="reportModalDescription">Thông tin được gửi riêng cho Admin để kiểm tra và xử lý.</p></div></div>
+      <form id="reportForm" class="modal-form report-form" novalidate>
+        <input id="reportTargetUserId" type="hidden"><input id="reportMessageId" type="hidden">
+        <div id="reportEvidencePreview" class="report-evidence-preview hidden"></div>
+        <label class="field"><span>Lý do tố cáo</span><select id="reportReason" required><option value="">Chọn lý do phù hợp</option><option value="spam">Spam hoặc quảng cáo</option><option value="harassment">Quấy rối, xúc phạm</option><option value="hate">Thù ghét hoặc phân biệt</option><option value="sexual">Nội dung tình dục</option><option value="violence">Bạo lực hoặc đe dọa</option><option value="scam">Lừa đảo, liên kết nguy hiểm</option><option value="impersonation">Giả mạo danh tính</option><option value="privacy">Tiết lộ thông tin riêng tư</option><option value="other">Lý do khác</option></select></label>
+        <label class="field"><span>Mô tả thêm <small id="reportDetailsCounter">0/500</small></span><textarea id="reportDetails" maxlength="500" rows="4" placeholder="Nêu ngắn gọn điều gì đã xảy ra. Không gửi mật khẩu hoặc thông tin nhạy cảm."></textarea></label>
+        <label class="report-confirm-check"><input id="reportGoodFaith" type="checkbox" required><span>Tôi xác nhận tố cáo này được gửi trung thực để Admin điều tra.</span></label>
+        <div class="report-privacy-note"><span class="classic-icon-host" data-classic-icon="lock" aria-hidden="true"></span><p>Người bị tố cáo không thấy danh tính người gửi. Hệ thống chỉ ưu tiên hồ sơ; quyết định xử lý luôn do Admin thực hiện.</p></div>
+        <p id="reportFormMessage" class="form-message"></p>
+        <div class="modal-actions"><button type="button" class="secondary-button" data-close-modal="reportModal">Hủy</button><button id="submitReportButton" type="submit" class="danger-button"><span>Gửi tố cáo</span><span class="button-loader"></span></button></div>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="conversationNoteModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="conversationNoteTitle">
+    <div class="modal-card modal-medium conversation-note-card">
+      <div class="modal-title-row"><div><span class="account-settings-kicker" data-smart-key="notes">Ghi chú riêng</span><h3 id="conversationNoteTitle" data-smart-key="conversationNote">Ghi chú cuộc trò chuyện</h3></div><button type="button" class="icon-button" data-close-smart-note aria-label="Đóng">×</button></div>
+      <p data-smart-key="notesDesc">Ghi chú chỉ lưu trên thiết bị này, không gửi lên máy chủ.</p>
+      <textarea id="conversationNoteInput" maxlength="2000" rows="8" data-smart-key="notePlaceholder" placeholder="Viết ghi chú cho cuộc trò chuyện này…"></textarea>
+      <div class="conversation-note-meta"><span>LocalStorage · không đồng bộ tài khoản</span><b id="conversationNoteCount">0/2000</b></div>
+      <div class="modal-actions"><button id="clearConversationNote" type="button" class="secondary-button" data-smart-key="clear">Xóa ghi chú</button><button type="button" class="secondary-button" data-close-smart-note data-smart-key="close">Đóng</button><button id="saveConversationNote" type="button" class="primary-button" data-smart-key="save">Lưu ghi chú</button></div>
+    </div>
+  </div>
+
+  <div id="restrictionModal" class="modal-backdrop hidden"><div class="modal-card modal-small"><div class="modal-icon danger-icon"><span class="classic-icon-host" data-classic-icon="shield-alert" aria-hidden="true"></span></div><h3>Tài khoản bị hạn chế</h3><p id="restrictionMessage"></p><div id="restrictionDetails" class="restriction-details"></div><div class="modal-actions single"><button id="restrictionLogout" class="primary-button" type="button">Đăng xuất</button></div></div></div>
+  <input id="avatarFileInput" aria-label="Chọn ảnh đại diện" type="file" accept="image/*" hidden><input id="coverFileInput" aria-label="Chọn ảnh bìa" type="file" accept="image/*" hidden>
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="/socket.io/socket.io.js"></script><script src="/i18n.js?v=1.0.0"></script><script src="/ui.js?v=1.0.0"></script><script src="/script.js?v=1.0.0"></script>
+</body>
+</html>

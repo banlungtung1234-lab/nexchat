@@ -1,0 +1,20 @@
+{
+  "users": [],
+  "friendRequests": [],
+  "messages": [],
+  "uploads": [],
+  "groups": [],
+  "conversationDeletes": [],
+  "reports": [],
+  "system": {
+    "worldChatEnabled": true,
+    "worldChatMode": "open",
+    "worldChatLockedUntil": null,
+    "worldSlowModeSeconds": 0,
+    "worldAntiSpamEnabled": true,
+    "activeAnnouncement": null,
+    "activeAnnouncements": [],
+    "adminAuditLog": [],
+    "maxAccounts": 1000
+  }
+}

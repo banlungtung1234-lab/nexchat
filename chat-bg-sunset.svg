@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#321a47"/>
+      <stop offset="0.28" stop-color="#b44f71"/>
+      <stop offset="0.6" stop-color="#f58d63"/>
+      <stop offset="1" stop-color="#ffd8a2"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="38%" r="34%">
+      <stop offset="0" stop-color="#fff6cd" stop-opacity="1"/>
+      <stop offset="0.36" stop-color="#ffe28d" stop-opacity="0.84"/>
+      <stop offset="0.72" stop-color="#ffb26c" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#ffb26c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffe7cc" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#fff7ea" stop-opacity="0.04"/>
+    </linearGradient>
+    <filter id="blur22"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <rect width="1600" height="1000" fill="url(#sunGlow)"/>
+  <circle cx="820" cy="348" r="118" fill="#fff0ab"/>
+  <circle cx="820" cy="348" r="162" fill="#ffd772" opacity="0.24"/>
+  <g filter="url(#blur22)" opacity="0.92">
+    <ellipse cx="290" cy="228" rx="178" ry="38" fill="url(#cloud)"/>
+    <ellipse cx="490" cy="282" rx="224" ry="44" fill="url(#cloud)"/>
+    <ellipse cx="1188" cy="214" rx="216" ry="46" fill="url(#cloud)"/>
+    <ellipse cx="1320" cy="290" rx="180" ry="36" fill="url(#cloud)"/>
+  </g>
+  <path d="M0 548c148-26 249-3 378 60 118 57 225 53 336 7 122-52 258-75 376-25 98 41 180 43 283 0 82-34 143-55 227-62V1000H0z" fill="#f4aa86" fill-opacity="0.45"/>
+  <path d="M0 626c118-11 205 10 334 53 108 36 222 54 352 29 146-28 246-95 395-91 157 4 240 65 519 70V1000H0z" fill="#cb6f67" fill-opacity="0.46"/>
+  <path d="M0 714c181 32 315 77 453 79 148 2 259-47 388-77 144-33 274-31 413 9 114 33 214 67 346 65V1000H0z" fill="#7e3752" fill-opacity="0.62"/>
+  <path d="M0 804c151 51 324 91 516 92 160 1 295-55 438-62 180-9 364 48 646 63V1000H0z" fill="#2a1632" fill-opacity="0.82"/>
+  <path d="M0 864c171 36 331 67 502 69 170 2 332-33 502-39 190-6 379 25 596 37V1000H0z" fill="#130f21" fill-opacity="0.92"/>
+  <g opacity=".22">
+    <path d="M0 462h1600" stroke="#fff1d8" stroke-width="3"/>
+    <path d="M0 486h1600" stroke="#ffc998" stroke-width="1.5"/>
+  </g>
+</svg>

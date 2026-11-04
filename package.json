@@ -1,0 +1,30 @@
+{
+  "name": "nexchat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NexChat 1.0.0 — secure realtime social chat platform",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node verify.js",
+    "test": "node verify.js && node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "compression": "^1.8.1",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "multer": "^2.5.0",
+    "session-file-store": "^1.5.0",
+    "socket.io": "^4.8.4",
+    "web-push": "^3.6.7"
+  },
+  "overrides": {
+    "engine.io": "6.6.11",
+    "socket.io-parser": "4.2.7"
+  }
+}

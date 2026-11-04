@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+<meta content="#050816" name="theme-color"/>
+<link href="/nexchat-logo.svg?v=1.0.0" rel="icon" type="image/svg+xml"/>
+<link href="/site.webmanifest?v=1.0.0" rel="manifest"/>
+<title>Quản trị · NexChat</title>
+<script src="/theme-init.js?v=1.0.0"></script>
+<script defer="" src="/app-runtime.js?v=1.0.0"></script>
+<link href="/style.css?v=1.0.0" rel="stylesheet"/>
+<link href="/mobile.css?v=1.0.0" rel="stylesheet"/>
+<link href="/system.css?v=1.0.0" rel="stylesheet"/>
+<link href="/smart-tools.css?v=1.0.0" rel="stylesheet"/>
+<link href="/v10-experience.css?v=1.0.0" rel="stylesheet"/>
+<link href="/v10-polish.css?v=1.0.0" rel="stylesheet"/>
+<script defer="" src="/smart-tools.js?v=1.0.0"></script>
+<script defer="" src="/v10-experience.js?v=1.0.0"></script>
+<script defer="" src="/v10-polish.js?v=1.0.0"></script>
+</head>
+<body class="admin-page admin-cyberpunk">
+<a class="skip-link" data-admin-i18n="skipAdminMenu" href="#adminMain">Bỏ qua menu quản trị</a>
+<div aria-hidden="true" class="admin-cyber-atmosphere">
+<span class="admin-atmosphere-photo"></span>
+<span class="admin-atmosphere-depth"></span>
+<span class="admin-atmosphere-galaxy admin-atmosphere-galaxy-a"></span>
+<span class="admin-atmosphere-galaxy admin-atmosphere-galaxy-b"></span>
+<span class="admin-atmosphere-dust admin-atmosphere-dust-a"></span>
+<span class="admin-atmosphere-dust admin-atmosphere-dust-b"></span>
+<span class="admin-atmosphere-cloud admin-atmosphere-cloud-a"></span>
+<span class="admin-atmosphere-cloud admin-atmosphere-cloud-b"></span>
+<span class="admin-atmosphere-nebula admin-atmosphere-nebula-a"></span>
+<span class="admin-atmosphere-nebula admin-atmosphere-nebula-b"></span>
+<span class="admin-atmosphere-ribbon admin-atmosphere-ribbon-a"></span>
+<span class="admin-atmosphere-ribbon admin-atmosphere-ribbon-b"></span>
+<span class="admin-atmosphere-aurora"></span>
+<span class="admin-atmosphere-orbit"></span>
+<span class="admin-atmosphere-grid"></span>
+<span class="admin-atmosphere-stars"></span>
+<span class="admin-atmosphere-particles"></span>
+<span class="admin-atmosphere-meteors"></span>
+<span class="admin-atmosphere-flare"></span>
+<span class="admin-atmosphere-vignette"></span>
+<span class="admin-atmosphere-beam"></span>
+</div>
+<div class="admin-shell">
+<aside class="admin-sidebar" id="adminSidebar">
+<div class="sidebar-top"><div class="brand brand-light"><img alt="NexChat" class="brand-logo" src="/nexchat-logo.svg?v=1.0.0"/><span>NexChat Admin</span></div><button aria-label="Đóng menu quản trị" class="icon-button mobile-only" data-admin-i18n-aria-label="closeAdminMenu" id="closeAdminSidebar"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="close"></span></button></div>
+<div class="admin-profile"><div class="avatar admin-avatar">A</div><div><strong data-admin-i18n="administrator">Quản trị viên</strong><small data-admin-i18n="securityVerified">Bảo mật mức 2 đã xác minh</small></div></div>
+<div class="admin-filter">
+<input aria-label="Tìm người dùng" autocomplete="off" data-admin-i18n-aria-label="searchUsersAria" data-admin-i18n-placeholder="searchUsers" id="userSearch" placeholder="Tìm tên, số điện thoại hoặc email..." spellcheck="false" type="search"/>
+<select aria-label="Lọc người dùng theo trạng thái" data-admin-i18n-aria-label="statusFilterAria" id="statusFilter"><option data-admin-i18n="allStatuses" value="all">Tất cả trạng thái</option><option data-admin-i18n="activeStatus" value="active">Đang hoạt động</option><option data-admin-i18n="lockedStatus" value="lock">Đang khóa</option><option data-admin-i18n="bannedStatus" value="ban">Đang bị cấm</option></select>
+<button class="secondary-button" data-admin-i18n-title="exportCsv" id="exportUsersButton" title="Xuất CSV" type="button"><span aria-hidden="true">⇩</span><span data-admin-i18n="exportFilteredUsers" data-smart-key="adminExport">Xuất danh sách đang lọc</span></button>
+</div>
+<div class="section-title admin-list-title"><span data-admin-i18n="users">Người dùng</span><b id="adminUserCount">0</b></div>
+<div class="admin-user-list" id="adminUserList"></div>
+<button class="logout-button light-logout" data-logout="admin" id="adminLogout" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="logout"></span><span data-admin-i18n="adminLogout">Đăng xuất quản trị</span></button>
+</aside>
+<div class="sidebar-overlay hidden" id="adminSidebarOverlay"></div>
+<main class="admin-main" id="adminMain" tabindex="-1">
+<header class="admin-topbar">
+<button aria-controls="adminSidebar" aria-expanded="false" aria-label="Mở menu quản trị" class="icon-button mobile-only" data-admin-i18n-aria-label="openAdminMenu" id="openAdminSidebar"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="menu"></span></button>
+<div class="admin-topbar-title"><span class="eyebrow" data-admin-i18n="adminCenter">TRUNG TÂM QUẢN TRỊ</span><h1 data-admin-i18n="systemManagement">Quản lý hệ thống</h1></div>
+<div class="admin-topbar-tools">
+<label class="language-picker admin-language-picker" data-admin-i18n-title="language" title="Ngôn ngữ"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="language"></span><b aria-hidden="true" class="admin-language-badge mobile-only" id="adminLanguageBadge">🇻🇳</b><select aria-label="Ngôn ngữ" autocomplete="language" data-admin-i18n-aria-label="language" data-language-select="" id="adminLanguageSelect" name="language"></select></label>
+<button class="v10-motion-trigger" data-v10-motion-trigger="" id="adminMotionButton" type="button"><span aria-hidden="true" class="v10-motion-trigger-icon">✦</span><span class="v10-motion-trigger-copy"><b data-v10-trigger-title="">Chuyển động</b><small data-v10-trigger-label="">Thông minh</small></span></button>
+<div aria-live="polite" class="connection-pill" data-connection-state="connecting" id="adminConnection"><span aria-hidden="true"></span> <b data-admin-connection-label="" data-admin-i18n="connecting">Đang kết nối</b></div>
+</div>
+</header>
+<section aria-label="Trạng thái trung tâm quản trị" class="admin-command-strip" data-admin-i18n-aria-label="adminStatusAria">
+<div class="admin-command-intro"><span class="admin-command-pulse"></span><div><strong data-admin-i18n="realtimeOperationsCenter">Trung tâm vận hành realtime</strong><small data-admin-i18n="realtimeOperationsDesc">Người dùng, bảo mật, hỗ trợ và đặc quyền được đồng bộ trong một bảng điều khiển.</small></div></div>
+<div class="admin-command-badges"><span><i></i><span data-admin-i18n="multilayerSecurity">Bảo mật nhiều lớp</span></span><span><i></i><span data-admin-i18n="auditTrail">Nhật ký kiểm soát</span></span><span><i></i><span data-admin-i18n="directResponse">Phản hồi trực tiếp</span></span></div>
+</section>
+<section class="stats-grid admin-stats-extended" id="statsGrid">
+<article><span data-admin-i18n="allUsers">Tất cả người dùng</span><strong id="statUsers">0</strong><small data-admin-i18n="registeredAccounts">Tài khoản đã đăng ký</small></article>
+<article class="stat-online-card"><span data-admin-i18n="onlineUsers">Đang hoạt động</span><strong id="statOnline">0</strong><small class="admin-status-live" data-admin-i18n="realtimeConnections">Kết nối realtime</small></article>
+<article><span data-admin-i18n="offlineUsers">Ngoại tuyến</span><strong id="statOffline">0</strong><small><i class="presence-dot"></i> <span data-admin-i18n="notConnected">Không kết nối</span></small></article>
+<article><span data-admin-i18n="restrictedAccounts">Đã khóa / ban</span><strong id="statRestricted">0</strong><small data-admin-i18n="restrictedHint">Tài khoản bị hạn chế</small></article>
+<article><span data-admin-i18n="effectAccess">Có thể dùng hiệu ứng</span><strong id="statEffects">0</strong><small data-admin-i18n="effectAccessHint">Admin hoặc VIP/LEGEND</small></article>
+<article class="stat-vip-card"><span data-admin-i18n="vipMembers">Thành viên VIP</span><strong id="statVip">0</strong><small data-admin-i18n="vipActive">Biểu tượng V đang hoạt động</small></article>
+<article class="stat-legend-card"><span data-admin-i18n="legendMembers">Thành viên LEGEND</span><strong id="statLegend">0</strong><small data-admin-i18n="legendActive">Biểu tượng L đang hoạt động</small></article>
+<article><span data-admin-i18n="unreadSupport">Tin hỗ trợ chưa đọc</span><strong id="statSupport">0</strong><small data-admin-i18n="needsHandling">Cần xử lý</small></article>
+<article class="stat-support-warning"><span data-admin-i18n="spamWarningsActive">Đang có cảnh cáo spam</span><strong id="statSupportWarnings">0</strong><small data-admin-i18n="spamCycle15Days">Trong chu kỳ 15 ngày</small></article>
+<article class="stat-support-blocked"><span data-admin-i18n="adminContactBlocked">Đã chặn liên hệ Admin</span><strong id="statSupportBlocked">0</strong><small data-admin-i18n="supportChannelRestricted">Kênh hỗ trợ bị hạn chế</small></article>
+<article class="stat-report-card"><span data-admin-i18n="pendingReports">Tố cáo đang chờ</span><strong id="statReportsPending">0</strong><small data-admin-i18n="reportsNeedReview">Hồ sơ cần Admin kiểm tra</small></article>
+<article class="stat-report-review"><span data-admin-i18n="reportInvestigating">Đang điều tra</span><strong id="statReportsInvestigating">0</strong><small data-admin-i18n="openedCases">Đã mở hồ sơ xử lý</small></article>
+<article class="stat-report-risk"><span data-admin-i18n="highPriority">Ưu tiên cao</span><strong id="statReportsHighRisk">0</strong><small data-admin-i18n="systemSuggestedReview">Hệ thống đề xuất xem trước</small></article>
+</section>
+<section aria-labelledby="accountCapacityTitle" class="account-capacity-card motion-surface">
+<div class="account-capacity-copy">
+<span class="eyebrow" data-admin-i18n="systemCapacityKicker">SỨC CHỨA HỆ THỐNG</span>
+<h2 data-admin-i18n="accountLimitTitle" id="accountCapacityTitle">Giới hạn số tài khoản</h2>
+<p data-admin-i18n="accountLimitDesc">Kiểm soát số người có thể đăng ký. Khi đạt giới hạn, tài khoản hiện tại vẫn hoạt động bình thường và hệ thống chỉ tạm dừng đăng ký mới.</p>
+<div aria-hidden="true" class="account-capacity-meter"><i id="accountCapacityBar"></i></div>
+<div class="account-capacity-summary"><strong><span id="accountCapacityUsed">0</span><span data-admin-i18n="accountsInUse"> tài khoản đang dùng</span></strong><small data-admin-i18n="notLimited" id="accountCapacityRemaining">Chưa giới hạn</small></div>
+</div>
+<form class="account-capacity-form" id="accountCapacityForm">
+<label class="field"><span data-admin-i18n="maximumLimit">Giới hạn tối đa</span><input id="maxAccountsInput" inputmode="numeric" max="1000000" min="1" step="1" type="number" value="1000"/></label>
+<label class="smart-switch-card account-capacity-unlimited"><input id="unlimitedAccountsInput" type="checkbox"/><span class="smart-switch-ui"><i></i></span><span class="smart-switch-copy"><strong data-admin-i18n="unlimited">Không giới hạn</strong><small data-admin-i18n="unlimitedRegistrationDesc">Cho phép đăng ký không giới hạn số tài khoản.</small></span></label>
+<button class="primary-button" id="saveAccountCapacityButton" type="submit"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="users"></span><span data-admin-i18n="saveLimit">Lưu giới hạn</span><span class="button-loader"></span></button>
+<p aria-live="polite" class="form-message" id="accountCapacityMessage"></p>
+</form>
+</section>
+<section aria-labelledby="adminSecurityActivityTitle" class="admin-security-activity motion-surface">
+<div class="admin-security-activity-head">
+<div><span class="eyebrow" data-admin-i18n="securityActivityEyebrow">BẢO MẬT &amp; NHẬT KÝ</span><h2 data-admin-i18n="securityActivityTitle" id="adminSecurityActivityTitle">Hoạt động quản trị gần đây</h2><p data-admin-i18n="securityActivityDesc">Các thao tác quan trọng được ghi lại mà không lưu mật khẩu hoặc nội dung bí mật.</p></div>
+<div class="admin-audit-actions">
+<button class="secondary-button compact-button audit-clear-button" id="clearAuditButton" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="trash"></span><span data-admin-i18n="clearHistory">Xóa lịch sử</span></button>
+<button class="secondary-button compact-button" id="refreshAuditButton" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="history"></span><span data-admin-i18n="refresh">Làm mới</span></button>
+</div>
+</div>
+<div aria-live="polite" class="admin-audit-list" id="adminAuditList"><div class="empty-compact" data-admin-i18n="loadingAudit">Đang tải nhật ký...</div></div>
+</section>
+<section aria-labelledby="adminReportCenterTitle" class="admin-report-center motion-surface">
+<div class="admin-report-head">
+<div><span class="eyebrow" data-admin-i18n="communitySafety">AN TOÀN CỘNG ĐỒNG</span><h2 data-admin-i18n="reportInvestigationCenter" id="adminReportCenterTitle">Trung tâm điều tra tố cáo</h2><p data-admin-i18n="reportCenterDesc">Tố cáo người dùng và tin nhắn thế giới được gom vào một luồng riêng. Điểm ưu tiên chỉ hỗ trợ sắp xếp; mọi hành động đều do Admin xác nhận.</p></div>
+<div class="admin-report-head-actions"><select aria-label="Lọc trạng thái tố cáo" data-admin-i18n-aria-label="reportFilterAria" id="reportStatusFilter"><option data-admin-i18n="reportPending" value="pending">Đang chờ</option><option data-admin-i18n="reportInvestigating" value="investigating">Đang điều tra</option><option data-admin-i18n="reportActioned" value="actioned">Đã xử lý</option><option data-admin-i18n="reportDismissed" value="dismissed">Đã đóng</option><option data-admin-i18n="all" value="all">Tất cả</option></select><button class="secondary-button compact-button" id="refreshReportsButton" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="history"></span><span data-admin-i18n="refresh">Làm mới</span></button></div>
+</div>
+<div aria-label="Tổng quan tố cáo" class="admin-report-summary" data-admin-i18n-aria-label="reportSummaryAria"><article><span data-admin-i18n="awaitingAction">Chờ xử lý</span><strong id="reportCountPending">0</strong></article><article><span data-admin-i18n="reportInvestigating">Đang điều tra</span><strong id="reportCountInvestigating">0</strong></article><article><span data-admin-i18n="actionTaken">Đã hành động</span><strong id="reportCountActioned">0</strong></article><article><span data-admin-i18n="reportDismissed">Đã đóng</span><strong id="reportCountDismissed">0</strong></article></div>
+<div aria-live="polite" class="admin-report-list" id="adminReportList"><div class="empty-compact" data-admin-i18n="loadingReports">Đang tải tố cáo...</div></div>
+</section>
+<section aria-labelledby="systemAdminTitle" class="system-admin-console motion-surface">
+<div class="system-admin-head">
+<div><span class="eyebrow" data-admin-i18n="globalControls">ĐIỀU KHIỂN TOÀN HỆ THỐNG</span><h2 data-admin-i18n="worldServerTitle" id="systemAdminTitle">Chat thế giới &amp; thông báo server</h2><p data-admin-i18n="worldServerDesc">Các thay đổi được áp dụng realtime tới mọi thiết bị đang mở NexChat.</p></div>
+<span class="system-state-pill is-open" id="worldChatStatusPill"><i></i><b data-admin-i18n="worldChatOpen">Chat thế giới đang mở</b></span>
+</div>
+<div class="system-admin-grid">
+<article class="system-control-card world-control-card world-control-pro" data-mode="open" id="worldControlCard">
+<div class="system-control-title world-control-heading">
+<span class="system-control-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="globe"></span></span>
+<div><h3 data-admin-i18n="worldCoordination">Điều phối chat thế giới</h3><p data-admin-i18n="worldCoordinationDesc">Quản lý quyền gửi, tốc độ trò chuyện và chống spam. Tin nhắn cũ luôn được giữ nguyên.</p></div>
+</div>
+<section aria-label="Cấu hình chat thế giới" class="world-config-surface" data-admin-i18n-aria-label="worldConfigAria">
+<div class="world-control-grid">
+<label class="field world-config-field world-mode-field">
+<span data-admin-i18n="operatingMode">Chế độ hoạt động</span>
+<select id="worldChatMode">
+<option data-admin-i18n="everyoneCanChat" value="open">Mọi thành viên được nhắn</option>
+<option data-admin-i18n="adminOnlyChat" value="admin_only">Chỉ quản trị viên được nhắn</option>
+<option data-admin-i18n="readOnlyChat" value="read_only">Chỉ đọc · không ai được nhắn</option>
+</select>
+<small data-admin-i18n="sendPermissionHint">Quy định ai có thể gửi tin vào kênh.</small>
+</label>
+<label class="field world-config-field">
+<span data-admin-i18n="slowMode">Slow mode</span>
+<select id="worldSlowMode">
+<option data-admin-i18n="off" value="0">Tắt</option>
+<option data-admin-i18n="fiveSecondsPerMessage" value="5">5 giây / tin</option>
+<option data-admin-i18n="tenSecondsPerMessage" value="10">10 giây / tin</option>
+<option data-admin-i18n="thirtySecondsPerMessage" value="30">30 giây / tin</option>
+<option data-admin-i18n="sixtySecondsPerMessage" value="60">60 giây / tin</option>
+<option data-admin-i18n="oneTwentySecondsPerMessage" value="120">120 giây / tin</option>
+</select>
+<small data-admin-i18n="slowModeHint">Giới hạn tốc độ gửi của mỗi thành viên.</small>
+</label>
+<label class="field world-config-field hidden" id="worldLockDurationField">
+<span data-admin-i18n="autoReopenAfterLabel">Tự mở lại sau</span>
+<select id="worldLockDuration">
+<option data-admin-i18n="noTimer" value="">Không hẹn giờ</option>
+<option data-admin-i18n="fiveMinutes" value="5">5 phút</option>
+<option data-admin-i18n="fifteenMinutes" value="15">15 phút</option>
+<option data-admin-i18n="thirtyMinutes" value="30">30 phút</option>
+<option data-admin-i18n="oneHour" value="60">1 giờ</option>
+<option data-admin-i18n="sixHours" value="360">6 giờ</option>
+<option data-admin-i18n="oneDay" value="1440">1 ngày</option>
+<option data-admin-i18n="custom" value="custom">Tùy chỉnh</option>
+</select>
+<small data-admin-i18n="readOnlyTimerHint">Chỉ áp dụng khi kênh ở chế độ chỉ đọc.</small>
+</label>
+<label class="field world-config-field hidden" id="worldLockCustomField">
+<span data-admin-i18n="lockMinutes">Số phút khóa</span>
+<input id="worldLockCustomMinutes" inputmode="numeric" max="10080" min="1" type="number" value="30"/>
+<small data-admin-i18n="maxSevenDaysHint">Từ 1 phút đến tối đa 7 ngày.</small>
+</label>
+<label class="smart-switch-card world-anti-spam-card">
+<input checked="" id="worldAntiSpam" type="checkbox"/>
+<span aria-hidden="true" class="smart-switch-track"><i></i></span>
+<span class="smart-switch-copy"><strong data-admin-i18n="smartAntiSpam">Chống spam thông minh</strong><small data-admin-i18n="antiSpamDescription">Chặn nội dung lặp, ký tự kéo dài và gửi tin quá dày.</small></span>
+</label>
+</div>
+<div class="world-config-footer">
+<div aria-live="polite" class="world-config-preview">
+<span aria-hidden="true" class="world-config-preview-dot"></span>
+<div><small data-admin-i18n="pendingConfiguration">Cấu hình sắp áp dụng</small><strong data-admin-i18n="everyoneCanSend" id="worldConfigPreview">Mọi thành viên có thể gửi tin</strong></div>
+</div>
+<button class="primary-button world-apply-button" id="applyWorldChatButton" type="button">
+<span aria-hidden="true" class="classic-icon-host" data-classic-icon="shield"></span>
+<span data-admin-i18n="applyConfig">Áp dụng cấu hình</span><span class="button-loader"></span>
+</button>
+</div>
+<p aria-live="polite" class="form-message world-control-message" id="worldControlMessage"></p>
+</section>
+<form class="world-admin-message-form" id="worldAdminMessageForm">
+<div class="world-admin-message-head">
+<div><strong data-admin-i18n="adminFeaturedMessage">Tin nổi bật từ quản trị viên</strong><small data-admin-i18n="adminFeaturedHint">Được gắn nhãn quản trị viên và vẫn gửi được trong chế độ “Chỉ quản trị viên”.</small></div>
+</div>
+<div class="world-message-compose">
+<textarea aria-label="Nội dung gửi vào chat thế giới" data-admin-i18n-aria-label="worldMessageAria" data-admin-i18n-placeholder="worldMessagePlaceholder" id="worldChatMessage" maxlength="1000" placeholder="Nhập nội dung muốn gửi vào chat thế giới..." rows="3"></textarea>
+<div class="world-message-compose-footer">
+<span class="world-message-shortcut" data-admin-i18n="sendShortcut">Ctrl/⌘ + Enter để gửi</span>
+<div class="world-message-actions">
+<b class="world-message-counter"><span id="worldChatMessageCounter">0</span>/1000</b>
+<button class="secondary-button" disabled="" id="sendWorldAdminMessageButton" type="submit">
+<span aria-hidden="true" class="classic-icon-host" data-classic-icon="send"></span>
+<span data-admin-i18n="sendWorldChat">Gửi vào chat thế giới</span><span class="button-loader"></span>
+</button>
+</div>
+</div>
+</div>
+</form>
+</article>
+<article class="system-control-card announcement-control-card">
+<div class="system-control-title"><span class="system-control-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="bell"></span></span><div><h3 data-admin-i18n="serverAnnouncement">Thông báo chạy ngang toàn server</h3><p data-admin-i18n="serverAnnouncementDesc">Thông báo xuất hiện ngay trên đầu tất cả trang và tự biến mất khi hết thời gian.</p></div></div>
+<form class="announcement-form" id="announcementForm">
+<label class="field announcement-message-field"><span data-admin-i18n="announcementContent">Nội dung thông báo</span><textarea data-admin-i18n-placeholder="announcementPlaceholder" id="announcementMessage" maxlength="500" placeholder="Ví dụ: Hệ thống sẽ bảo trì lúc 23:00..." required="" rows="3"></textarea><small><b id="announcementCounter">0</b><span data-admin-i18n="charactersLimit500">/500 ký tự</span></small></label>
+<div class="announcement-time-row">
+<label class="field"><span data-admin-i18n="announcementDuration">Thời gian hiển thị</span><select id="announcementDuration"><option data-admin-i18n="thirtySeconds" value="30">30 giây</option><option data-admin-i18n="oneMinute" value="60">1 phút</option><option data-admin-i18n="fiveMinutes" selected="" value="300">5 phút</option><option data-admin-i18n="fifteenMinutes" value="900">15 phút</option><option data-admin-i18n="thirtyMinutes" value="1800">30 phút</option><option data-admin-i18n="oneHour" value="3600">1 giờ</option><option data-admin-i18n="custom" value="custom">Tùy chỉnh</option></select></label>
+<label class="field hidden" id="announcementCustomField"><span data-admin-i18n="secondsCount">Số giây</span><input id="announcementCustomSeconds" max="604800" min="10" type="number" value="120"/></label>
+</div>
+<div class="announcement-actions"><button class="primary-button" id="sendAnnouncementButton" type="submit"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="send"></span><span data-admin-i18n="sendAnnouncement">Gửi thông báo</span><span class="button-loader"></span></button><button class="secondary-button" data-admin-i18n="stopAllAnnouncements" id="stopAnnouncementButton" type="button">Kết thúc tất cả</button></div>
+<p class="form-message" id="announcementMessageState"></p>
+</form>
+<div class="active-announcement-card hidden" id="activeAnnouncementCard"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="activity"></span><div><small data-admin-i18n="serverAnnouncement">Thông báo toàn server</small><strong id="activeAnnouncementText"></strong></div><time id="activeAnnouncementTime"></time></div>
+</article>
+</div>
+</section>
+<section aria-labelledby="effectAdminTitle" class="effect-admin-console motion-surface">
+<div class="effect-admin-head">
+<div>
+<span class="eyebrow" data-admin-i18n="specialEffectsKicker">HIỆU ỨNG ĐẶC BIỆT</span>
+<h2 data-admin-i18n="effectCenter" id="effectAdminTitle">Trung tâm hiệu ứng bóng chat</h2>
+<p data-admin-i18n="effectDescription">Nhập đúng tên đăng nhập để cấp hoặc thu hồi 10 hiệu ứng. Thay đổi được gửi tới người dùng ngay lập tức.</p>
+</div>
+<div class="effect-admin-count"><span data-admin-i18n="currentlyAllowed">Đang có quyền</span><strong id="effectGrantedCount">0</strong><small data-admin-i18n="accounts">tài khoản</small></div>
+</div>
+<div class="effect-admin-controls">
+<label class="field effect-user-field"><span data-admin-i18n="username">Tên đăng nhập</span><div class="field-control"><span>@</span><input autocomplete="off" data-admin-i18n-placeholder="effectUsernamePlaceholder" id="effectUsername" maxlength="24" placeholder="Nhập tên tài khoản"/></div></label>
+<button class="primary-button effect-grant-button" id="grantEffectByUsername" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="sparkles"></span><span data-admin-i18n="grantPermission">Cấp quyền</span></button>
+<button class="danger-button" data-admin-i18n="revokePermission" id="revokeEffectByUsername" type="button">Thu hồi quyền</button>
+</div>
+<p class="form-message" id="effectManagerMessage"></p>
+<div class="effect-admin-list-head"><strong data-admin-i18n="peopleWithPermission">Người đang có quyền</strong><span data-admin-i18n="accessSourceHint">Admin cấp hoặc VIP/LEGEND còn hạn</span></div>
+<div class="effect-granted-list" id="effectGrantedList"><div class="empty-compact" data-admin-i18n="noEffectUsers">Chưa có người dùng nào đang có quyền hiệu ứng.</div></div>
+</section>
+<section aria-labelledby="badgeAdminTitle" class="badge-admin-console motion-surface">
+<div class="badge-admin-hero">
+<div>
+<span class="eyebrow" data-admin-i18n="profilePrivilegesKicker">ĐẶC QUYỀN HỒ SƠ</span>
+<h2 data-admin-i18n="profilePrivilegeCenter" id="badgeAdminTitle">Trung tâm VIP &amp; LEGEND</h2>
+<p data-admin-i18n="badgeDescription">Cấp biểu tượng nổi bật cạnh ảnh đại diện theo thời hạn hoặc vĩnh viễn. Hệ thống tự ẩn ngay khi hết hạn.</p>
+</div>
+<div class="badge-admin-metrics">
+<div><span class="profile-rank-badge profile-rank-vip badge-preview rank-emblem-image-host"><img alt="" aria-hidden="true" class="rank-emblem-art" decoding="async" src="/vip-emblem.webp?v=1.0.0"/><b>V</b><i aria-hidden="true"></i></span><strong id="vipGrantedCount">0</strong><small>VIP</small></div>
+<div><span class="profile-rank-badge profile-rank-legend badge-preview rank-emblem-image-host"><img alt="" aria-hidden="true" class="rank-emblem-art" decoding="async" src="/legend-emblem.webp?v=1.0.0"/><b>L</b><i></i></span><strong id="legendGrantedCount">0</strong><small>LEGEND</small></div>
+</div>
+</div>
+<div class="badge-admin-controls">
+<label class="field"><span data-admin-i18n="username">Tên đăng nhập</span><div class="field-control"><span>@</span><input autocomplete="off" data-admin-i18n-placeholder="badgeUsernamePlaceholder" id="badgeUsername" maxlength="24" placeholder="Nhập tên tài khoản"/></div></label>
+<label class="field"><span data-admin-i18n="badge">Biểu tượng</span><select id="badgeType"><option data-admin-i18n="vipStyleName" value="vip">VIP · kim cương ánh bạch kim</option><option data-admin-i18n="legendStyleName" value="legend">LEGEND · kim cương đen viền vàng</option></select></label>
+<label class="field"><span data-admin-i18n="duration">Thời hạn</span><select id="badgeDuration"><option data-admin-i18n="oneDay" value="1440">1 ngày</option><option data-admin-i18n="sevenDays" value="10080">7 ngày</option><option data-admin-i18n="thirtyDays" value="43200">30 ngày</option><option data-admin-i18n="ninetyDays" value="129600">90 ngày</option><option data-admin-i18n="oneYear" value="525600">1 năm</option><option data-admin-i18n="permanent" value="permanent">Vĩnh viễn</option><option data-admin-i18n="custom" value="custom">Tùy chỉnh</option></select></label>
+<label class="field hidden" id="badgeCustomDurationField"><span data-admin-i18n="minutes">Số phút</span><div class="field-control"><input id="badgeCustomDuration" max="2628000" min="1" type="number" value="1440"/></div></label>
+<div class="badge-admin-actions"><button class="primary-button" data-admin-i18n="grantBadge" id="grantBadgeByUsername" type="button">Cấp biểu tượng</button><button class="danger-button" data-admin-i18n="revoke" id="revokeBadgeByUsername" type="button">Thu hồi</button></div>
+</div>
+<p class="form-message" id="badgeManagerMessage"></p>
+<div class="badge-admin-list-head"><strong data-admin-i18n="activePrivileges">Đặc quyền đang hoạt động</strong><span data-admin-i18n="remainingAuto">Thời gian còn lại được cập nhật tự động</span></div>
+<div class="badge-granted-list" id="badgeGrantedList"><div class="empty-compact" data-admin-i18n="noActiveBadges">Chưa có biểu tượng VIP hoặc LEGEND đang hoạt động.</div></div>
+</section>
+<section class="admin-empty" id="adminEmpty"><div class="empty-illustration">◎</div><h2 data-admin-i18n="chooseUser">Chọn một người dùng</h2><p data-admin-i18n="chooseUserDesc">Xem thông tin chi tiết, trò chuyện hoặc quản lý trạng thái tài khoản.</p></section>
+<section aria-live="polite" class="admin-workspace hidden" id="adminWorkspace">
+<header class="mobile-admin-workspace-head mobile-only">
+<button aria-label="Quay lại" class="icon-button" data-admin-i18n-aria-label="back" id="mobileAdminWorkspaceClose" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="chevron-left"></span></button>
+<div><small data-admin-i18n="userProfile">HỒ SƠ NGƯỜI DÙNG</small><strong data-admin-i18n="accountInformation" id="mobileAdminWorkspaceTitle">Thông tin tài khoản</strong></div>
+<span class="mobile-admin-user-state" id="mobileAdminWorkspaceState"></span>
+</header>
+<nav aria-label="Nội dung người dùng" class="mobile-admin-tabs mobile-only" data-admin-i18n-aria-label="userContentAria">
+<button class="active" data-admin-workspace-tab="info" id="mobileAdminInfoTab" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="user"></span><span data-admin-i18n="information">Thông tin</span></button>
+<button data-admin-workspace-tab="chat" id="mobileAdminChatTab" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="message-circle"></span><span data-admin-i18n="supportChat">Hỗ trợ</span></button>
+</nav>
+<aside class="user-detail-panel" data-admin-workspace-panel="info">
+<div class="detail-heading"><div class="detail-avatar-host" id="detailAvatar"></div><div><h2 id="detailUsername"></h2><div class="detail-rank-presentation hidden" id="detailRankPresentation"></div><span class="status-chip" id="detailStatus"></span></div></div>
+<dl class="detail-list">
+<div><dt data-admin-i18n="username">Tên đăng nhập</dt><dd id="detailLogin"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="nickname">Tên hiển thị</dt><dd id="detailNickname"></dd></div>
+<div><dt data-admin-i18n="phone">Số điện thoại</dt><dd id="detailPhone"></dd></div>
+<div><dt data-admin-i18n="email">Email</dt><dd id="detailEmail"></dd></div>
+<div><dt data-admin-i18n="securityLevel2">Bảo mật cấp 2</dt><dd id="detailSecurityLevel2"></dd></div>
+<div><dt data-admin-i18n="securityLevel3">Bảo mật cấp 3</dt><dd id="detailSecurityLevel3"></dd></div>
+<div class="detail-wide mobile-admin-extra"><dt data-admin-i18n="bio">Giới thiệu</dt><dd id="detailBio"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="location">Khu vực</dt><dd id="detailLocation"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="work">Công việc</dt><dd id="detailWork"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="school">Trường học</dt><dd id="detailSchool"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="birthday">Sinh nhật</dt><dd id="detailBirthday"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="relationship">Mối quan hệ</dt><dd id="detailRelationship"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="messagePrivacy">Quyền nhắn tin</dt><dd id="detailMessagePrivacy"></dd></div>
+<div><dt data-admin-i18n="registeredDate">Ngày đăng ký</dt><dd id="detailCreated"></dd></div>
+<div><dt data-admin-i18n="lastActive">Lần cuối hoạt động</dt><dd id="detailLastSeen"></dd></div>
+<div><dt data-admin-i18n="friends">Bạn bè</dt><dd id="detailFriends"></dd></div>
+<div><dt data-admin-i18n="sessions">Phiên đăng nhập</dt><dd id="detailSessions"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="blockedUsers">Đã chặn</dt><dd id="detailBlocked"></dd></div>
+<div class="mobile-admin-extra"><dt data-admin-i18n="archivedChats">Đã lưu trữ</dt><dd id="detailArchived"></dd></div>
+<div><dt data-admin-i18n="specialEffects">Hiệu ứng đặc biệt</dt><dd id="detailEffects"></dd></div>
+<div><dt data-admin-i18n="profileBadges">Biểu tượng hồ sơ</dt><dd id="detailBadges"></dd></div>
+</dl>
+<section class="support-moderation-card" id="supportModerationCard">
+<div class="support-moderation-head">
+<span class="support-moderation-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="headset"></span></span>
+<div class="support-moderation-copy"><small data-admin-i18n="adminContactControl">KIỂM SOÁT LIÊN HỆ ADMIN</small><strong aria-live="polite" data-admin-i18n="supportAllowed" id="detailSupportAccess">Được phép gửi tin</strong><p data-admin-i18n="supportResetDesc" id="detailSupportReason">Cảnh cáo được đặt lại sau 15 ngày kể từ vi phạm đầu tiên.</p></div>
+<span class="support-admin-strike"><small data-admin-i18n="supportViolationCount">Vi phạm</small><strong aria-live="polite" id="detailSupportStrike">0/5</strong></span>
+</div>
+<div class="support-penalty-caption"><strong data-admin-i18n="spamLevelAria">Mức xử lý spam</strong><span data-admin-i18n="spamCycle15Days">Trong chu kỳ 15 ngày</span></div>
+<div aria-label="Mức xử lý spam" class="support-penalty-ladder" data-admin-i18n-aria-label="spamLevelAria">
+<span data-step="1"><b>1</b><small data-admin-i18n="warning">Cảnh cáo</small></span>
+<span data-step="2"><b>2</b><small data-admin-i18n="warning">Cảnh cáo</small></span>
+<span data-step="3"><b>3</b><small data-admin-i18n="lockThreeMinutes">Khóa 3 phút</small></span>
+<span data-step="4"><b>4</b><small data-admin-i18n="lockOneDay">Khóa 1 ngày</small></span>
+<span data-step="5"><b>5</b><small data-admin-i18n="lockSevenDays">Khóa 7 ngày</small></span>
+</div>
+<div class="support-moderation-meta">
+<span class="support-reset-summary"><span aria-hidden="true" class="support-reset-icon classic-icon-host" data-classic-icon="history"></span><span><small data-admin-i18n="resetAt">Đặt lại:</small><b data-admin-i18n="noViolation" id="detailSupportReset">Chưa có vi phạm</b></span></span>
+<button class="secondary-button" id="supportBlockButton" type="button"><span class="support-block-button-label" data-admin-i18n="blockAdminContact">Chặn liên hệ Admin</span></button>
+</div>
+</section>
+<div class="restriction-summary hidden" id="restrictionSummary"></div>
+<div class="admin-action-grid">
+<button class="secondary-button" data-admin-i18n="changePassword" id="changePasswordButton" type="button">Đổi mật khẩu</button>
+<button class="primary-button" data-admin-i18n="grantEffects" id="effectPermissionButton" type="button">Cấp quyền hiệu ứng</button>
+<button class="badge-manage-button" data-admin-i18n="managePrivileges" id="manageBadgeButton" type="button">Quản lý VIP / LEGEND</button>
+<button class="warning-button" data-admin-i18n="lockBan" id="restrictButton" type="button">Khóa / Ban</button>
+<button class="success-button hidden" data-admin-i18n="unlock" id="unlockButton" type="button">Mở khóa</button>
+</div>
+</aside>
+<section class="admin-chat-panel" data-admin-workspace-panel="chat">
+<header class="admin-chat-header"><div><span class="eyebrow" data-admin-i18n="liveSupport">HỖ TRỢ TRỰC TIẾP</span><h2 data-admin-i18n="conversation" id="adminChatTitle">Cuộc trò chuyện</h2></div><span class="typing-inline" id="adminTyping"></span></header>
+<div class="messages admin-messages" id="adminMessages"></div>
+<div class="attachment-preview hidden" id="adminAttachmentPreview"></div>
+<form class="composer admin-composer" id="adminMessageForm">
+<input aria-label="Chọn tệp gửi cho người dùng" data-admin-i18n-aria-label="chooseUserFileAria" hidden="" id="adminFileInput" type="file"/>
+<button aria-label="Đính kèm" class="icon-button attach-button" data-admin-i18n-aria-label="attach" id="adminAttachButton" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="paperclip"></span></button>
+<textarea aria-label="Nội dung tin nhắn cho người dùng" data-admin-i18n-aria-label="userMessageAria" data-admin-i18n-placeholder="messageUser" id="adminMessageInput" maxlength="2000" placeholder="Nhập tin nhắn cho người dùng..." rows="1"></textarea>
+<button aria-label="Gửi" class="send-button" data-admin-i18n-aria-label="send" type="submit"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="send"></span></button>
+</form>
+</section>
+</section>
+</main>
+</div>
+<div aria-modal="true" class="modal-backdrop hidden" id="passwordModal" role="dialog">
+<div class="modal-card modal-small"><div class="modal-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="lock"></span></div><h3 data-admin-i18n="changePasswordTitle">Đổi mật khẩu người dùng</h3><p data-admin-i18n="changePasswordDescription">Mật khẩu mới phải có 8–72 ký tự, gồm ít nhất một chữ và một số. Mật khẩu hiện tại không được hiển thị.</p><form class="modal-form" id="passwordForm"><label class="field"><span data-admin-i18n="newPassword">Mật khẩu mới</span><div class="field-control"><input autocomplete="new-password" id="newUserPassword" maxlength="72" minlength="8" required="" type="password"/><button class="password-toggle" data-admin-i18n="show" data-toggle-password="newUserPassword" type="button">Hiện</button></div></label><p class="form-message" id="passwordMessage"></p><div class="modal-actions"><button class="secondary-button" data-admin-i18n="cancel" data-close-modal="passwordModal" type="button">Hủy</button><button class="primary-button" data-admin-i18n="savePassword" type="submit">Lưu mật khẩu</button></div></form></div>
+</div>
+<div aria-modal="true" class="modal-backdrop hidden" id="restrictModal" role="dialog">
+<div class="modal-card modal-medium"><div class="modal-icon danger-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="shield-alert"></span></div><h3 data-admin-i18n="restrictTitle">Khóa hoặc cấm tài khoản</h3><p data-admin-i18n="restrictDescription">Người dùng sẽ nhận thông báo ngay lập tức và tự động đăng xuất.</p><form class="modal-form" id="restrictForm"><div class="choice-grid"><label class="choice-card"><input checked="" name="restrictionType" type="radio" value="lock"/><span><strong data-admin-i18n="lockAccount">Khóa tài khoản</strong><small data-admin-i18n="suspendAccess">Tạm ngừng truy cập</small></span></label><label class="choice-card"><input name="restrictionType" type="radio" value="ban"/><span><strong data-admin-i18n="banAccount">Cấm tài khoản</strong><small data-admin-i18n="severeViolation">Áp dụng với vi phạm nghiêm trọng</small></span></label></div><label class="field"><span data-admin-i18n="duration">Thời hạn</span><select id="restrictionDuration"><option data-admin-i18n="thirtyMinutes" value="30">30 phút</option><option data-admin-i18n="oneHour" value="60">1 giờ</option><option data-admin-i18n="oneDay" value="1440">1 ngày</option><option data-admin-i18n="sevenDays" value="10080">7 ngày</option><option data-admin-i18n="thirtyDays" value="43200">30 ngày</option><option data-admin-i18n="permanent" value="permanent">Vĩnh viễn</option><option data-admin-i18n="custom" value="custom">Tùy chỉnh</option></select></label><label class="field hidden" id="customDurationField"><span data-admin-i18n="minutes">Số phút</span><div class="field-control"><input id="customDuration" max="525600" min="1" type="number" value="120"/></div></label><label class="field"><span data-admin-i18n="reason">Lý do</span><textarea data-admin-i18n-placeholder="restrictionReasonPlaceholder" id="restrictionReason" maxlength="300" placeholder="Nhập lý do khóa hoặc cấm..." required=""></textarea></label><p class="form-message" id="restrictMessage"></p><div class="modal-actions"><button class="secondary-button" data-admin-i18n="cancel" data-close-modal="restrictModal" type="button">Hủy</button><button class="danger-button" data-admin-i18n="applyNow" type="submit">Áp dụng ngay</button></div></form></div>
+</div>
+<div aria-labelledby="supportBlockTitle" aria-modal="true" class="modal-backdrop hidden" id="supportBlockModal" role="dialog">
+<div class="modal-card modal-medium support-block-modal-card">
+<div class="modal-icon support-block-modal-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="message-circle"></span></div>
+<span class="support-block-kicker" data-admin-i18n="supportBlockKicker">KIỂM SOÁT LIÊN HỆ ADMIN</span>
+<h3 data-admin-i18n="supportBlockTitle" id="supportBlockTitle">Tạm chặn tin nhắn hỗ trợ</h3>
+<p data-admin-i18n="supportBlockDesc">Người dùng vẫn sử dụng NexChat bình thường nhưng không thể gửi thêm tin tới Admin trong thời gian đã chọn.</p>
+<form class="modal-form" id="supportBlockForm">
+<label class="field"><span data-admin-i18n="duration">Thời hạn</span><select id="supportBlockDuration"><option data-admin-i18n="thirtyMinutes" value="30">30 phút</option><option data-admin-i18n="oneHour" value="60">1 giờ</option><option data-admin-i18n="oneDay" value="1440">1 ngày</option><option data-admin-i18n="sevenDays" value="10080">7 ngày</option><option data-admin-i18n="thirtyDays" value="43200">30 ngày</option><option data-admin-i18n="permanent" value="permanent">Vĩnh viễn</option><option data-admin-i18n="custom" value="custom">Tùy chỉnh</option></select></label>
+<label class="field hidden" id="supportBlockCustomField"><span data-admin-i18n="minutes">Số phút</span><input id="supportBlockCustomMinutes" max="525600" min="1" type="number" value="120"/></label>
+<label class="field"><span data-admin-i18n="reason">Lý do</span><textarea data-admin-i18n-placeholder="supportBlockReasonPlaceholder" id="supportBlockReason" maxlength="300" placeholder="Ví dụ: Gửi liên tục nội dung không liên quan..." required=""></textarea></label>
+<p class="form-message" id="supportBlockMessage"></p>
+<div class="modal-actions"><button class="secondary-button" data-admin-i18n="cancel" data-close-modal="supportBlockModal" type="button">Hủy</button><button class="danger-button" data-admin-i18n="blockSupportChannel" type="submit">Chặn kênh hỗ trợ</button></div>
+</form>
+</div>
+</div>
+<div aria-modal="true" class="modal-backdrop hidden" id="badgeModal" role="dialog">
+<div class="modal-card modal-medium badge-modal-card">
+<div aria-hidden="true" class="badge-modal-showcase"><span class="profile-rank-badge profile-rank-vip badge-preview rank-emblem-image-host"><img alt="" aria-hidden="true" class="rank-emblem-art" decoding="async" src="/vip-emblem.webp?v=1.0.0"/><b>V</b><i aria-hidden="true"></i></span><span class="profile-rank-badge profile-rank-legend badge-preview rank-emblem-image-host"><img alt="" aria-hidden="true" class="rank-emblem-art" decoding="async" src="/legend-emblem.webp?v=1.0.0"/><b>L</b><i></i></span></div>
+<h3 data-admin-i18n="manageBadgeTitle">Quản lý biểu tượng hồ sơ</h3>
+<p data-admin-i18n="manageBadgeDescription" id="badgeModalUser">Chọn loại biểu tượng và thời gian hiển thị cho người dùng.</p>
+<form class="modal-form" id="badgeForm">
+<div class="choice-grid badge-choice-grid">
+<label class="choice-card badge-choice-vip"><input checked="" name="profileBadgeType" type="radio" value="vip"/><i aria-hidden="true" class="premium-rank-symbol symbol-vip">V</i><span><strong>VIP</strong><small data-admin-i18n="vipDescription">V Vitality xanh ngọc viền vàng với phản sáng chuyển động</small></span></label>
+<label class="choice-card badge-choice-legend"><input name="profileBadgeType" type="radio" value="legend"/><i aria-hidden="true" class="premium-rank-symbol symbol-legend">L</i><span><strong>LEGEND</strong><small data-admin-i18n="legendDescription">L Luxe đỏ ruby viền vàng với ánh kim chuyển động</small></span></label>
+</div>
+<label class="field"><span data-admin-i18n="duration">Thời hạn</span><select id="badgeModalDuration"><option data-admin-i18n="oneDay" value="1440">1 ngày</option><option data-admin-i18n="sevenDays" value="10080">7 ngày</option><option data-admin-i18n="thirtyDays" value="43200">30 ngày</option><option data-admin-i18n="ninetyDays" value="129600">90 ngày</option><option data-admin-i18n="oneYear" value="525600">1 năm</option><option data-admin-i18n="permanent" value="permanent">Vĩnh viễn</option><option data-admin-i18n="custom" value="custom">Tùy chỉnh</option></select></label>
+<label class="field hidden" id="badgeModalCustomField"><span data-admin-i18n="minutes">Số phút</span><div class="field-control"><input id="badgeModalCustom" max="2628000" min="1" type="number" value="1440"/></div></label>
+<p class="form-message" id="badgeModalMessage"></p>
+<div class="modal-actions badge-modal-actions"><button class="secondary-button" data-admin-i18n="cancel" data-close-modal="badgeModal" type="button">Hủy</button><button class="danger-button" data-admin-i18n="revokeSelected" id="revokeSelectedBadge" type="button">Thu hồi loại đã chọn</button><button class="primary-button" data-admin-i18n="grantExtend" type="submit">Cấp / gia hạn</button></div>
+</form>
+</div>
+</div>
+<div aria-labelledby="adminReportTitle" aria-modal="true" class="modal-backdrop hidden" id="adminReportModal" role="dialog">
+<div class="modal-card modal-large admin-report-modal-card">
+<div class="admin-report-modal-head"><span class="admin-report-modal-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="shield-alert"></span></span><div><span data-admin-i18n="investigationFile">HỒ SƠ ĐIỀU TRA</span><h3 data-admin-i18n="reviewReport" id="adminReportTitle">Xem xét tố cáo</h3><p data-admin-i18n="reviewEvidenceFirst" id="adminReportSubtitle">Kiểm tra bằng chứng trước khi chọn hành động.</p></div><button aria-label="Đóng" class="icon-button" data-admin-i18n-aria-label="close" data-close-modal="adminReportModal" type="button"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="close"></span></button></div>
+<div class="admin-report-modal-grid">
+<section class="admin-report-evidence-section"><div class="admin-report-identity" id="adminReportIdentity"></div><div class="admin-report-evidence" id="adminReportEvidence"></div><div class="admin-report-signals" id="adminReportSignals"></div></section>
+<form class="admin-report-action-form" id="adminReportForm" novalidate="">
+<input id="adminReportId" type="hidden"/>
+<div class="admin-report-action-heading"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="shield"></span><div><strong data-admin-i18n="adminDecision">Quyết định của Admin</strong><small data-admin-i18n="noAutomaticRestriction">Hệ thống không tự khóa hoặc cấm tài khoản.</small></div></div>
+<label class="field"><span data-admin-i18n="investigationStatus">Trạng thái điều tra</span><select id="adminReportStatus"><option data-admin-i18n="reportInvestigating" value="investigating">Đang điều tra</option><option data-admin-i18n="reportActioned" value="actioned">Đã xử lý</option><option data-admin-i18n="reportDismissed" value="dismissed">Đã đóng</option></select></label>
+<label class="field"><span data-admin-i18n="action">Hành động</span><select id="adminReportAction"><option data-admin-i18n="updateInvestigationOnly" value="none">Chỉ cập nhật điều tra</option><option data-admin-i18n="sendPrivateWarning" value="warn">Gửi cảnh báo riêng</option><option data-admin-i18n="restrictWorldChat" value="world_mute">Hạn chế chat thế giới</option><option data-admin-i18n="lockAccount" value="lock">Khóa tài khoản</option><option data-admin-i18n="banAccount" value="ban">Cấm tài khoản</option><option data-admin-i18n="dismissReport" value="dismiss">Bác bỏ tố cáo</option></select></label>
+<label class="field hidden" id="adminReportDurationField"><span data-admin-i18n="duration">Thời hạn</span><select id="adminReportDuration"><option data-admin-i18n="oneHour" value="60">1 giờ</option><option data-admin-i18n="oneDay" value="1440">1 ngày</option><option data-admin-i18n="sevenDays" value="10080">7 ngày</option><option data-admin-i18n="thirtyDays" value="43200">30 ngày</option><option data-admin-i18n="permanent" value="permanent">Vĩnh viễn</option><option data-admin-i18n="custom" value="custom">Tùy chỉnh</option></select></label>
+<label class="field hidden" id="adminReportCustomDurationField"><span data-admin-i18n="minutes">Số phút</span><input id="adminReportCustomDuration" max="525600" min="1" type="number" value="60"/></label>
+<label class="field"><span data-admin-i18n="investigationNotes">Ghi chú điều tra</span><textarea data-admin-i18n-placeholder="reportNotePlaceholder" id="adminReportNote" maxlength="500" placeholder="Nêu lý do kết luận hoặc nội dung cảnh báo gửi cho người dùng..." rows="5"></textarea></label>
+<p aria-live="polite" class="form-message" id="adminReportMessage"></p>
+<div class="modal-actions"><button class="secondary-button" data-admin-i18n="cancel" data-close-modal="adminReportModal" type="button">Hủy</button><button class="primary-button" id="saveAdminReportButton" type="submit"><span data-admin-i18n="completeReview">Hoàn tất xem xét</span><span class="button-loader"></span></button></div>
+</form>
+</div>
+</div>
+</div>
+<div aria-labelledby="clearAuditTitle" aria-modal="true" class="modal-backdrop hidden" id="clearAuditModal" role="dialog">
+<div class="modal-card modal-small admin-clear-audit-card">
+<div class="modal-icon danger-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="trash"></span></div>
+<span class="admin-modal-kicker" data-admin-i18n="adminVerification">XÁC MINH QUẢN TRỊ</span>
+<h3 data-admin-i18n="clearActivityHistory" id="clearAuditTitle">Xóa lịch sử hoạt động</h3>
+<p data-admin-i18n="clearHistoryDesc">Toàn bộ nhật ký quản trị hiện tại sẽ bị xóa. Nhập mật khẩu xác nhận để tiếp tục.</p>
+<form class="modal-form" id="clearAuditForm">
+<label class="field"><span data-admin-i18n="confirmationPassword">Mật khẩu xác nhận</span><div class="field-control"><span class="field-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="lock"></span></span><input autocomplete="current-password" data-admin-i18n-placeholder="confirmationPasswordPlaceholder" id="clearAuditPassword" maxlength="72" placeholder="Nhập mật khẩu" type="password"/></div></label>
+<p aria-live="polite" class="form-message" id="clearAuditMessage"></p>
+<div class="modal-actions"><button class="secondary-button" data-admin-i18n="cancel" data-close-modal="clearAuditModal" type="button">Hủy</button><button class="danger-button" id="confirmClearAuditButton" type="submit"><span data-admin-i18n="clearHistory">Xóa lịch sử</span><span class="button-loader"></span></button></div>
+</form>
+</div>
+</div>
+<div aria-modal="true" class="modal-backdrop hidden" id="confirmModal" role="dialog"><div class="modal-card modal-small"><div class="modal-icon"><span aria-hidden="true" class="classic-icon-host" data-classic-icon="info"></span></div><h3 data-admin-i18n="confirm" id="confirmTitle">Xác nhận</h3><p id="confirmMessage"></p><div class="modal-actions"><button class="secondary-button" data-admin-i18n="cancel" id="confirmCancel" type="button">Hủy</button><button class="primary-button" data-admin-i18n="confirm" id="confirmAccept" type="button">Xác nhận</button></div></div></div>
+<div class="toast-container" id="toastContainer"></div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/i18n.js?v=1.0.0"></script>
+<script src="/admin-i18n.js?v=1.0.0"></script>
+<script src="/ui.js?v=1.0.0"></script>
+<script src="/admin.js?v=1.0.0"></script>
+</body>
+</html>
