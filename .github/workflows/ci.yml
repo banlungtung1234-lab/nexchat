@@ -1,0 +1,55 @@
+name: NexChat CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nexchat-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test on Node.js 24
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          package-manager-cache: false
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Assert patched dependency versions
+        run: |
+          node - <<'NODE'
+          const lock = require('./package-lock.json');
+          const expected = {
+            'body-parser': '2.4.0',
+            'compression': '1.8.2',
+            'proxy-addr': '2.0.8',
+            'qs': '6.17.0',
+            'multer': '2.5.0',
+            'socket.io': '4.8.4',
+            'engine.io': '6.6.11',
+            'socket.io-parser': '4.2.7'
+          };
+          for (const [name, version] of Object.entries(expected)) {
+            const actual = lock.packages['node_modules/' + name]?.version;
+            if (actual !== version) throw new Error(name + ': expected ' + version + ', found ' + actual);
+            console.log(name + '@' + actual);
+          }
+          NODE
+      - name: Run release test suite
+        run: npm test
+      - name: Audit production dependencies
+        run: npm audit --omit=dev
