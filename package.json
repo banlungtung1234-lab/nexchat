@@ -11,11 +11,11 @@
     "test": "node verify.js && node --test test/*.test.js"
   },
   "engines": {
-    "node": ">=22"
+    "node": "24.x"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "compression": "^1.8.1",
+    "compression": "^1.8.2",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "multer": "^2.5.0",
@@ -24,6 +24,9 @@
     "web-push": "^3.6.7"
   },
   "overrides": {
+    "body-parser": "2.4.0",
+    "proxy-addr": "2.0.8",
+    "qs": "6.17.0",
     "engine.io": "6.6.11",
     "socket.io-parser": "4.2.7"
   }
