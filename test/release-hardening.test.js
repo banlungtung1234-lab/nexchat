@@ -17,7 +17,7 @@ test('release metadata and lockfile agree on NexChat 1.0.0', () => {
   assert.equal(lock.name, 'nexchat');
   assert.equal(lock.version, '1.0.0');
   assert.equal(lock.packages[''].version, '1.0.0');
-  assert.equal(pkg.engines.node, '>=22');
+  assert.equal(pkg.engines.node, '24.x');
 });
 
 test('security-sensitive dependencies are pinned to patched release lines', () => {
